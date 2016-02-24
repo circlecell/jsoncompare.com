@@ -11,8 +11,8 @@ export default class Tabs extends MK.Object {
 			diff: { title: 'Diff' }
 		})
 		.bindNode({
-			sandbox: '.tabs',
-			container: '.tab-content'
+			sandbox: 'main',
+			container: '.tabs'
 		})
 		.setClassFor({
 			simple: SimpleTab,
@@ -20,11 +20,20 @@ export default class Tabs extends MK.Object {
 			diff: DiffTab
 		})
 		.on({
-			'@click::tabHeader': evt => {
+			'*@click::tabHeader': evt => {
 				for(let tab of this) {
 					tab.active = evt.target.dataset.tab == tab.name;
 				}
 			}
 		})
+		.on({
+			'*@change:active': evt => {
+				if(evt.value) {
+					for(let tab of this) {
+						tab.active = tab === evt.self;
+					}
+				}
+			}
+		}, true);
 	}
 }

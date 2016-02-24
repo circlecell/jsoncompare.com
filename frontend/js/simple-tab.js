@@ -3,13 +3,19 @@ import CodeMirror from './codemirror';
 
 export default class SimpleTab extends Tab {
 	constructor(...args) {
-		super(...args)
-			.bindNode('editor', ':bound(container) .editor');
+		super(...args);
 
-		CodeMirror(this.nodes.editor, {
+
+	}
+
+	initialize() {
+		this.editor = CodeMirror(this.nodes.content, {
 			lineNumbers: true,
 		    mode: "text/html",
-			jsonlint: true
+			jsonlint: true,
+			viewportMargin: Infinity
 		});
+
+		return this;
 	}
 }

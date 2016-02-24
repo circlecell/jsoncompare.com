@@ -1,7 +1,8 @@
 "use strict";
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin"),
+ 	webpack = require('webpack'),
+	postcssPlugins = [];
 
 module.exports = [{
 	context: __dirname + "/frontend/js",
@@ -19,17 +20,16 @@ module.exports = [{
 			loader: 'babel-loader',
 			exclude: /node_modules/,
 			query: {
-				presets: ['es2015', 'stage-0']
+				presets: ['es2015', 'stage-0'],
+				plugins: ['transform-es2015-modules-simple-commonjs']
 			}
 		}, {
 			test: /\.css$|\.pcss$/,
 			loader: "style-loader!css-loader!postcss-loader"
 		}]
 	},
-	postcss: function() {
-		return [require('autoprefixer')];
-	},
-	devtool: 'eval',//'source-map'
+	postcss: postcssPlugins,
+	devtool: 'source-map',//'eval'
 	plugins: [
 		new webpack.ProvidePlugin({
 		    CodeMirror: "codemirror"
@@ -47,11 +47,19 @@ module.exports = [{
 	module: {
 		loaders: [{
 			test: /\.css$|\.pcss$/,
-			loader: ExtractTextPlugin.extract("style-loader", "css-loader", "postcss-loader")
+			loader: ExtractTextPlugin.extract("style", ["css", "postcss"])
 		}]
 	},
 	postcss: function() {
-		return [require('autoprefixer')];
+		return [
+			require('postcss-import'),
+			require('postcss-nested')(),
+			require('postcss-cssnext')(),
+			require('postcss-calc')(),
+			require('autoprefixer')({
+				browsers: ['last 3 versions']
+			})
+		]
 	},
 	plugins: [
 	   new ExtractTextPlugin("style.css", {

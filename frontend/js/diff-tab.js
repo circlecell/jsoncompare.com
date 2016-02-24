@@ -3,19 +3,23 @@ import CodeMirror from './codemirror';
 
 export default class DiffTab extends Tab {
 	constructor(...args){
-		super(...args)
-			.bindNode('editor', ':bound(container) .editor');
+		super(...args);
+	}
 
-		let dv = CodeMirror.MergeView(this.nodes.editor, {
-		    value: 'yopanm',
-		    origLeft: null,
-		    orig: 'ozozo',
-		    lineNumbers: true,
-		    mode: "text/html",
-		    highlightDifferences: true,
-		    collapseIdentical: false,
+	initialize() {
+		this.editor = CodeMirror.MergeView(this.nodes.content, {
+			value: 'yopanm',
+			origLeft: null,
+			orig: 'ozozo',
+			lineNumbers: true,
+			mode: "text/html",
+			highlightDifferences: true,
+			collapseIdentical: false,
 			allowEditingOriginals: true,
-			jsonlint: true
-		  });
+			jsonlint: true,
+			viewportMargin: Infinity
+		});
+
+		return this;
 	}
 }

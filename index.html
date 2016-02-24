@@ -4,10 +4,49 @@
 	<title></title>
 	<meta content="">
 	<link rel="stylesheet" type="text/css" href="public/css/style.css">
+	<style>
+
+
+
+	</style>
 </head>
 
 <body>
-	<div class="container">
+	<main>
+		<ul class="tab-nav">
+			<li  data-tab="simple">Simple</li>
+			<li data-tab="batch" class="active">Batch</li>
+			<li data-tab="diff">Merge</li>
+		</ul>
+		<div class="tabs">
+			<div class="tab-pane" id="simple">
+				<article class="tab-info">
+					<h5>Tab 1</h5>
+					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+				</article>
+				<div class="content"></div>
+			</div>
+			<div class="tab-pane active" id="batch">
+				<article class="tab-info">
+					<h5>Tab 1</h5>
+					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo Yeiner Fernándezinventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+				</article>
+				<button class="add">Add</button>
+				<div class="content"></div>
+				<script type="text/html" class="renderer">
+					<div></div>
+				</script>
+			</div>
+			<div class="tab-pane " id="diff">
+				<article class="tab-info">
+					<h5>Tab 1</h5>
+					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+				</article>
+				<div class="content"></div>
+			</div>
+		</div>
+	</main>
+	<!--<div class="containere" style="display: none">
 		<div class="row">
 			<div class="twelve columns tabs">
 				<ul class="tab-nav">
@@ -25,26 +64,26 @@
 					<div class="tab-pane active" id="simple">
 						<h5>Tab 1</h5>
 						<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-						<div class="container">
+						<div class="content">
 							<div class="editor"></div>
 						</div>
 					</div>
 					<div class="tab-pane" id="batch">
 						<h5>Tab 2</h5>
 						<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-						<div class="container"></div>
+						<div class="content"></div>
 					</div>
 					<div class="tab-pane" id="diff">
 						<h5>Tab 3</h5>
 						<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-						<div class="container">
+						<div class="content">
 							<div class="editor"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	<script src="public/js/app.js"></script>
 
 </body>
