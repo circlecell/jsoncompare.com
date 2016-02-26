@@ -109,4 +109,32 @@ module.exports = new class App extends MK.Object {
 				console.log(this.files);
 			});
 	}
+
+	toJSONString() {
+		const {tabs} = this,
+			encode = str => str ? encodeURIComponent(str) : '';
+
+		return JSON.stringify({
+			simple: encode(tabs.simple.value),
+			batch: tabs.batch.items.map(item => encode(item.value)),
+			diff: {
+				left: encode(tabs.diff.leftValue),
+				right: encode(tabs.diff.rightValue)
+			}
+		});
+	}
+
+	fromJSONString(data) {
+		const {tabs} = this,
+			decode = str => decodeURIComponent(str);
+
+		data = JSON.parse(data);
+
+		tabs.simple.value = decode(data.simple);
+		tabs.batch.items.recreate(data.batch ? data.batch.map(item => decode(item)) : []);
+		tabs.diff.leftValue = decode(data.diff.left);
+		tabs.diff.rightValue = decode(data.diff.right);
+
+		return this;
+	}
 }

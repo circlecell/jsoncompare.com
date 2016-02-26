@@ -59,6 +59,24 @@ var app =
 		}
 	}
 	
+	var _createClass = function () {
+		function defineProperties(target, props) {
+			for (var i = 0; i < props.length; i++) {
+				var descriptor = props[i];
+				descriptor.enumerable = descriptor.enumerable || false;
+				descriptor.configurable = true;
+				if ("value" in descriptor) descriptor.writable = true;
+				Object.defineProperty(target, descriptor.key, descriptor);
+			}
+		}
+	
+		return function (Constructor, protoProps, staticProps) {
+			if (protoProps) defineProperties(Constructor.prototype, protoProps);
+			if (staticProps) defineProperties(Constructor, staticProps);
+			return Constructor;
+		};
+	}();
+	
 	function _possibleConstructorReturn(self, call) {
 		if (!self) {
 			throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -190,6 +208,46 @@ var app =
 			});
 			return _this;
 		}
+	
+		_createClass(App, [{
+			key: 'toJSONString',
+			value: function toJSONString() {
+				var tabs = this.tabs;
+				var encode = function encode(str) {
+					return str ? encodeURIComponent(str) : '';
+				};
+	
+				return JSON.stringify({
+					simple: encode(tabs.simple.value),
+					batch: tabs.batch.items.map(function (item) {
+						return encode(item.value);
+					}),
+					diff: {
+						left: encode(tabs.diff.leftValue),
+						right: encode(tabs.diff.rightValue)
+					}
+				});
+			}
+		}, {
+			key: 'fromJSONString',
+			value: function fromJSONString(data) {
+				var tabs = this.tabs;
+				var decode = function decode(str) {
+					return decodeURIComponent(str);
+				};
+	
+				data = JSON.parse(data);
+	
+				tabs.simple.value = decode(data.simple);
+				tabs.batch.items.recreate(data.batch ? data.batch.map(function (item) {
+					return decode(item);
+				}) : []);
+				tabs.diff.leftValue = decode(data.diff.left);
+				tabs.diff.rightValue = decode(data.diff.right);
+	
+				return this;
+			}
+		}]);
 	
 		return App;
 	}(MK.Object))();
@@ -17561,9 +17619,9 @@ var app =
 			key: 'initialize',
 			value: function initialize() {
 				this.editor = CodeMirror.MergeView(this.nodes.content, {
-					value: '',
+					value: this.leftValue || '',
 					origLeft: null,
-					orig: '',
+					orig: this.rightValue || '',
 					highlightDifferences: true,
 					collapseIdentical: false,
 					allowEditingOriginals: true
