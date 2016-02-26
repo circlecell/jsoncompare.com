@@ -1,5 +1,8 @@
 /*@import 'skeleton.pcss';
 //@import 'skeleton-tabs.pcss';*/
+
+@import 'codemirror-jsonlint-addon/codemirror-jsonlint-addon.css';
+
 * {
 	margin: 0;
 	padding: 0;
@@ -44,13 +47,17 @@ main > .tabs {
 	display: none;
 	position: relative;
 
-	&.active {
-		display: flex;
-		flex-direction: column;
-		flex: 1;
+	#batch&.active {
+		display: block;
 	}
 
 	#simple&, #diff& {
+		&.active {
+			display: flex;
+			flex-direction: column;
+			flex: 1;
+		}
+
 		& > .content {
 			flex: 1;
 			display: flex;
@@ -88,13 +95,7 @@ main > .tabs {
 }
 
 
-.delete-editor {
-	position: absolute;
-	top: 30px;
-	right: 0;
-	color: red;
-	z-index: 3;
-}
+
 
 
 ul.tab-nav {
@@ -127,6 +128,71 @@ ul.tab-nav {
 
 		&.active {
 		    border-bottom: 1px solid #fff;
+		}
+	}
+}
+
+.CodeMirror {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+
+	.CodeMirror-merge & {
+		border: none;
+	}
+
+	.delete-editor, .lint-button {
+		/*background-color: #BCD183;
+		border: 1px solid #D2D4DB;
+		border-color: #9CBE43;*/
+		background-color: rgba(229, 233,235,0.8);
+		border: 1px solid #D2D4DB;
+		border-radius: 3px;
+		padding: 8px;
+		right: 20px;
+		cursor: pointer;
+
+
+		&::before {
+			content: '';
+			opacity: .5;
+			background-image: url("~url!./img/actions_sprite.png");
+			background-position: 0 0;
+			width: 22px;
+			height: 22px;
+			display: inline-block;
+		}
+
+		&:hover {
+			background-color: rgba(229, 233,235,0.5);
+			&::before {
+				opacity: 1;
+			}
+		}
+	}
+
+
+	.lint-button {
+		top: 20px;
+		&.success {
+			background-color: #BCD183;
+			border: 1px solid #D2D4DB;
+			&::before {
+				opacity: 1;
+			}
+		}
+		&::before {
+			background-position: 0 0;
+		}
+
+	}
+
+	.delete-editor {
+		position: absolute;
+		top: 70px;
+		z-index: 3;
+
+		&::before {
+			background-position: -22px 0;
 		}
 	}
 }

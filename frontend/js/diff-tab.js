@@ -8,18 +8,18 @@ export default class DiffTab extends Tab {
 
 	initialize() {
 		this.editor = CodeMirror.MergeView(this.nodes.content, {
-			value: 'yopanm',
+			value: '',
 			origLeft: null,
-			orig: 'ozozo',
-			lineNumbers: true,
-			mode: "text/html",
+			orig: '',
 			highlightDifferences: true,
 			collapseIdentical: false,
-			allowEditingOriginals: true,
-			jsonlint: true,
-			viewportMargin: Infinity
+			allowEditingOriginals: true
 		});
 
-		return this;
+		return this
+			.bindNode({
+				leftValue: this.editor.edit.display.wrapper,
+				rightValue: this.editor.right.edit.display.wrapper
+			});
 	}
 }

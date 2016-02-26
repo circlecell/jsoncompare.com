@@ -16,6 +16,7 @@ export default class SimpleTab extends Tab {
 			viewportMargin: Infinity
 		});
 
-		return this;
+		return this
+			.bindNode('value', this.editor.display.wrapper);
 	}
 }

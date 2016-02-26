@@ -3,7 +3,7 @@ import BatchItem from './batch-item';
 
 export default class BatchTab extends MK.Array {
 	Model = BatchItem;
-	itemRenderer = ':sandbox .renderer';
+	itemRenderer = '<div></div>';
 	constructor(data, parent) {
 		super(...data)
 			.bindNode({

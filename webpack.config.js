@@ -2,7 +2,15 @@
 
 var ExtractTextPlugin = require("extract-text-webpack-plugin"),
  	webpack = require('webpack'),
-	postcssPlugins = [];
+	postcssPlugins = [
+		require('postcss-import'),
+		require('postcss-nested')(),
+		require('postcss-cssnext')(),
+		require('postcss-calc')(),
+		require('autoprefixer')({
+			browsers: ['last 3 versions']
+		})
+	];
 
 module.exports = [{
 	context: __dirname + "/frontend/js",
@@ -50,17 +58,7 @@ module.exports = [{
 			loader: ExtractTextPlugin.extract("style", ["css", "postcss"])
 		}]
 	},
-	postcss: function() {
-		return [
-			require('postcss-import'),
-			require('postcss-nested')(),
-			require('postcss-cssnext')(),
-			require('postcss-calc')(),
-			require('autoprefixer')({
-				browsers: ['last 3 versions']
-			})
-		]
-	},
+	postcss: postcssPlugins,
 	plugins: [
 	   new ExtractTextPlugin("style.css", {
 		   allChunks: true

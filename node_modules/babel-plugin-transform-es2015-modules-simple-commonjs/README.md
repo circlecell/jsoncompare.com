@@ -1,6 +1,6 @@
 # babel-plugin-transform-es2015-modules-simple-commonjs [![npm version](https://badge.fury.io/js/babel-plugin-transform-es2015-modules-simple-commonjs.svg)](https://badge.fury.io/js/babel-plugin-transform-es2015-modules-simple-commonjs)
 
-Limited CommonJS transformer for ECMAScript 2015 modules.
+Limited transformer for ECMAScript 2015 modules (CommonJS).
 
 Converts this code:
 ```js

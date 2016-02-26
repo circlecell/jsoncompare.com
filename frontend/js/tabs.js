@@ -24,9 +24,7 @@ export default class Tabs extends MK.Object {
 				for(let tab of this) {
 					tab.active = evt.target.dataset.tab == tab.name;
 				}
-			}
-		})
-		.on({
+			},
 			'*@change:active': evt => {
 				if(evt.value) {
 					for(let tab of this) {
@@ -34,6 +32,6 @@ export default class Tabs extends MK.Object {
 					}
 				}
 			}
-		}, true);
+		});
 	}
 }

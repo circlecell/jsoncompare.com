@@ -9,14 +9,14 @@ const $ = MK.$b;
 export default class BatchTab extends Tab {
 	constructor(...args) {
 		super(...args)
-			.set('batch', [{},{}])
+			.set('items', [{},{}])
 			.setClassFor({
-				batch: Batch
+				items: Batch
 			});
 	}
 
 	initialize() {
-		this.batch.rerender();
+		this.items.rerender();
 
 		return this;
 	}

@@ -23,7 +23,6 @@
     "autoprefixer": "^6.3.3",
     "babel-core": "^6.5.1",
     "babel-loader": "^6.2.2",
-    "babel-plugin-transform-es2015-modules-simple-amd": "^0.2.0",
     "babel-plugin-transform-es2015-modules-simple-commonjs": "0.0.2",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
