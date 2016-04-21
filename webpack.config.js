@@ -4,6 +4,10 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin"),
  	webpack = require('webpack'),
 	postcssPlugins = [
 		require('postcss-import'),
+		require('postcss-url')({
+			url: "inline",
+			from: "frontend/pcss/stype.pcss"
+		}),
 		require('postcss-nested')(),
 		require('postcss-cssnext')(),
 		require('postcss-calc')(),

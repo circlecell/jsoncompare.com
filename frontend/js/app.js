@@ -1,5 +1,9 @@
 import MK from 'matreshka';
 import Tabs from './tabs';
+import 'matreshka-router';
+import "babel-polyfill";
+
+const $ = MK.$b;
 
 MK.prototype.appendNode = function(key, selector) {
 	var nodes = this.$bound(key),
@@ -27,69 +31,6 @@ MK.binders.codeMirror = function() {
 	};
 };
 
-MK.binders.dropFiles = function(readAs) {
-	var readFiles = function(files, readAs, callback) {
-			var length = files.length,
-				i = 0,
-				filesArray = MK.toArray(files),
-				file;
-
-			if (readAs) {
-				filesArray.forEach(function(file) {
-					var reader = new FileReader();
-
-					reader.onloadend = function(evt) {
-						file.readerResult = reader.result;
-						if (++i == length) {
-							callback(filesArray);
-						}
-					};
-
-					reader[readAs](file);
-				});
-			} else {
-				callback(filesArray);
-			}
-		};
-
-		/* istanbul ignore if  */
-		if (typeof FileReader == 'undefined') {
-			throw Error('FileReader is not supported by this browser');
-		}
-
-		if(readAs) {
-			readAs = 'readAs' + readAs[0].toUpperCase() + readAs.slice(1);
-			if(!FileReader.prototype[readAs]) {
-				throw Error(readAs + ' is not supported by FileReader');
-			}
-		}
-
-		return {
-			on: function(callback) {
-				var handler = function(evt) {
-					evt.preventDefault();
-					evt.stopPropagation();
-					var files = evt.dataTransfer.files;
-					if (files.length) {
-						readFiles(files, readAs, callback);
-					} else {
-						callback([]);
-					}
-				};
-
-				this.addEventListener('drop', handler);
-				this.addEventListener('dragover', function(evt) {
-					evt.dataTransfer.dropEffect = 'copy';
-					evt.preventDefault();
-				});
-			},
-			getValue: function(o) {
-				return o.domEvent || [];
-			}
-		};
-
-
-};
 
 MK.defaultBinders.unshift(function() {
 	if(this.classList.contains('CodeMirror')) {
@@ -99,15 +40,51 @@ MK.defaultBinders.unshift(function() {
 
 module.exports = new class App extends MK.Object {
 	constructor() {
+		const dndPlaceholderAreas = '#simple, #batch';
+
 		super()
 			.setClassFor({
 				tabs: Tabs
 			})
+			.initRouter('mode/id')
+			.set({
+				mode: this.mode || 'simple'
+			})
 			.bindNode('sandbox', 'body')
-			.bindNode('files', 'body', MK.binders.dropFiles('text'))
-			.on('change:files', evt => {
-				console.log(this.files);
+			//.bindNode('dndAreas', '#simple, #batch, #diff .CodeMirror')
+			.on({
+				'tabs@change:activeTab': evt => {
+					this.mode = evt.value.name;
+				},
+				'dragover::sandbox drop::sandbox': evt => evt.preventDefault()
+			})
+			.on({
+				'change:mode': evt => {
+					this.tabs[this.mode].active = true;
+				}
+			}, true)
+			.onDebounce({
+				[`dragover::(${dndPlaceholderAreas})`]: evt => {console.log('yomanarofd');
+					if(!$.one('.dnd-area', evt.target.closest(dndPlaceholderAreas))) {
+						evt.target.closest(dndPlaceholderAreas).appendChild($.create('div', {
+							className: 'dnd-area'
+						}));
+					}
+				},
+				[`dragleave::(${dndPlaceholderAreas}) drop::(${dndPlaceholderAreas})`]: evt => {
+					var area = $.one('.dnd-area', evt.target.closest(dndPlaceholderAreas));
+					if(area) {
+						area.parentNode.removeChild(area);
+					}
+				}
+			})
+			.on({
+				'click::(.save)': evt => this.save()
 			});
+
+		if(this.id) {
+			this.restore(this.id);
+		}
 	}
 
 	toJSONString() {
@@ -129,12 +106,28 @@ module.exports = new class App extends MK.Object {
 			decode = str => decodeURIComponent(str);
 
 		data = JSON.parse(data);
-
 		tabs.simple.value = decode(data.simple);
-		tabs.batch.items.recreate(data.batch ? data.batch.map(item => decode(item)) : []);
+		tabs.batch.items.recreate(data.batch ? data.batch.map(item => ({value: decode(item)})) : []);
 		tabs.diff.leftValue = decode(data.diff.left);
 		tabs.diff.rightValue = decode(data.diff.right);
 
 		return this;
+	}
+
+	async save() {
+		let resp = await fetch('/save', {
+			method: 'POST',
+			body: this.toJSONString()
+		});
+		resp = await resp.json();
+
+		if(!resp.error) {
+			this.id = resp.key;
+		}
+	}
+
+	async restore(id) {
+		let resp = await fetch(`//jsonlintcom.s3.amazonaws.com/${id}.json`);
+		this.fromJSONString(await resp.text());
 	}
 }

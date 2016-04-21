@@ -8,6 +8,7 @@ export default class DiffTab extends Tab {
 
 	initialize() {
 		this.editor = CodeMirror.MergeView(this.nodes.content, {
+			dragDrop: true,
 			value: this.leftValue || '',
 			origLeft: null,
 			orig: this.rightValue || '',
@@ -16,10 +17,12 @@ export default class DiffTab extends Tab {
 			allowEditingOriginals: true
 		});
 
+		console.log(this.editor);
+
 		return this
 			.bindNode({
 				leftValue: this.editor.edit.display.wrapper,
-				rightValue: this.editor.right.edit.display.wrapper
+				rightValue: this.editor.right.orig.display.wrapper
 			});
 	}
 }

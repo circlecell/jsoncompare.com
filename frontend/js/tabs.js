@@ -14,6 +14,15 @@ export default class Tabs extends MK.Object {
 			sandbox: 'main',
 			container: '.tabs'
 		})
+		/*.bindNode('activeTabName', ':sandbox .tab-nav li', {
+			on: 'click',
+			getValue() {
+				return this.dataset.tab;
+			},
+			setValue(v) {
+
+			}
+		})*/
 		.setClassFor({
 			simple: SimpleTab,
 			batch: BatchTab,
@@ -30,6 +39,8 @@ export default class Tabs extends MK.Object {
 					for(let tab of this) {
 						tab.active = tab === evt.self;
 					}
+
+					this.activeTab = evt.self;
 				}
 			}
 		});
