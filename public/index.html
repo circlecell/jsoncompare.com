@@ -7,33 +7,37 @@
 </head>
 
 <body>
+
 	<main>
-		<button class="save">Save</button>
-		<ul class="tab-nav">
-			<li  data-tab="simple">Simple</li>
-			<li data-tab="batch">Batch</li>
-			<li data-tab="diff">Merge</li>
+
+		<ul class="tab-nav" >
+			<li data-tab="simple" class="tab-nav-item">Simple</li>
+			<li data-tab="batch" class="tab-nav-item">Batch</li>
+			<li data-tab="diff" class="tab-nav-item">Merge</li>
+			<li style="flex: 1; ">
+				<button class="save button-primary" style="float:right;">Save</button>
+			</li>
 		</ul>
 		<div class="tabs">
 			<div class="tab-pane" id="simple">
 				<article class="tab-info">
-					<h5>Tab 1</h5>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+					<h5>Simple</h5>
+					<p>Very similar to jsonlint.com.</p>
 				</article>
 				<div class="content"></div>
 			</div>
 			<div class="tab-pane" id="batch">
 				<article class="tab-info">
-					<h5>Tab 1</h5>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo Yeiner Fernándezinventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+					<h5>Batch</h5>
+					<p> User can drop files here or add fields manually.</p>
 				</article>
-				<button class="add">Add</button>
+				<button class="add">Add field</button>
 				<div class="content"></div>
 			</div>
 			<div class="tab-pane " id="diff">
 				<article class="tab-info">
-					<h5>Tab 1</h5>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+					<h5>Merge</h5>
+					<p>User can look at difference between two JSON objects and merge them step by step using arrows in the middle.</p>
 				</article>
 				<div class="content"></div>
 			</div>

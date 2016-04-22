@@ -10,10 +10,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin"),
 		}),
 		require('postcss-nested')(),
 		require('postcss-cssnext')(),
-		require('postcss-calc')(),
-		require('autoprefixer')({
-			browsers: ['last 3 versions']
-		})
+		require('postcss-calc')()
 	];
 
 module.exports = [{

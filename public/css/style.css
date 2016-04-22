@@ -132,6 +132,14 @@ main > .tabs {
 	min-height: 80%;
 }
 
+#batch.tab-pane .add {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 5;
+	background: #fff;
+}
+
 #diff.tab-pane .CodeMirror-merge {
 	position: absolute;
 }
@@ -144,7 +152,7 @@ main > .tabs {
 ul.tab-nav {
     list-style: none;
     border-bottom: 1px solid #bbb;
-    padding-left: 5px;
+    padding: 0 5px;
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: -webkit-box;
@@ -155,7 +163,7 @@ ul.tab-nav {
 	margin-top: 20px;
 }
 
-ul.tab-nav li {
+ul.tab-nav li.tab-nav-item {
 	border-radius: 4px;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
@@ -169,14 +177,14 @@ ul.tab-nav li {
 	cursor: pointer;
 }
 
-ul.tab-nav li:hover {
+ul.tab-nav li.tab-nav-item:hover {
 	color: #333;
 	border-top-color: #888;
 	border-right-color: #888;
 	border-left-color: #888;
 }
 
-ul.tab-nav li.active {
+ul.tab-nav li.tab-nav-item.active {
 	border-bottom: 1px solid #fff;
 }
 
@@ -274,3 +282,64 @@ ul.tab-nav li.active {
 	    flex: 1;
 	text-align: center;
 }
+
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 1.6px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box; }
+
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0; }
+
+.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+  color: #FFF;
+  background-color: #33C3F0;
+  border-color: #33C3F0; }
+
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+  color: #FFF;
+  background-color: #1EAEDB;
+  border-color: #1EAEDB; }

@@ -48,6 +48,7 @@ module.exports = new class App extends MK.Object {
 			})
 			.initRouter('mode/id')
 			.set({
+				memo: {},
 				mode: this.mode || 'simple'
 			})
 			.bindNode('sandbox', 'body')
@@ -79,7 +80,14 @@ module.exports = new class App extends MK.Object {
 				}
 			})
 			.on({
-				'click::(.save)': evt => this.save()
+				'click::(.save)': this.save,
+				'change:id': evt => {
+					if(this.id) {
+						this.restore(this.id);
+					}
+
+					console.log('yomanarod');
+				}
 			});
 
 		if(this.id) {
@@ -115,19 +123,28 @@ module.exports = new class App extends MK.Object {
 	}
 
 	async save() {
+		const body = this.toJSONString();
 		let resp = await fetch('/save', {
 			method: 'POST',
-			body: this.toJSONString()
+			body
 		});
 		resp = await resp.json();
 
 		if(!resp.error) {
 			this.id = resp.key;
+			this.memo[resp.key] = body;
 		}
 	}
 
 	async restore(id) {
-		let resp = await fetch(`//jsonlintcom.s3.amazonaws.com/${id}.json`);
-		this.fromJSONString(await resp.text());
+		if(this.memo[id]) {
+			this.fromJSONString(this.memo[id]);
+		} else {
+			let resp = await fetch(`//jsonlintcom.s3.amazonaws.com/${id}.json`);
+			resp = await resp.text();
+			this.memo[id] = resp;
+			this.fromJSONString(resp);
+		}
+
 	}
 }

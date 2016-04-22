@@ -1,4 +1,5 @@
 "use strict";
+
 const bodyParser = require('body-parser'),
 	http = require('http'),
 	path = require('path'),
@@ -8,7 +9,9 @@ const bodyParser = require('body-parser'),
 app.set('port', process.env.PORT || 5000);
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 app.use((req, res, next) => {
 	let rawBody = '';
