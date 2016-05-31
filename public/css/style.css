@@ -6,6 +6,7 @@
 	line-height: 1;
 	top: 10px;
 	right: 10px;
+	-webkit-transition: color .5s ease-out;
 	transition: color .5s ease-out;
 	z-index: 3;
 }
@@ -27,6 +28,7 @@
 	left: 40px;
 	opacity: 0;
 	pointer-events: none;
+	-webkit-transition: opacity .5s ease-out;
 	transition: opacity .5s ease-out;
 }
 
@@ -61,26 +63,26 @@ html, body {
 
 main {
 	min-height: 100%;
-	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	-webkit-flex-direction: column;
-	-ms-flex-direction: column;
-	flex-direction: column;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 }
 
 main > .tabs {
-	-webkit-flex: 1;
-	-ms-flex: 1;
-	    flex: 1;
-	display: -webkit-flex;
-	display: -ms-flexbox;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	-webkit-flex-direction: column;
-	-ms-flex-direction: column;
-	flex-direction: column;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
 }
 
 .tab-pane {
@@ -93,25 +95,24 @@ main > .tabs {
 }
 
 #simple.tab-pane.active, #diff.tab-pane.active {
-	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	-webkit-flex-direction: column;
-	-ms-flex-direction: column;
-	flex-direction: column;
-	-webkit-flex: 1;
-	-ms-flex: 1;
-	    flex: 1;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 }
 
 #simple.tab-pane > .content, #diff.tab-pane > .content {
-	-webkit-flex: 1;
-	-ms-flex: 1;
-	    flex: 1;
-	display: -webkit-flex;
-	display: -ms-flexbox;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	position: relative;
 }
@@ -153,13 +154,13 @@ ul.tab-nav {
     list-style: none;
     border-bottom: 1px solid #bbb;
     padding: 0 5px;
-	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	-webkit-flex-direction: row;
-	-ms-flex-direction: row;
-	flex-direction: row;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
 	margin-top: 20px;
 }
 
@@ -261,25 +262,24 @@ ul.tab-nav li.tab-nav-item.active {
 	left: 0;
 	border: 50px dashed green;
 	z-index: 5;
-	display: -webkit-flex;
-	display: -ms-flexbox;
 	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	-webkit-align-items: center;
-	-ms-flex-align: center;
-	    align-items: center;
-  	-webkit-justify-content: center;
-  	-ms-flex-pack: center;
-  	    justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+  	-webkit-box-pack: center;
+  	    -ms-flex-pack: center;
+  	        justify-content: center;
 	pointer-events: none;
 }
 
 .dnd-area::before {
 	content: 'Drop files here';
 	font-size: 36px;
-	-webkit-flex: 1;
-	-ms-flex: 1;
-	    flex: 1;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
 	text-align: center;
 }
 

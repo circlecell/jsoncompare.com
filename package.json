@@ -27,6 +27,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "nodemon": "^1.9.2",
     "postcss-calc": "^5.2.0",
     "postcss-cssnext": "^2.4.0",
     "postcss-import": "^8.0.2",
@@ -34,7 +35,8 @@
     "postcss-nested": "^1.0.0",
     "postcss-url": "^5.1.1",
     "script-loader": "^0.7.0",
-    "style-loader": "^0.13.0"
+    "style-loader": "^0.13.0",
+    "webpack": "^1.13.1"
   },
   "dependencies": {
     "aws-sdk": "^2.2.39",
