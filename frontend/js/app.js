@@ -1,7 +1,9 @@
 import MK from 'matreshka';
 import Tabs from './tabs';
 import 'matreshka-router';
-import "babel-polyfill";
+import 'babel-polyfill';
+import './codemirror-init';
+
 
 const $ = MK.$b;
 

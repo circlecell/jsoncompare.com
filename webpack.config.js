@@ -6,7 +6,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin"),
 		require('postcss-import'),
 		require('postcss-url')({
 			url: "inline",
-			from: "frontend/pcss/stype.pcss"
+			from: "frontend/pcss/style.pcss"
 		}),
 		require('postcss-nested')(),
 		require('postcss-cssnext')(),
@@ -38,12 +38,7 @@ module.exports = [{
 		}]
 	},
 	postcss: postcssPlugins,
-	devtool: 'source-map',//'eval'
-	plugins: [
-		new webpack.ProvidePlugin({
-		    CodeMirror: "codemirror"
-		})
-	]
+	devtool: 'source-map'
 }, {
 	context: __dirname + "/frontend/pcss",
 	entry: {

@@ -1,5 +1,5 @@
 import Tab from './tab';
-import CodeMirror from './codemirror';
+import CodeMirror from 'codemirror';
 import MK from 'matreshka';
 
 export default class SimpleTab extends Tab {

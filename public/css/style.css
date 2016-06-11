@@ -1,6 +1,3 @@
-/*@import 'skeleton.pcss';
-//@import 'skeleton-tabs.pcss';*/
-
 .CodeMirror .lint-button {
 	position: absolute;
 	line-height: 1;
@@ -10,6 +7,8 @@
 	transition: color .5s ease-out;
 	z-index: 3;
 }
+
+* {color: green;}
 
 .CodeMirror .lint-button::before {
 	content: '\2713';
@@ -197,7 +196,8 @@ ul.tab-nav li.tab-nav-item.active {
 	border: none;
 }
 
-.CodeMirror .delete-editor, .CodeMirror .lint-button {/*background-color: #BCD183;
+.CodeMirror .delete-editor, .CodeMirror .lint-button {
+	/*background-color: #BCD183;
 		border: 1px solid #D2D4DB;
 		border-color: #9CBE43;*/
 	background-color: rgba(229, 233,235,0.8);
