@@ -4,7 +4,11 @@
   "description": "Jsonlint website",
   "main": "app.js",
   "scripts": {
-    "develop": "nodemon app.js & webpack --watch"
+    "develop": "npm-run-all --parallel serve watch open-in-browser",
+    "serve": "PORT=5001 nodemon app.js",
+    "open-in-browser": "opn http://localhost:5001",
+    "watch": "webpack --watch",
+    "bundle": "webpack"
   },
   "repository": {
     "type": "git",
@@ -28,6 +32,7 @@
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "nodemon": "^1.9.2",
+    "npm-run-all": "^2.1.1",
     "postcss-calc": "^5.2.0",
     "postcss-cssnext": "^2.4.0",
     "postcss-import": "^8.0.2",
