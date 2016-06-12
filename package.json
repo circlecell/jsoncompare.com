@@ -9,7 +9,8 @@
     "open-in-browser": "opn http://localhost:5001",
     "watch": "webpack --watch --progress",
     "bundle": "webpack",
-    "check-updates": "ncu"
+    "check-updates": "ncu --error-level",
+    "upgrade": "ncu --upgradeAll && npm i"
   },
   "repository": {
     "type": "git",
