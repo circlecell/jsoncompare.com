@@ -8,12 +8,7 @@ export default class SimpleTab extends Tab {
 	}
 
 	initialize() {
-		this.editor = CodeMirror(this.nodes.content, {
-			lineNumbers: true,
-			mode: "text/html",
-			jsonlint: true,
-			viewportMargin: Infinity
-		});
+		this.editor = CodeMirror(this.nodes.content);
 
 		return this
 			.bindNode('value', this.editor.display.wrapper)

@@ -4,7 +4,7 @@ import CodeMirror from 'codemirror';
 import {isUri} from 'valid-url';
 
 CodeMirror.defineOption('jsonlint', false, function(editor, value) {
-	let initialized = editor._jsonlint;
+	const initialized = editor._jsonlint;
 
 	if(value && !initialized) {
 		let wrapper = editor.display.wrapper,
@@ -24,6 +24,7 @@ CodeMirror.defineOption('jsonlint', false, function(editor, value) {
 
 		validateButton.addEventListener('click', async evt => {
 			const value = editor.getValue();
+
 			if(isUri(value.trim())) {
 				const resp = await (
 					await fetch('/proxy', {

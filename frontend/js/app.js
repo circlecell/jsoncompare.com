@@ -1,11 +1,12 @@
 import MK from 'matreshka';
 import Tabs from './tabs';
+import CodeMirror from 'codemirror';
+import $ from 'balajs';
 import 'matreshka-router';
 import 'babel-polyfill';
 import './codemirror-init';
 import '../pcss/style.pcss';
 
-const $ = MK.$b;
 
 MK.prototype.appendNode = function(key, selector) {
 	var nodes = this.$bound(key),
@@ -53,19 +54,48 @@ module.exports = new class App extends MK.Object {
 				memo: {},
 				mode: this.mode || 'simple'
 			})
-			.bindNode('sandbox', 'body')
-			//.bindNode('dndAreas', '#simple, #batch, #diff .CodeMirror')
+			.bindNode({
+				sandbox: 'body',
+				reformat: ':sandbox .reformat'
+			})
 			.on({
 				'tabs@change:activeTab': evt => {
 					this.mode = evt.value.name;
 				},
-				'dragover::sandbox drop::sandbox': evt => evt.preventDefault()
+				'dragover::sandbox drop::sandbox': evt => evt.preventDefault(),
+				'click::(.save)': this.save,
+				'change:id': evt => {
+					if(this.id) {
+						this.restore(this.id);
+					}
+				},
+				'addevent': evt => {
+					const prefix = 'codemirror:';
+					if(evt.name.indexOf(prefix) == 0) {
+						CodeMirror.on(CodeMirror, evt.name.replace(prefix, ''), evt.callback)
+					}
+				},
+				'codemirror:validate': editor => {console.log(this.reformat)
+					if(this.reformat) {
+						const value = JSON.parse(editor.getValue());
+						if(this.reformat === 'minify') {
+							editor.setValue(JSON.stringify(value));
+						} else if(this.reformat === 'beautify') {
+							editor.setValue(JSON.stringify(value, null, '\t'))
+						}
+					}
+				},
+
+				'codemirror:errorvalidate': editor => {
+					console.log('errora', editor);
+				}
 			})
 			.on({
 				'change:mode': evt => {
 					this.tabs[this.mode].active = true;
 				}
 			}, true)
+			// REFACTOR THIS SHIT
 			.onDebounce({
 				[`dragover::(${dndPlaceholderAreas})`]: evt => {console.log('yomanarofd');
 					if(!$.one('.dnd-area', evt.target.closest(dndPlaceholderAreas))) {
@@ -79,16 +109,6 @@ module.exports = new class App extends MK.Object {
 					if(area) {
 						area.parentNode.removeChild(area);
 					}
-				}
-			})
-			.on({
-				'click::(.save)': this.save,
-				'change:id': evt => {
-					if(this.id) {
-						this.restore(this.id);
-					}
-
-					console.log('yomanarod');
 				}
 			});
 
@@ -143,8 +163,10 @@ module.exports = new class App extends MK.Object {
 		if(this.memo[id]) {
 			this.fromJSONString(this.memo[id]);
 		} else {
-			let resp = await fetch(`//jsonlintcom.s3.amazonaws.com/${id}.json`);
-			resp = await resp.text();
+			const resp = await (
+				await fetch(`//jsonlintcom.s3.amazonaws.com/${id}.json`)
+			).text();
+
 			this.memo[id] = resp;
 			this.fromJSONString(resp);
 		}

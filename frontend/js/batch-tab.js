@@ -1,10 +1,7 @@
 import Tab from './tab';
 import MK from 'matreshka';
-import Batch from './batch'
-
-const $ = MK.$b;
-
-
+import Batch from './batch';
+import $ from 'balajs';
 
 export default class BatchTab extends Tab {
 	constructor(...args) {
@@ -12,8 +9,7 @@ export default class BatchTab extends Tab {
 			.set('items', [])
 			.setClassFor({
 				items: Batch
-			})
-			//.bindNode('files', 'body', MK.binders.dropFiles('text'));
+			});
 	}
 
 	initialize() {

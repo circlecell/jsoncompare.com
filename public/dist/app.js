@@ -53,6 +53,10 @@ var app =
 	
 	var Tabs = __webpack_require__(2);
 	
+	var CodeMirror = __webpack_require__(5);
+	
+	var $ = __webpack_require__(314);
+	
 	__webpack_require__(10);
 	
 	__webpack_require__(11);
@@ -70,8 +74,6 @@ var app =
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var $ = MK.$b;
 	
 	MK.prototype.appendNode = function (key, selector) {
 		var nodes = this.$bound(key),
@@ -120,20 +122,50 @@ var app =
 			}).initRouter('mode/id').set({
 				memo: {},
 				mode: _this.mode || 'simple'
-			}).bindNode('sandbox', 'body')
-			//.bindNode('dndAreas', '#simple, #batch, #diff .CodeMirror')
-			.on({
+			}).bindNode({
+				sandbox: 'body',
+				reformat: ':sandbox .reformat'
+			}).on({
 				'tabs@change:activeTab': function tabsChangeActiveTab(evt) {
 					_this.mode = evt.value.name;
 				},
 				'dragover::sandbox drop::sandbox': function dragoverSandboxDropSandbox(evt) {
 					return evt.preventDefault();
+				},
+				'click::(.save)': _this.save,
+				'change:id': function changeId(evt) {
+					if (_this.id) {
+						_this.restore(_this.id);
+					}
+				},
+				'addevent': function addevent(evt) {
+					var prefix = 'codemirror:';
+					if (evt.name.indexOf(prefix) == 0) {
+						CodeMirror.on(CodeMirror, evt.name.replace(prefix, ''), evt.callback);
+					}
+				},
+				'codemirror:validate': function codemirrorValidate(editor) {
+					console.log(_this.reformat);
+					if (_this.reformat) {
+						var value = JSON.parse(editor.getValue());
+						if (_this.reformat === 'minify') {
+							editor.setValue(JSON.stringify(value));
+						} else if (_this.reformat === 'beautify') {
+							editor.setValue(JSON.stringify(value, null, '\t'));
+						}
+					}
+				},
+	
+				'codemirror:errorvalidate': function codemirrorErrorvalidate(editor) {
+					console.log('errora', editor);
 				}
 			}).on({
 				'change:mode': function changeMode(evt) {
 					_this.tabs[_this.mode].active = true;
 				}
-			}, true).onDebounce((_setClassFor$initRout = {}, _defineProperty(_setClassFor$initRout, 'dragover::(' + dndPlaceholderAreas + ')', function undefined(evt) {
+			}, true)
+			// REFACTOR THIS SHIT
+			.onDebounce((_setClassFor$initRout = {}, _defineProperty(_setClassFor$initRout, 'dragover::(' + dndPlaceholderAreas + ')', function undefined(evt) {
 				console.log('yomanarofd');
 				if (!$.one('.dnd-area', evt.target.closest(dndPlaceholderAreas))) {
 					evt.target.closest(dndPlaceholderAreas).appendChild($.create('div', {
@@ -145,16 +177,7 @@ var app =
 				if (area) {
 					area.parentNode.removeChild(area);
 				}
-			}), _setClassFor$initRout)).on({
-				'click::(.save)': _this.save,
-				'change:id': function changeId(evt) {
-					if (_this.id) {
-						_this.restore(_this.id);
-					}
-	
-					console.log('yomanarod');
-				}
-			});
+			}), _setClassFor$initRout));
 	
 			if (_this.id) {
 				_this.restore(_this.id);
@@ -257,7 +280,7 @@ var app =
 									}
 	
 									this.fromJSONString(this.memo[id]);
-									_context2.next = 12;
+									_context2.next = 11;
 									break;
 	
 								case 4:
@@ -265,17 +288,17 @@ var app =
 									return fetch('//jsonlintcom.s3.amazonaws.com/' + id + '.json');
 	
 								case 6:
-									resp = _context2.sent;
-									_context2.next = 9;
-									return resp.text();
+									_context2.next = 8;
+									return _context2.sent.text();
 	
-								case 9:
+								case 8:
 									resp = _context2.sent;
+	
 	
 									this.memo[id] = resp;
 									this.fromJSONString(resp);
 	
-								case 12:
+								case 11:
 								case 'end':
 									return _context2.stop();
 							}
@@ -4058,12 +4081,7 @@ var app =
 			value: function initialize() {
 				var _this2 = this;
 	
-				this.editor = CodeMirror(this.nodes.content, {
-					lineNumbers: true,
-					mode: "text/html",
-					jsonlint: true,
-					viewportMargin: Infinity
-				});
+				this.editor = CodeMirror(this.nodes.content);
 	
 				return this.bindNode('value', this.editor.display.wrapper).bindNode('files', ':sandbox', MK.binders.dropFiles('text')).on({
 					'change:files': function changeFiles(evt) {
@@ -13060,13 +13078,13 @@ var app =
 	
 	var Batch = __webpack_require__(7);
 	
+	var $ = __webpack_require__(314);
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var $ = MK.$b;
 	
 	var BatchTab = function (_Tab) {
 		_inherits(BatchTab, _Tab);
@@ -13085,7 +13103,6 @@ var app =
 			(_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(BatchTab)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this).set('items', []).setClassFor({
 				items: Batch
 			});
-			//.bindNode('files', 'body', MK.binders.dropFiles('text'));
 			return _this;
 		}
 	
@@ -13171,6 +13188,8 @@ var app =
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var MK = __webpack_require__(1);
+	
+	var CodeMirror = __webpack_require__(5);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -22485,17 +22504,19 @@ var app =
 	
 	var CodeMirror = __webpack_require__(5);
 	
-	CodeMirror.defineExtension('validate', function (editor) {
+	CodeMirror.defineExtension('validate', function () {
 		var code = this.getValue(),
 		    lineMatches = void 0;
 	
 		try {
 			JSON.parse(code);
 			this.notify('SUCCESS', 'Valid JSON');
+			CodeMirror.signal(CodeMirror, 'validate', this);
 		} catch (_e) {
 			try {
 				jsonlint.parse(code);
 				this.notify('SUCCESS', 'Valid JSON');
+				CodeMirror.signal(CodeMirror, 'validate', this);
 			} catch (e) {
 				// retrieve line number from error
 				lineMatches = e.message.match(/line ([0-9]*)/);
@@ -22505,6 +22526,8 @@ var app =
 				}
 	
 				this.notify('ERROR', e);
+	
+				CodeMirror.signal(CodeMirror, 'errorvalidate', this);
 			}
 		}
 	});

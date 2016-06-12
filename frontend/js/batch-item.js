@@ -1,4 +1,5 @@
 import MK from 'matreshka';
+import CodeMirror from 'codemirror';
 
 export default class BatchItem extends MK.Object {
 	constructor(data) {
@@ -9,7 +10,6 @@ export default class BatchItem extends MK.Object {
 	onRender() {
 		setTimeout(() => {
 			this.editor = CodeMirror(this.sandbox);
-
 
 			this
 				.bindNode({

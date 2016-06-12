@@ -2,8 +2,9 @@ import $ from 'balajs';
 import assign from 'object.assign';
 import CodeMirror from 'codemirror';
 
+
 CodeMirror.defineExtension('notify', function(state, message) {
-	let {notifierBlock, validateButton} = this.display;
+	const {notifierBlock, validateButton} = this.display;
 
 	if(!notifierBlock || !validateButton) return;
 
