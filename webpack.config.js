@@ -29,13 +29,12 @@ module.exports = [{
 	module: {
 		loaders: [{
 			test: /.js?$/,
-			loader: 'babel-loader',
-			exclude: /node_modules/,
-			query: {
+			loader: `babel?${JSON.stringify({
 				presets: ['es2015', 'stage-0'],
 				plugins: ['transform-es2015-modules-simple-commonjs']
-			}
-		}, {
+			})}!eslint`,
+			exclude: /node_modules/
+        }, {
 			test: /\.css$|\.pcss$/,
 			loader: ExtractTextPlugin.extract('style', 'css!postcss')
 		}]
