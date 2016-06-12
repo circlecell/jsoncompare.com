@@ -1,10 +1,11 @@
 import $ from 'balajs';
 import assign from 'object.assign';
 import CodeMirror from 'codemirror';
+import {isUri} from 'valid-url';
 
 CodeMirror.defineOption('jsonlint', false, function(editor, value) {
 	let initialized = editor._jsonlint;
-	//if(!value && !editor._jsonlint)
+
 	if(value && !initialized) {
 		let wrapper = editor.display.wrapper,
 			validateButton = assign(wrapper.appendChild($.one('<div>')), {
@@ -21,8 +22,29 @@ CodeMirror.defineOption('jsonlint', false, function(editor, value) {
 			editor.notify(null);
 		});
 
-		validateButton.addEventListener('click', evt => {
-			editor.validate()
+		validateButton.addEventListener('click', async evt => {
+			const value = editor.getValue();
+			if(isUri(value.trim())) {
+				const resp = await (
+					await fetch('/proxy', {
+						method: 'post',
+						body: JSON.stringify({
+							url: value
+						})
+					})
+				).json();
+
+				if(!resp.error) {
+					editor.setValue(resp.body);
+					editor.validate();
+				} else {
+					alert('TODO: RESP ERROR');
+				}
+
+			} else {
+				editor.validate()
+			}
+
 		});
 
 		editor._jsonlint = true;

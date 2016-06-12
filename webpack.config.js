@@ -22,7 +22,7 @@ module.exports = [{
 		app: './app'
 	},
 	output: {
-		path: __dirname + '/public/js',
+		path: __dirname + '/public/dist',
 		filename: "[name].js",
 		library: "[name]"
 	},
@@ -37,7 +37,7 @@ module.exports = [{
 			}
 		}, {
 			test: /\.css$|\.pcss$/,
-			loader: "style-loader!css-loader!postcss-loader"
+			loader: ExtractTextPlugin.extract('style', 'css!postcss')
 		}]
 	},
 	postcss: postcssPlugins,

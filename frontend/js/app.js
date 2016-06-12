@@ -5,7 +5,6 @@ import 'babel-polyfill';
 import './codemirror-init';
 import '../pcss/style.pcss';
 
-
 const $ = MK.$b;
 
 MK.prototype.appendNode = function(key, selector) {
@@ -127,11 +126,12 @@ module.exports = new class App extends MK.Object {
 
 	async save() {
 		const body = this.toJSONString();
-		let resp = await fetch('/save', {
-			method: 'POST',
-			body
-		});
-		resp = await resp.json();
+		const resp = await(
+		 	await fetch('/save', {
+				method: 'post',
+				body
+			})
+		).json();
 
 		if(!resp.error) {
 			this.id = resp.key;

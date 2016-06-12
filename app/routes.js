@@ -39,18 +39,25 @@ module.exports = app => {
 			});
 
 		}
-
-		//console.log(req.body);;
-
-		//res.send('alles gut')
-		/**/
-
 	});
 
+	app.post('/proxy', (req, res) => {
+		const {url} = req.jsonBody;
+		const request = require('request');
+		const {isUri} = require('valid-url');
 
-
-
-	//var p = {"simple":"","batch":["",""],"diff":{"left":3,"right":""}};
-
-	//console.log(validator.validate(p, AppState));
+		if(isUri(url)) {
+			request(url, (error, response, body) => {
+				if(error) {
+					res.json(400, {error: `Error ${error.code || 'unknown'}`});
+				} else if(response.statusCode === 200) {
+					res.json({body, error: null})
+				} else {
+					res.json({error: `Error ${response.statusCode}`})
+				}
+			});
+		} else {
+			res.json(400, {error: 'Wrong URL format'});
+		}
+	});
 };

@@ -59,7 +59,7 @@ var app =
 	
 	__webpack_require__(309);
 	
-	__webpack_require__(336);
+	__webpack_require__(333);
 	
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 	
@@ -211,16 +211,15 @@ var app =
 									body = this.toJSONString();
 									_context.next = 3;
 									return fetch('/save', {
-										method: 'POST',
+										method: 'post',
 										body: body
 									});
 	
 								case 3:
-									resp = _context.sent;
-									_context.next = 6;
-									return resp.json();
+									_context.next = 5;
+									return _context.sent.json();
 	
-								case 6:
+								case 5:
 									resp = _context.sent;
 	
 	
@@ -229,7 +228,7 @@ var app =
 										this.memo[resp.key] = body;
 									}
 	
-								case 8:
+								case 7:
 								case 'end':
 									return _context.stop();
 							}
@@ -21563,12 +21562,12 @@ var app =
 	
 	__webpack_require__(310);
 	
-	__webpack_require__(314);
+	__webpack_require__(311);
 	
-	__webpack_require__(316);
+	__webpack_require__(312);
 	
-	Object.assign(window, __webpack_require__(334));
-	__webpack_require__(335);
+	Object.assign(window, __webpack_require__(331));
+	__webpack_require__(332);
 	
 	Object.assign(CodeMirror.defaults, {
 		dragDrop: false,
@@ -21582,423 +21581,55 @@ var app =
 
 /***/ },
 /* 310 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(311);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(313)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../css-loader/index.js!./../../../postcss-loader/index.js!./merge.css", function() {
-				var newContent = require("!!./../../../css-loader/index.js!./../../../postcss-loader/index.js!./merge.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
+	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 311 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	exports = module.exports = __webpack_require__(312)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".CodeMirror-merge {\n  position: relative;\n  border: 1px solid #ddd;\n  white-space: pre;\n}\n\n.CodeMirror-merge, .CodeMirror-merge .CodeMirror {\n  height: 350px;\n}\n\n.CodeMirror-merge-2pane .CodeMirror-merge-pane { width: 47%; }\n\n.CodeMirror-merge-2pane .CodeMirror-merge-gap { width: 6%; }\n\n.CodeMirror-merge-3pane .CodeMirror-merge-pane { width: 31%; }\n\n.CodeMirror-merge-3pane .CodeMirror-merge-gap { width: 3.5%; }\n\n.CodeMirror-merge-pane {\n  display: inline-block;\n  white-space: normal;\n  vertical-align: top;\n}\n\n.CodeMirror-merge-pane-rightmost {\n  position: absolute;\n  right: 0px;\n  z-index: 1;\n}\n\n.CodeMirror-merge-gap {\n  z-index: 2;\n  display: inline-block;\n  height: 100%;\n  box-sizing: border-box;\n  overflow: hidden;\n  border-left: 1px solid #ddd;\n  border-right: 1px solid #ddd;\n  position: relative;\n  background: #f8f8f8;\n}\n\n.CodeMirror-merge-scrolllock-wrap {\n  position: absolute;\n  bottom: 0; left: 50%;\n}\n\n.CodeMirror-merge-scrolllock {\n  position: relative;\n  left: -50%;\n  cursor: pointer;\n  color: #555;\n  line-height: 1;\n}\n\n.CodeMirror-merge-copybuttons-left, .CodeMirror-merge-copybuttons-right {\n  position: absolute;\n  left: 0; top: 0;\n  right: 0; bottom: 0;\n  line-height: 1;\n}\n\n.CodeMirror-merge-copy {\n  position: absolute;\n  cursor: pointer;\n  color: #44c;\n  z-index: 3;\n}\n\n.CodeMirror-merge-copy-reverse {\n  position: absolute;\n  cursor: pointer;\n  color: #44c;\n}\n\n.CodeMirror-merge-copybuttons-left .CodeMirror-merge-copy { left: 2px; }\n\n.CodeMirror-merge-copybuttons-right .CodeMirror-merge-copy { right: 2px; }\n\n.CodeMirror-merge-r-inserted, .CodeMirror-merge-l-inserted {\n  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAGUlEQVQI12MwuCXy3+CWyH8GBgYGJgYkAABZbAQ9ELXurwAAAABJRU5ErkJggg==);\n  background-position: bottom left;\n  background-repeat: repeat-x;\n}\n\n.CodeMirror-merge-r-deleted, .CodeMirror-merge-l-deleted {\n  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAGUlEQVQI12M4Kyb2/6yY2H8GBgYGJgYkAABURgPz6Ks7wQAAAABJRU5ErkJggg==);\n  background-position: bottom left;\n  background-repeat: repeat-x;\n}\n\n.CodeMirror-merge-r-chunk { background: #ffffe0; }\n\n.CodeMirror-merge-r-chunk-start { border-top: 1px solid #ee8; }\n\n.CodeMirror-merge-r-chunk-end { border-bottom: 1px solid #ee8; }\n\n.CodeMirror-merge-r-connect { fill: #ffffe0; stroke: #ee8; stroke-width: 1px; }\n\n.CodeMirror-merge-l-chunk { background: #eef; }\n\n.CodeMirror-merge-l-chunk-start { border-top: 1px solid #88e; }\n\n.CodeMirror-merge-l-chunk-end { border-bottom: 1px solid #88e; }\n\n.CodeMirror-merge-l-connect { fill: #eef; stroke: #88e; stroke-width: 1px; }\n\n.CodeMirror-merge-l-chunk.CodeMirror-merge-r-chunk { background: #dfd; }\n\n.CodeMirror-merge-l-chunk-start.CodeMirror-merge-r-chunk-start { border-top: 1px solid #4e4; }\n\n.CodeMirror-merge-l-chunk-end.CodeMirror-merge-r-chunk-end { border-bottom: 1px solid #4e4; }\n\n.CodeMirror-merge-collapsed-widget:before {\n  content: \"(...)\";\n}\n\n.CodeMirror-merge-collapsed-widget {\n  cursor: pointer;\n  color: #88b;\n  background: #eef;\n  border: 1px solid #ddf;\n  font-size: 90%;\n  padding: 0 3px;\n  border-radius: 4px;\n}\n\n.CodeMirror-merge-collapsed-line .CodeMirror-gutter-elt { display: none; }\n", ""]);
-	
-	// exports
-
+	// removed by extract-text-webpack-plugin
 
 /***/ },
 /* 312 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
+	'use strict';
 	
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
+	__webpack_require__(313);
 	
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
+	__webpack_require__(326);
+	
+	__webpack_require__(327);
+	
+	__webpack_require__(329);
+	
+	__webpack_require__(330);
 
 /***/ },
 /* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-	
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-	
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-	
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-	
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-	
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-	
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-	
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-	
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-	
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-	
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-	
-	function createLinkElement(options) {
-		var linkElement = document.createElement("link");
-		linkElement.rel = "stylesheet";
-		insertStyleElement(options, linkElement);
-		return linkElement;
-	}
-	
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-	
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else if(obj.sourceMap &&
-			typeof URL === "function" &&
-			typeof URL.createObjectURL === "function" &&
-			typeof URL.revokeObjectURL === "function" &&
-			typeof Blob === "function" &&
-			typeof btoa === "function") {
-			styleElement = createLinkElement(options);
-			update = updateLink.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-				if(styleElement.href)
-					URL.revokeObjectURL(styleElement.href);
-			};
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-	
-		update(obj);
-	
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-	
-	var replaceText = (function () {
-		var textStore = [];
-	
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-	
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-	
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-	
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-	
-		if(media) {
-			styleElement.setAttribute("media", media)
-		}
-	
-		if(styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-	
-	function updateLink(linkElement, obj) {
-		var css = obj.css;
-		var sourceMap = obj.sourceMap;
-	
-		if(sourceMap) {
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-	
-		var blob = new Blob([css], { type: "text/css" });
-	
-		var oldSrc = linkElement.href;
-	
-		linkElement.href = URL.createObjectURL(blob);
-	
-		if(oldSrc)
-			URL.revokeObjectURL(oldSrc);
-	}
-
-
-/***/ },
-/* 314 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(315);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(313)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../css-loader/index.js!./../../postcss-loader/index.js!./codemirror.css", function() {
-				var newContent = require("!!./../../css-loader/index.js!./../../postcss-loader/index.js!./codemirror.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 315 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(312)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "/* BASICS */\n\n.CodeMirror {\n  /* Set height, width, borders, and global font properties here */\n  font-family: monospace;\n  height: 300px;\n  color: black;\n}\n\n/* PADDING */\n\n.CodeMirror-lines {\n  padding: 4px 0; /* Vertical padding around content */\n}\n\n.CodeMirror pre {\n  padding: 0 4px; /* Horizontal padding of content */\n}\n\n.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {\n  background-color: white; /* The little square between H and V scrollbars */\n}\n\n/* GUTTER */\n\n.CodeMirror-gutters {\n  border-right: 1px solid #ddd;\n  background-color: #f7f7f7;\n  white-space: nowrap;\n}\n\n.CodeMirror-linenumbers {}\n\n.CodeMirror-linenumber {\n  padding: 0 3px 0 5px;\n  min-width: 20px;\n  text-align: right;\n  color: #999;\n  white-space: nowrap;\n}\n\n.CodeMirror-guttermarker { color: black; }\n\n.CodeMirror-guttermarker-subtle { color: #999; }\n\n/* CURSOR */\n\n.CodeMirror-cursor {\n  border-left: 1px solid black;\n  border-right: none;\n  width: 0;\n}\n\n/* Shown when moving in bi-directional text */\n\n.CodeMirror div.CodeMirror-secondarycursor {\n  border-left: 1px solid silver;\n}\n\n.cm-fat-cursor .CodeMirror-cursor {\n  width: auto;\n  border: 0 !important;\n  background: #7e7;\n}\n\n.cm-fat-cursor div.CodeMirror-cursors {\n  z-index: 1;\n}\n\n.cm-animate-fat-cursor {\n  width: auto;\n  border: 0;\n  -webkit-animation: blink 1.06s steps(1) infinite;\n  animation: blink 1.06s steps(1) infinite;\n  background-color: #7e7;\n}\n\n@-webkit-keyframes blink {\n  0% {}\n  50% { background-color: transparent; }\n  100% {}\n}\n\n@keyframes blink {\n  0% {}\n  50% { background-color: transparent; }\n  100% {}\n}\n\n/* Can style cursor different in overwrite (non-insert) mode */\n\n.CodeMirror-overwrite .CodeMirror-cursor {}\n\n.cm-tab { display: inline-block; text-decoration: inherit; }\n\n.CodeMirror-ruler {\n  border-left: 1px solid #ccc;\n  position: absolute;\n}\n\n/* DEFAULT THEME */\n\n.cm-s-default .cm-header {color: blue;}\n\n.cm-s-default .cm-quote {color: #090;}\n\n.cm-negative {color: #d44;}\n\n.cm-positive {color: #292;}\n\n.cm-header, .cm-strong {font-weight: bold;}\n\n.cm-em {font-style: italic;}\n\n.cm-link {text-decoration: underline;}\n\n.cm-strikethrough {text-decoration: line-through;}\n\n.cm-s-default .cm-keyword {color: #708;}\n\n.cm-s-default .cm-atom {color: #219;}\n\n.cm-s-default .cm-number {color: #164;}\n\n.cm-s-default .cm-def {color: #00f;}\n\n.cm-s-default .cm-variable,\n.cm-s-default .cm-punctuation,\n.cm-s-default .cm-property,\n.cm-s-default .cm-operator {}\n\n.cm-s-default .cm-variable-2 {color: #05a;}\n\n.cm-s-default .cm-variable-3 {color: #085;}\n\n.cm-s-default .cm-comment {color: #a50;}\n\n.cm-s-default .cm-string {color: #a11;}\n\n.cm-s-default .cm-string-2 {color: #f50;}\n\n.cm-s-default .cm-meta {color: #555;}\n\n.cm-s-default .cm-qualifier {color: #555;}\n\n.cm-s-default .cm-builtin {color: #30a;}\n\n.cm-s-default .cm-bracket {color: #997;}\n\n.cm-s-default .cm-tag {color: #170;}\n\n.cm-s-default .cm-attribute {color: #00c;}\n\n.cm-s-default .cm-hr {color: #999;}\n\n.cm-s-default .cm-link {color: #00c;}\n\n.cm-s-default .cm-error {color: #f00;}\n\n.cm-invalidchar {color: #f00;}\n\n.CodeMirror-composing { border-bottom: 2px solid; }\n\n/* Default styles for common addons */\n\ndiv.CodeMirror span.CodeMirror-matchingbracket {color: #0f0;}\n\ndiv.CodeMirror span.CodeMirror-nonmatchingbracket {color: #f22;}\n\n.CodeMirror-matchingtag { background: rgba(255, 150, 0, .3); }\n\n.CodeMirror-activeline-background {background: #e8f2ff;}\n\n/* STOP */\n\n/* The rest of this file contains styles related to the mechanics of\n   the editor. You probably shouldn't touch them. */\n\n.CodeMirror {\n  position: relative;\n  overflow: hidden;\n  background: white;\n}\n\n.CodeMirror-scroll {\n  overflow: scroll !important; /* Things will break if this is overridden */\n  /* 30px is the magic margin used to hide the element's real scrollbars */\n  /* See overflow: hidden in .CodeMirror */\n  margin-bottom: -30px; margin-right: -30px;\n  padding-bottom: 30px;\n  height: 100%;\n  outline: none; /* Prevent dragging from highlighting the element */\n  position: relative;\n}\n\n.CodeMirror-sizer {\n  position: relative;\n  border-right: 30px solid transparent;\n}\n\n/* The fake, visible scrollbars. Used to force redraw during scrolling\n   before actual scrolling happens, thus preventing shaking and\n   flickering artifacts. */\n\n.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {\n  position: absolute;\n  z-index: 6;\n  display: none;\n}\n\n.CodeMirror-vscrollbar {\n  right: 0; top: 0;\n  overflow-x: hidden;\n  overflow-y: scroll;\n}\n\n.CodeMirror-hscrollbar {\n  bottom: 0; left: 0;\n  overflow-y: hidden;\n  overflow-x: scroll;\n}\n\n.CodeMirror-scrollbar-filler {\n  right: 0; bottom: 0;\n}\n\n.CodeMirror-gutter-filler {\n  left: 0; bottom: 0;\n}\n\n.CodeMirror-gutters {\n  position: absolute; left: 0; top: 0;\n  min-height: 100%;\n  z-index: 3;\n}\n\n.CodeMirror-gutter {\n  white-space: normal;\n  height: 100%;\n  display: inline-block;\n  vertical-align: top;\n  margin-bottom: -30px;\n  /* Hack to make IE7 behave */\n  *zoom:1;\n  *display:inline;\n}\n\n.CodeMirror-gutter-wrapper {\n  position: absolute;\n  z-index: 4;\n  background: none !important;\n  border: none !important;\n}\n\n.CodeMirror-gutter-background {\n  position: absolute;\n  top: 0; bottom: 0;\n  z-index: 4;\n}\n\n.CodeMirror-gutter-elt {\n  position: absolute;\n  cursor: default;\n  z-index: 4;\n}\n\n.CodeMirror-gutter-wrapper {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n      user-select: none;\n}\n\n.CodeMirror-lines {\n  cursor: text;\n  min-height: 1px; /* prevents collapsing before first draw */\n}\n\n.CodeMirror pre {\n  /* Reset some styles that the rest of the page might have set */ border-radius: 0;\n  border-width: 0;\n  background: transparent;\n  font-family: inherit;\n  font-size: inherit;\n  margin: 0;\n  white-space: pre;\n  word-wrap: normal;\n  line-height: inherit;\n  color: inherit;\n  z-index: 2;\n  position: relative;\n  overflow: visible;\n  -webkit-tap-highlight-color: transparent;\n  -webkit-font-variant-ligatures: none;\n  -webkit-font-feature-settings: none;\n          font-feature-settings: none;\n  font-variant-ligatures: none;\n}\n\n.CodeMirror-wrap pre {\n  word-wrap: break-word;\n  white-space: pre-wrap;\n  word-break: normal;\n}\n\n.CodeMirror-linebackground {\n  position: absolute;\n  left: 0; right: 0; top: 0; bottom: 0;\n  z-index: 0;\n}\n\n.CodeMirror-linewidget {\n  position: relative;\n  z-index: 2;\n  overflow: auto;\n}\n\n.CodeMirror-widget {}\n\n.CodeMirror-code {\n  outline: none;\n}\n\n/* Force content-box sizing for the elements where we expect it */\n\n.CodeMirror-scroll,\n.CodeMirror-sizer,\n.CodeMirror-gutter,\n.CodeMirror-gutters,\n.CodeMirror-linenumber {\n  box-sizing: content-box;\n}\n\n.CodeMirror-measure {\n  position: absolute;\n  width: 100%;\n  height: 0;\n  overflow: hidden;\n  visibility: hidden;\n}\n\n.CodeMirror-cursor { position: absolute; }\n\n.CodeMirror-measure pre { position: static; }\n\ndiv.CodeMirror-cursors {\n  visibility: hidden;\n  position: relative;\n  z-index: 3;\n}\n\ndiv.CodeMirror-dragcursors {\n  visibility: visible;\n}\n\n.CodeMirror-focused div.CodeMirror-cursors {\n  visibility: visible;\n}\n\n.CodeMirror-selected { background: #d9d9d9; }\n\n.CodeMirror-focused .CodeMirror-selected { background: #d7d4f0; }\n\n.CodeMirror-crosshair { cursor: crosshair; }\n\n.CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection { background: #d7d4f0; }\n\n.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection { background: #d7d4f0; }\n\n.CodeMirror-line::-moz-selection, .CodeMirror-line > span::-moz-selection, .CodeMirror-line > span > span::-moz-selection { background: #d7d4f0; }\n\n.cm-searching {\n  background: #ffa;\n  background: rgba(255, 255, 0, .4);\n}\n\n/* IE7 hack to prevent it from returning funny offsetTops on the spans */\n\n.CodeMirror span { *vertical-align: text-bottom; }\n\n/* Used to force a border model for a node */\n\n.cm-force-border { padding-right: .1px; }\n\n@media print {\n  /* Hide the cursor when printing */\n  .CodeMirror div.CodeMirror-cursors {\n    visibility: hidden;\n  }\n}\n\n/* See issue #2901 */\n\n.cm-tab-wrap-hack:after { content: ''; }\n\n/* Help users use markselection to safely style text background */\n\nspan.CodeMirror-selectedtext { background: none; }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 316 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
-	__webpack_require__(317);
+	var $ = __webpack_require__(314);
 	
-	__webpack_require__(330);
-	
-	__webpack_require__(331);
-	
-	__webpack_require__(333);
-	
-	__webpack_require__(338);
-
-/***/ },
-/* 317 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var $ = __webpack_require__(318);
-	
-	var assign = __webpack_require__(319);
+	var assign = __webpack_require__(315);
 	
 	var CodeMirror = __webpack_require__(5);
 	
+	var _validUrl = __webpack_require__(334);
+	
+	var isUri = _validUrl.isUri;
+	
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+	
 	CodeMirror.defineOption('jsonlint', false, function (editor, value) {
+		var _this = this;
+	
 		var initialized = editor._jsonlint;
-		//if(!value && !editor._jsonlint)
+	
 		if (value && !initialized) {
 			var wrapper = editor.display.wrapper,
 			    validateButton = assign(wrapper.appendChild($.one('<div>')), {
@@ -22015,9 +21646,61 @@ var app =
 				editor.notify(null);
 			});
 	
-			validateButton.addEventListener('click', function (evt) {
-				editor.validate();
-			});
+			validateButton.addEventListener('click', function () {
+				var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(evt) {
+					var value, resp;
+					return regeneratorRuntime.wrap(function _callee$(_context) {
+						while (1) {
+							switch (_context.prev = _context.next) {
+								case 0:
+									value = editor.getValue();
+	
+									if (!isUri(value.trim())) {
+										_context.next = 10;
+										break;
+									}
+	
+									_context.next = 4;
+									return fetch('/proxy', {
+										method: 'post',
+										body: JSON.stringify({
+											url: value
+										})
+									});
+	
+								case 4:
+									_context.next = 6;
+									return _context.sent.json();
+	
+								case 6:
+									resp = _context.sent;
+	
+	
+									if (!resp.error) {
+										editor.setValue(resp.body);
+										editor.validate();
+									} else {
+										alert('TODO: RESP ERROR');
+									}
+	
+									_context.next = 11;
+									break;
+	
+								case 10:
+									editor.validate();
+	
+								case 11:
+								case 'end':
+									return _context.stop();
+							}
+						}
+					}, _callee, _this);
+				}));
+	
+				return function (_x) {
+					return ref.apply(this, arguments);
+				};
+			}());
 	
 			editor._jsonlint = true;
 		} else if (!value && !initialized) {
@@ -22030,7 +21713,7 @@ var app =
 	});
 
 /***/ },
-/* 318 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, $) {
@@ -22086,16 +21769,16 @@ var app =
 
 
 /***/ },
-/* 319 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var defineProperties = __webpack_require__(320);
+	var defineProperties = __webpack_require__(316);
 	
-	var implementation = __webpack_require__(324);
-	var getPolyfill = __webpack_require__(328);
-	var shim = __webpack_require__(329);
+	var implementation = __webpack_require__(320);
+	var getPolyfill = __webpack_require__(324);
+	var shim = __webpack_require__(325);
 	
 	defineProperties(implementation, {
 		implementation: implementation,
@@ -22107,13 +21790,13 @@ var app =
 
 
 /***/ },
-/* 320 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var keys = __webpack_require__(321);
-	var foreach = __webpack_require__(323);
+	var keys = __webpack_require__(317);
+	var foreach = __webpack_require__(319);
 	var hasSymbols = typeof Symbol === 'function' && typeof Symbol() === 'symbol';
 	
 	var toStr = Object.prototype.toString;
@@ -22169,7 +21852,7 @@ var app =
 
 
 /***/ },
-/* 321 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22178,7 +21861,7 @@ var app =
 	var has = Object.prototype.hasOwnProperty;
 	var toStr = Object.prototype.toString;
 	var slice = Array.prototype.slice;
-	var isArgs = __webpack_require__(322);
+	var isArgs = __webpack_require__(318);
 	var hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString');
 	var hasProtoEnumBug = function () {}.propertyIsEnumerable('prototype');
 	var dontEnums = [
@@ -22303,7 +21986,7 @@ var app =
 
 
 /***/ },
-/* 322 */
+/* 318 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22326,7 +22009,7 @@ var app =
 
 
 /***/ },
-/* 323 */
+/* 319 */
 /***/ function(module, exports) {
 
 	
@@ -22354,18 +22037,18 @@ var app =
 
 
 /***/ },
-/* 324 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	// modified from https://github.com/es-shims/es6-shim
-	var keys = __webpack_require__(321);
-	var bind = __webpack_require__(325);
+	var keys = __webpack_require__(317);
+	var bind = __webpack_require__(321);
 	var canBeObject = function (obj) {
 		return typeof obj !== 'undefined' && obj !== null;
 	};
-	var hasSymbols = __webpack_require__(327)();
+	var hasSymbols = __webpack_require__(323)();
 	var toObject = Object;
 	var push = bind.call(Function.call, Array.prototype.push);
 	var propIsEnumerable = bind.call(Function.call, Object.prototype.propertyIsEnumerable);
@@ -22399,16 +22082,16 @@ var app =
 
 
 /***/ },
-/* 325 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var implementation = __webpack_require__(326);
+	var implementation = __webpack_require__(322);
 	
 	module.exports = Function.prototype.bind || implementation;
 
 
 /***/ },
-/* 326 */
+/* 322 */
 /***/ function(module, exports) {
 
 	var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
@@ -22462,12 +22145,12 @@ var app =
 
 
 /***/ },
-/* 327 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var keys = __webpack_require__(321);
+	var keys = __webpack_require__(317);
 	
 	module.exports = function hasSymbols() {
 		if (typeof Symbol !== 'function' || typeof Object.getOwnPropertySymbols !== 'function') { return false; }
@@ -22505,12 +22188,12 @@ var app =
 
 
 /***/ },
-/* 328 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var implementation = __webpack_require__(324);
+	var implementation = __webpack_require__(320);
 	
 	var lacksProperEnumerationOrder = function () {
 		if (!Object.assign) {
@@ -22561,13 +22244,13 @@ var app =
 
 
 /***/ },
-/* 329 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var define = __webpack_require__(320);
-	var getPolyfill = __webpack_require__(328);
+	var define = __webpack_require__(316);
+	var getPolyfill = __webpack_require__(324);
 	
 	module.exports = function shimAssign() {
 		var polyfill = getPolyfill();
@@ -22581,14 +22264,14 @@ var app =
 
 
 /***/ },
-/* 330 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var $ = __webpack_require__(318);
+	var $ = __webpack_require__(314);
 	
-	var assign = __webpack_require__(319);
+	var assign = __webpack_require__(315);
 	
 	var CodeMirror = __webpack_require__(5);
 	
@@ -22617,12 +22300,12 @@ var app =
 	});
 
 /***/ },
-/* 331 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var jsonlint = __webpack_require__(332);
+	var jsonlint = __webpack_require__(328);
 	
 	var CodeMirror = __webpack_require__(5);
 	
@@ -22651,7 +22334,7 @@ var app =
 	});
 
 /***/ },
-/* 332 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var jsonlint=function(){var a=!0,b=!1,c={},d=function(){var a={trace:function(){},yy:{},symbols_:{error:2,JSONString:3,STRING:4,JSONNumber:5,NUMBER:6,JSONNullLiteral:7,NULL:8,JSONBooleanLiteral:9,TRUE:10,FALSE:11,JSONText:12,JSONValue:13,EOF:14,JSONObject:15,JSONArray:16,"{":17,"}":18,JSONMemberList:19,JSONMember:20,":":21,",":22,"[":23,"]":24,JSONElementList:25,$accept:0,$end:1},terminals_:{2:"error",4:"STRING",6:"NUMBER",8:"NULL",10:"TRUE",11:"FALSE",14:"EOF",17:"{",18:"}",21:":",22:",",23:"[",24:"]"},productions_:[0,[3,1],[5,1],[7,1],[9,1],[9,1],[12,2],[13,1],[13,1],[13,1],[13,1],[13,1],[13,1],[15,2],[15,3],[20,3],[19,1],[19,3],[16,2],[16,3],[25,1],[25,3]],performAction:function(b,c,d,e,f,g,h){var i=g.length-1;switch(f){case 1:this.$=b.replace(/\\(\\|")/g,"$1").replace(/\\n/g,"\n").replace(/\\r/g,"\r").replace(/\\t/g,"	").replace(/\\v/g,"").replace(/\\f/g,"\f").replace(/\\b/g,"\b");break;case 2:this.$=Number(b);break;case 3:this.$=null;break;case 4:this.$=!0;break;case 5:this.$=!1;break;case 6:return this.$=g[i-1];case 13:this.$={};break;case 14:this.$=g[i-1];break;case 15:this.$=[g[i-2],g[i]];break;case 16:this.$={},this.$[g[i][0]]=g[i][1];break;case 17:this.$=g[i-2],g[i-2][g[i][0]]=g[i][1];break;case 18:this.$=[];break;case 19:this.$=g[i-1];break;case 20:this.$=[g[i]];break;case 21:this.$=g[i-2],g[i-2].push(g[i])}},table:[{3:5,4:[1,12],5:6,6:[1,13],7:3,8:[1,9],9:4,10:[1,10],11:[1,11],12:1,13:2,15:7,16:8,17:[1,14],23:[1,15]},{1:[3]},{14:[1,16]},{14:[2,7],18:[2,7],22:[2,7],24:[2,7]},{14:[2,8],18:[2,8],22:[2,8],24:[2,8]},{14:[2,9],18:[2,9],22:[2,9],24:[2,9]},{14:[2,10],18:[2,10],22:[2,10],24:[2,10]},{14:[2,11],18:[2,11],22:[2,11],24:[2,11]},{14:[2,12],18:[2,12],22:[2,12],24:[2,12]},{14:[2,3],18:[2,3],22:[2,3],24:[2,3]},{14:[2,4],18:[2,4],22:[2,4],24:[2,4]},{14:[2,5],18:[2,5],22:[2,5],24:[2,5]},{14:[2,1],18:[2,1],21:[2,1],22:[2,1],24:[2,1]},{14:[2,2],18:[2,2],22:[2,2],24:[2,2]},{3:20,4:[1,12],18:[1,17],19:18,20:19},{3:5,4:[1,12],5:6,6:[1,13],7:3,8:[1,9],9:4,10:[1,10],11:[1,11],13:23,15:7,16:8,17:[1,14],23:[1,15],24:[1,21],25:22},{1:[2,6]},{14:[2,13],18:[2,13],22:[2,13],24:[2,13]},{18:[1,24],22:[1,25]},{18:[2,16],22:[2,16]},{21:[1,26]},{14:[2,18],18:[2,18],22:[2,18],24:[2,18]},{22:[1,28],24:[1,27]},{22:[2,20],24:[2,20]},{14:[2,14],18:[2,14],22:[2,14],24:[2,14]},{3:20,4:[1,12],20:29},{3:5,4:[1,12],5:6,6:[1,13],7:3,8:[1,9],9:4,10:[1,10],11:[1,11],13:30,15:7,16:8,17:[1,14],23:[1,15]},{14:[2,19],18:[2,19],22:[2,19],24:[2,19]},{3:5,4:[1,12],5:6,6:[1,13],7:3,8:[1,9],9:4,10:[1,10],11:[1,11],13:31,15:7,16:8,17:[1,14],23:[1,15]},{18:[2,17],22:[2,17]},{18:[2,15],22:[2,15]},{22:[2,21],24:[2,21]}],defaultActions:{16:[2,6]},parseError:function(b,c){throw new Error(b)},parse:function(b){function o(a){d.length=d.length-2*a,e.length=e.length-a,f.length=f.length-a}function p(){var a;return a=c.lexer.lex()||1,typeof a!="number"&&(a=c.symbols_[a]||a),a}var c=this,d=[0],e=[null],f=[],g=this.table,h="",i=0,j=0,k=0,l=2,m=1;this.lexer.setInput(b),this.lexer.yy=this.yy,this.yy.lexer=this.lexer,typeof this.lexer.yylloc=="undefined"&&(this.lexer.yylloc={});var n=this.lexer.yylloc;f.push(n),typeof this.yy.parseError=="function"&&(this.parseError=this.yy.parseError);var q,r,s,t,u,v,w={},x,y,z,A;for(;;){s=d[d.length-1],this.defaultActions[s]?t=this.defaultActions[s]:(q==null&&(q=p()),t=g[s]&&g[s][q]);if(typeof t=="undefined"||!t.length||!t[0]){if(!k){A=[];for(x in g[s])this.terminals_[x]&&x>2&&A.push("'"+this.terminals_[x]+"'");var B="";this.lexer.showPosition?B="Parse error on line "+(i+1)+":\n"+this.lexer.showPosition()+"\nExpecting "+A.join(", ")+", got '"+this.terminals_[q]+"'":B="Parse error on line "+(i+1)+": Unexpected "+(q==1?"end of input":"'"+(this.terminals_[q]||q)+"'"),this.parseError(B,{text:this.lexer.match,token:this.terminals_[q]||q,line:this.lexer.yylineno,loc:n,expected:A})}if(k==3){if(q==m)throw new Error(B||"Parsing halted.");j=this.lexer.yyleng,h=this.lexer.yytext,i=this.lexer.yylineno,n=this.lexer.yylloc,q=p()}for(;;){if(l.toString()in g[s])break;if(s==0)throw new Error(B||"Parsing halted.");o(1),s=d[d.length-1]}r=q,q=l,s=d[d.length-1],t=g[s]&&g[s][l],k=3}if(t[0]instanceof Array&&t.length>1)throw new Error("Parse Error: multiple actions possible at state: "+s+", token: "+q);switch(t[0]){case 1:d.push(q),e.push(this.lexer.yytext),f.push(this.lexer.yylloc),d.push(t[1]),q=null,r?(q=r,r=null):(j=this.lexer.yyleng,h=this.lexer.yytext,i=this.lexer.yylineno,n=this.lexer.yylloc,k>0&&k--);break;case 2:y=this.productions_[t[1]][1],w.$=e[e.length-y],w._$={first_line:f[f.length-(y||1)].first_line,last_line:f[f.length-1].last_line,first_column:f[f.length-(y||1)].first_column,last_column:f[f.length-1].last_column},v=this.performAction.call(w,h,j,i,this.yy,t[1],e,f);if(typeof v!="undefined")return v;y&&(d=d.slice(0,-1*y*2),e=e.slice(0,-1*y),f=f.slice(0,-1*y)),d.push(this.productions_[t[1]][0]),e.push(w.$),f.push(w._$),z=g[d[d.length-2]][d[d.length-1]],d.push(z);break;case 3:return!0}}return!0}},b=function(){var a={EOF:1,parseError:function(b,c){if(!this.yy.parseError)throw new Error(b);this.yy.parseError(b,c)},setInput:function(a){return this._input=a,this._more=this._less=this.done=!1,this.yylineno=this.yyleng=0,this.yytext=this.matched=this.match="",this.conditionStack=["INITIAL"],this.yylloc={first_line:1,first_column:0,last_line:1,last_column:0},this},input:function(){var a=this._input[0];this.yytext+=a,this.yyleng++,this.match+=a,this.matched+=a;var b=a.match(/\n/);return b&&this.yylineno++,this._input=this._input.slice(1),a},unput:function(a){return this._input=a+this._input,this},more:function(){return this._more=!0,this},less:function(a){this._input=this.match.slice(a)+this._input},pastInput:function(){var a=this.matched.substr(0,this.matched.length-this.match.length);return(a.length>20?"...":"")+a.substr(-20).replace(/\n/g,"")},upcomingInput:function(){var a=this.match;return a.length<20&&(a+=this._input.substr(0,20-a.length)),(a.substr(0,20)+(a.length>20?"...":"")).replace(/\n/g,"")},showPosition:function(){var a=this.pastInput(),b=(new Array(a.length+1)).join("-");return a+this.upcomingInput()+"\n"+b+"^"},next:function(){if(this.done)return this.EOF;this._input||(this.done=!0);var a,b,c,d,e,f;this._more||(this.yytext="",this.match="");var g=this._currentRules();for(var h=0;h<g.length;h++){c=this._input.match(this.rules[g[h]]);if(c&&(!b||c[0].length>b[0].length)){b=c,d=h;if(!this.options.flex)break}}if(b){f=b[0].match(/\n.*/g),f&&(this.yylineno+=f.length),this.yylloc={first_line:this.yylloc.last_line,last_line:this.yylineno+1,first_column:this.yylloc.last_column,last_column:f?f[f.length-1].length-1:this.yylloc.last_column+b[0].length},this.yytext+=b[0],this.match+=b[0],this.yyleng=this.yytext.length,this._more=!1,this._input=this._input.slice(b[0].length),this.matched+=b[0],a=this.performAction.call(this,this.yy,this,g[d],this.conditionStack[this.conditionStack.length-1]),this.done&&this._input&&(this.done=!1);if(a)return a;return}if(this._input==="")return this.EOF;this.parseError("Lexical error on line "+(this.yylineno+1)+". Unrecognized text.\n"+this.showPosition(),{text:"",token:null,line:this.yylineno})},lex:function(){var b=this.next();return typeof b!="undefined"?b:this.lex()},begin:function(b){this.conditionStack.push(b)},popState:function(){return this.conditionStack.pop()},_currentRules:function(){return this.conditions[this.conditionStack[this.conditionStack.length-1]].rules},topState:function(){return this.conditionStack[this.conditionStack.length-2]},pushState:function(b){this.begin(b)}};return a.options={},a.performAction=function(b,c,d,e){var f=e;switch(d){case 0:break;case 1:return 6;case 2:return c.yytext=c.yytext.substr(1,c.yyleng-2),4;case 3:return 17;case 4:return 18;case 5:return 23;case 6:return 24;case 7:return 22;case 8:return 21;case 9:return 10;case 10:return 11;case 11:return 8;case 12:return 14;case 13:return"INVALID"}},a.rules=[/^(?:\s+)/,/^(?:(-?([0-9]|[1-9][0-9]+))(\.[0-9]+)?([eE][-+]?[0-9]+)?\b)/,/^(?:"(?:\\[\\"bfnrt/]|\\u[a-fA-F0-9]{4}|[^\\\0-\x09\x0a-\x1f"])*")/,/^(?:\{)/,/^(?:\})/,/^(?:\[)/,/^(?:\])/,/^(?:,)/,/^(?::)/,/^(?:true\b)/,/^(?:false\b)/,/^(?:null\b)/,/^(?:$)/,/^(?:.)/],a.conditions={INITIAL:{rules:[0,1,2,3,4,5,6,7,8,9,10,11,12,13],inclusive:!0}},a}();return a.lexer=b,a}();return typeof a!="undefined"&&typeof c!="undefined"&&(c.parser=d,c.parse=function(){return d.parse.apply(d,arguments)},c.main=function(d){if(!d[1])throw new Error("Usage: "+d[0]+" FILE");if(typeof process!="undefined")var e=a("fs").readFileSync(a("path").join(process.cwd(),d[1]),"utf8");else var f=a("file").path(a("file").cwd()),e=f.join(d[1]).read({charset:"utf-8"});return c.parser.parse(e)},typeof b!="undefined"&&a.main===b&&c.main(typeof process!="undefined"?process.argv.slice(1):a("system").args)),c}();
@@ -22661,7 +22344,7 @@ var app =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(305)))
 
 /***/ },
-/* 333 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22678,7 +22361,13 @@ var app =
 	});
 
 /***/ },
-/* 334 */
+/* 330 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 331 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -24877,7 +24566,7 @@ var app =
 
 
 /***/ },
-/* 335 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -25656,83 +25345,185 @@ var app =
 
 
 /***/ },
-/* 336 */
+/* 333 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
+	/* WEBPACK VAR INJECTION */(function(module) {(function(module) {
+	    'use strict';
 	
-	// load the styles
-	var content = __webpack_require__(337);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(313)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/postcss-loader/index.js!./style.pcss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/postcss-loader/index.js!./style.pcss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
+	    module.exports.is_uri = is_iri;
+	    module.exports.is_http_uri = is_http_iri;
+	    module.exports.is_https_uri = is_https_iri;
+	    module.exports.is_web_uri = is_web_iri;
+	    // Create aliases
+	    module.exports.isUri = is_iri;
+	    module.exports.isHttpUri = is_http_iri;
+	    module.exports.isHttpsUri = is_https_iri;
+	    module.exports.isWebUri = is_web_iri;
+	
+	
+	    // private function
+	    // internal URI spitter method - direct from RFC 3986
+	    var splitUri = function(uri) {
+	        var splitted = uri.match(/(?:([^:\/?#]+):)?(?:\/\/([^\/?#]*))?([^?#]*)(?:\?([^#]*))?(?:#(.*))?/);
+	        return splitted;
+	    };
+	
+	    function is_iri(value) {
+	        if (!value) {
+	            return;
+	        }
+	
+	        // check for illegal characters
+	        if (/[^a-z0-9\:\/\?\#\[\]\@\!\$\&\'\(\)\*\+\,\;\=\.\-\_\~\%]/i.test(value)) return;
+	
+	        // check for hex escapes that aren't complete
+	        if (/%[^0-9a-f]/i.test(value)) return;
+	        if (/%[0-9a-f](:?[^0-9a-f]|$)/i.test(value)) return;
+	
+	        var splitted = [];
+	        var scheme = '';
+	        var authority = '';
+	        var path = '';
+	        var query = '';
+	        var fragment = '';
+	        var out = '';
+	
+	        // from RFC 3986
+	        splitted = splitUri(value);
+	        scheme = splitted[1]; 
+	        authority = splitted[2];
+	        path = splitted[3];
+	        query = splitted[4];
+	        fragment = splitted[5];
+	
+	        // scheme and path are required, though the path can be empty
+	        if (!(scheme && scheme.length && path.length >= 0)) return;
+	
+	        // if authority is present, the path must be empty or begin with a /
+	        if (authority && authority.length) {
+	            if (!(path.length === 0 || /^\//.test(path))) return;
+	        } else {
+	            // if authority is not present, the path must not start with //
+	            if (/^\/\//.test(path)) return;
+	        }
+	
+	        // scheme must begin with a letter, then consist of letters, digits, +, ., or -
+	        if (!/^[a-z][a-z0-9\+\-\.]*$/.test(scheme.toLowerCase()))  return;
+	
+	        // re-assemble the URL per section 5.3 in RFC 3986
+	        out += scheme + ':';
+	        if (authority && authority.length) {
+	            out += '//' + authority;
+	        }
+	
+	        out += path;
+	
+	        if (query && query.length) {
+	            out += '?' + query;
+	        }
+	
+	        if (fragment && fragment.length) {
+	            out += '#' + fragment;
+	        }
+	
+	        return out;
+	    }
+	
+	    function is_http_iri(value, allowHttps) {
+	        if (!is_iri(value)) {
+	            return;
+	        }
+	
+	        var splitted = [];
+	        var scheme = '';
+	        var authority = '';
+	        var path = '';
+	        var port = '';
+	        var query = '';
+	        var fragment = '';
+	        var out = '';
+	
+	        // from RFC 3986
+	        splitted = splitUri(value);
+	        scheme = splitted[1]; 
+	        authority = splitted[2];
+	        path = splitted[3];
+	        query = splitted[4];
+	        fragment = splitted[5];
+	
+	        if (!scheme)  return;
+	
+	        if(allowHttps) {
+	            if (scheme.toLowerCase() != 'https') return;
+	        } else {
+	            if (scheme.toLowerCase() != 'http') return;
+	        }
+	
+	        // fully-qualified URIs must have an authority section that is
+	        // a valid host
+	        if (!authority) {
+	            return;
+	        }
+	
+	        // enable port component
+	        if (/:(\d+)$/.test(authority)) {
+	            port = authority.match(/:(\d+)$/)[0];
+	            authority = authority.replace(/:\d+$/, '');
+	        }
+	
+	        out += scheme + ':';
+	        out += '//' + authority;
+	        
+	        if (port) {
+	            out += port;
+	        }
+	        
+	        out += path;
+	        
+	        if(query && query.length){
+	            out += '?' + query;
+	        }
+	
+	        if(fragment && fragment.length){
+	            out += '#' + fragment;
+	        }
+	        
+	        return out;
+	    }
+	
+	    function is_https_iri(value) {
+	        return is_http_iri(value, true);
+	    }
+	
+	    function is_web_iri(value) {
+	        return (is_http_iri(value) || is_https_iri(value));
+	    }
+	
+	})(module);
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(335)(module)))
+
+/***/ },
+/* 335 */
+/***/ function(module, exports) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
 		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
+		return module;
 	}
-
-/***/ },
-/* 337 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(312)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, "* {\n\tmargin: 0;\n\tpadding: 0;\n\tbox-sizing: border-box;\n}\n\nbody {\n\tfont-size: 14px;\n\tline-height: 1.6;\n\tfont-weight: 400;\n\tfont-family: \"Raleway\", \"HelveticaNeue\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n\tcolor: #222;\n}\n\n* {color: red}\n\nhtml, body {\n\theight: 100%;\n\tmargin: 0;\n\tpadding: 0;\n}\n\nmain {\n\tmin-height: 100%;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n}\n\nmain > .tabs {\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1;\n\t        flex: 1;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n}\n\n.tab-pane {\n\tdisplay: none;\n\tposition: relative;\n}\n\n#batch.tab-pane.active {\n\tdisplay: block;\n}\n\n#simple.tab-pane.active, #diff.tab-pane.active {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1;\n\t        flex: 1;\n}\n\n#simple.tab-pane > .content, #diff.tab-pane > .content {\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1;\n\t        flex: 1;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\tposition: relative;\n}\n\n#simple.tab-pane .CodeMirror, #simple.tab-pane .CodeMirror-merge, #diff.tab-pane .CodeMirror, #diff.tab-pane .CodeMirror-merge {\n\twidth: 100%;\n}\n\n#simple.tab-pane .CodeMirror, #simple.tab-pane .CodeMirror-merge, #simple.tab-pane .CodeMirror-merge-pane, #diff.tab-pane .CodeMirror, #diff.tab-pane .CodeMirror-merge, #diff.tab-pane .CodeMirror-merge-pane {\n\theight: 100%!important;\n}\n\n#simple.tab-pane .CodeMirror {\n\tposition: absolute;\n}\n\n#batch.tab-pane {\n\tmin-height: 80%;\n}\n\n#batch.tab-pane .add {\n\tposition: fixed;\n\tbottom: 20px;\n\tright: 20px;\n\tz-index: 5;\n\tbackground: #fff;\n}\n\n#diff.tab-pane .CodeMirror-merge {\n\tposition: absolute;\n}\n\n.tab-pane .tab-info {\n\twidth: 98%;\n\tmargin: 0 auto;\n}\n\nul.tab-nav {\n    list-style: none;\n    border-bottom: 1px solid #bbb;\n    padding: 0 5px;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: horizontal;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: row;\n\t        flex-direction: row;\n\tmargin-top: 20px;\n}\n\nul.tab-nav li.tab-nav-item {\n\tborder-radius: 4px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tmargin-bottom: -1px;\n\tborder-bottom: none;\n\tborder: 1px solid #bbb;\n\tpadding: 0 30px;\n\tline-height: 38px;\n\tmargin-right: 3px;\n\tcolor: #555;\n\tcursor: pointer;\n}\n\nul.tab-nav li.tab-nav-item:hover {\n\tcolor: #333;\n\tborder-top-color: #888;\n\tborder-right-color: #888;\n\tborder-left-color: #888;\n}\n\nul.tab-nav li.tab-nav-item.active {\n\tborder-bottom: 1px solid #fff;\n}\n\n.CodeMirror {\n\tborder-top: 1px solid #ddd;\n}\n\n.CodeMirror-merge .CodeMirror {\n\tborder: none;\n}\n\n.CodeMirror .delete-editor, .CodeMirror .lint-button {\n\t/*background-color: #BCD183;\n\t\tborder: 1px solid #D2D4DB;\n\t\tborder-color: #9CBE43;*/\n\tbackground-color: rgba(229, 233,235,0.8);\n\tborder: 1px solid #D2D4DB;\n\tborder-radius: 3px;\n\tpadding: 8px;\n\tright: 20px;\n\tcursor: pointer;\n}\n\n.CodeMirror .delete-editor::before, .CodeMirror .lint-button::before {\n\tcontent: '';\n\topacity: .5;\n\tbackground-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAAWCAYAAAAB6jTvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABB5JREFUeNrsWk1IVFEUvscGIQjSxK0QuGtTtGoXRIEQChIkSTHhUBAtAjcFbaNVIdimEEaQoFBskyBICyEKhKH2uSkIAvNnQBAEOZ373nnz7r3v3pn3XjOOU/eTo+/nvjvjO9893znnPUBE0Uno7evvqC+8vbkBnfR9C4fxIT19/a5TpnMTN29nc0P8C+h134M8JGsdIeQXRfoBxReoeAcNL2Htd3wFj5+h/WWaayF05O+0JHCda7SyIOU82ljzZloiDmR1gryHKeZ14RjZwVEhbhfyPXB+e4wpoJJDv2tYpv0Jkp83RJMbIEB4pMIg2eKRk4wwEuixoOZ4iONA5GgjmpTpSDGIMgCS7dNkS2TVHCv7f8I1Edw7sdVuSVKjW1e84kERA2GRD2sUkZGhCPH1kgRDFjJgXuvpsCQyBbp50cyTnSAbyHA/0uAs2VSDMc94XOOkErRPxgRRZFXCUaOMTAZGlfav0IC1OKp4GDjNRDjfovmlkz+QnSI7SXbbMmaGbIKsSHaJ7KuWQ4iaXOhEMKVBKBJC42WoKyrk2aVjQ7S/Ji/BJJnB2E69v9NhZVsDSHn42cL5i0yGaLvsIIPgccVEUhn5IFj5ijyYsqHsBzmD4r09KRN0xef4Wh8hHJBSOkI2SbafU27qQc47axCkbCGD4HGTVkJAuPSFGi3U7TjplDKBqkwEZKAzHwXLCQprhPDQ8ZzsItkPNkhpjUgky9eShRTfLGQo2crdrsiRhGGyy9rq1vwK5SjEsMNDMiCuhkfC3AIcUuORgIyo57gic/Un8sBGisE0ZKj1IciRw+TCedp+T3a9JhNxchhUE3FeAXt0foRIsCoAvEz8XU5xz3Fu0XBkHlKsG8fX65GBIwRe4MxX6lM3ufU1OftOJBNhn0FLPvbp3Cj9XRGJEtVLRZMrhi/cr8iDGQuhBvm4qEMIqJAbF5Q6Q4aql7T1EKRMIGpkIBslxy+DUjxED8jUEtXDibQ9hwHuU8xz36I7w2eYi3jdkWgmCQHhir9F9iruRAb2NEgga8mm2MeADGIpIQ8AWufEi0fTcZ/sE/cxspJB5gxn6lQfwtaHkJpyl7NfW/tARoYxMBIg8+EXeNloJX4J9+OACFMWMpTYf7bqY8qSVGpdBlmXPjboIMkyTq5+h5bVD4m/Pj7UwfGcCeIjsqui8XOPOWWMWU2Y1ccWj9dQENqDqqBV/YQcX6Wj0xhMguN0bMHmaHTIg48STuxlUNTvnM+NCe7zpEBFyMcHQtzkxX3gqD6qTIZKghD6swuInnq+oF+7YRcS3qIhDyj0/jIm5MNHiSZghSND1rdhKjZHG6R44DpZqPPix6z3SVtRyjK4WW9RFdrwj2LG/bTzpBqb4r0B67yNrmvmK3LtRMEvxMPBdoe8G/pHgAEAQct309m5wIAAAAAASUVORK5CYII=');\n\tbackground-position: 0 0;\n\twidth: 22px;\n\theight: 22px;\n\tdisplay: inline-block;\n}\n\n.CodeMirror .delete-editor:hover, .CodeMirror .lint-button:hover {\n\tbackground-color: rgba(229, 233,235,0.5);\n}\n\n.CodeMirror .delete-editor:hover::before, .CodeMirror .lint-button:hover::before {\n\topacity: 1;\n}\n\n.CodeMirror .lint-button {\n\ttop: 20px;\n}\n\n.CodeMirror .lint-button.success {\n\tbackground-color: #BCD183;\n\tborder: 1px solid #D2D4DB;\n}\n\n.CodeMirror .lint-button.success::before {\n\topacity: 1;\n}\n\n.CodeMirror .lint-button::before {\n\tbackground-position: 0 0;\n}\n\n.CodeMirror .delete-editor {\n\tposition: absolute;\n\ttop: 70px;\n\tz-index: 3;\n}\n\n.CodeMirror .delete-editor::before {\n\tbackground-position: -22px 0;\n}\n\n.dnd-area {\n\tposition: absolute;\n\twidth: 100%;\n\theight: 100%;\n\tbackground: rgba(0,0,0,.5);\n\ttop: 0;\n\tleft: 0;\n\tborder: 50px dashed green;\n\tz-index: 5;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n  \t-webkit-box-pack: center;\n  \t    -ms-flex-pack: center;\n  \t        justify-content: center;\n\tpointer-events: none;\n}\n\n.dnd-area::before {\n\tcontent: 'Drop files here';\n\tfont-size: 36px;\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1;\n\t        flex: 1;\n\ttext-align: center;\n}\n\n.button,\nbutton,\ninput[type=\"submit\"],\ninput[type=\"reset\"],\ninput[type=\"button\"] {\n  display: inline-block;\n  height: 38px;\n  padding: 0 30px;\n  color: #555;\n  text-align: center;\n  font-size: 11px;\n  font-weight: 600;\n  line-height: 38px;\n  letter-spacing: 1.6px;\n  letter-spacing: .1rem;\n  text-transform: uppercase;\n  text-decoration: none;\n  white-space: nowrap;\n  background-color: transparent;\n  border-radius: 4px;\n  border: 1px solid #bbb;\n  cursor: pointer;\n  box-sizing: border-box; }\n\n.button:hover,\nbutton:hover,\ninput[type=\"submit\"]:hover,\ninput[type=\"reset\"]:hover,\ninput[type=\"button\"]:hover,\n.button:focus,\nbutton:focus,\ninput[type=\"submit\"]:focus,\ninput[type=\"reset\"]:focus,\ninput[type=\"button\"]:focus {\n  color: #333;\n  border-color: #888;\n  outline: 0; }\n\n.button.button-primary,\nbutton.button-primary,\ninput[type=\"submit\"].button-primary,\ninput[type=\"reset\"].button-primary,\ninput[type=\"button\"].button-primary {\n  color: #FFF;\n  background-color: #33C3F0;\n  border-color: #33C3F0; }\n\n.button.button-primary:hover,\nbutton.button-primary:hover,\ninput[type=\"submit\"].button-primary:hover,\ninput[type=\"reset\"].button-primary:hover,\ninput[type=\"button\"].button-primary:hover,\n.button.button-primary:focus,\nbutton.button-primary:focus,\ninput[type=\"submit\"].button-primary:focus,\ninput[type=\"reset\"].button-primary:focus,\ninput[type=\"button\"].button-primary:focus {\n  color: #FFF;\n  background-color: #1EAEDB;\n  border-color: #1EAEDB; }\n", ""]);
-	
-	// exports
-
-
-/***/ },
-/* 338 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(339);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(313)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/postcss-loader/index.js!./codemirror-jsonlint-addon.pcss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/postcss-loader/index.js!./codemirror-jsonlint-addon.pcss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 339 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(312)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".CodeMirror .lint-button {\n\tposition: absolute;\n\tline-height: 1;\n\ttop: 10px;\n\tright: 10px;\n\t-webkit-transition: color .5s ease-out;\n\ttransition: color .5s ease-out;\n\tz-index: 3;\n}\n\n.CodeMirror .lint-button::before {\n\tcontent: '\\2713';\n\tfont-size: 36px;\n\tcursor: pointer;\n}\n\n.CodeMirror .lint-button.success {\n\tcolor: green;\n}\n\n.CodeMirror .lint-notifier {\n\tposition: absolute;\n\tbottom: 10px;\n\tz-index: 3;\n\tleft: 40px;\n\topacity: 0;\n\tpointer-events: none;\n\t-webkit-transition: opacity .5s ease-out;\n\ttransition: opacity .5s ease-out;\n}\n\n.CodeMirror .lint-notifier.shown {\n\topacity: 1;\n\tpointer-events: auto;\n}\n\n.CodeMirror .lint-line-error {\n    background-color: #FBE3E4;\n}\n", ""]);
-	
-	// exports
 
 
 /***/ }
