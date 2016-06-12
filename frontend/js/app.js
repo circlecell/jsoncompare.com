@@ -3,6 +3,7 @@ import Tabs from './tabs';
 import 'matreshka-router';
 import 'babel-polyfill';
 import './codemirror-init';
+import '../pcss/style.pcss';
 
 
 const $ = MK.$b;

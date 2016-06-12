@@ -1,9 +1,11 @@
 "use strict";
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin"),
+const ExtractTextPlugin = require("extract-text-webpack-plugin"),
  	webpack = require('webpack'),
-	postcssPlugins = [
-		require('postcss-import'),
+	postcssPlugins = webpack => [
+		require('postcss-import')({
+            addDependencyTo: webpack
+        }),
 		require('postcss-url')({
 			url: "inline",
 			from: "frontend/pcss/style.pcss"
@@ -12,6 +14,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin"),
 		require('postcss-cssnext')(),
 		require('postcss-calc')()
 	];
+
 
 module.exports = [{
 	context: __dirname + "/frontend/js",
@@ -38,26 +41,10 @@ module.exports = [{
 		}]
 	},
 	postcss: postcssPlugins,
-	devtool: 'source-map'
-}, {
-	context: __dirname + "/frontend/pcss",
-	entry: {
-		style: './style.pcss'
-	},
-	output: {
-		path: __dirname + '/public/css',
-		filename: "[name].css"
-	},
-	module: {
-		loaders: [{
-			test: /\.css$|\.pcss$/,
-			loader: ExtractTextPlugin.extract("style", ["css", "postcss"])
-		}]
-	},
-	postcss: postcssPlugins,
-	plugins: [
+	devtool: 'source-map',
+    plugins: [
 	   new ExtractTextPlugin("style.css", {
 		   allChunks: true
 	   })
-   ]
+    ]
 }];

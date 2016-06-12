@@ -47,6 +47,8 @@ var app =
 
 	'use strict';
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var MK = __webpack_require__(1);
 	
 	var Tabs = __webpack_require__(2);
@@ -57,97 +59,17 @@ var app =
 	
 	__webpack_require__(309);
 	
-	function _asyncToGenerator(fn) {
-		return function () {
-			var gen = fn.apply(this, arguments);
-			return new Promise(function (resolve, reject) {
-				function step(key, arg) {
-					try {
-						var info = gen[key](arg);
-						var value = info.value;
-					} catch (error) {
-						reject(error);
-						return;
-					}
+	__webpack_require__(336);
 	
-					if (info.done) {
-						resolve(value);
-					} else {
-						return Promise.resolve(value).then(function (value) {
-							return step("next", value);
-						}, function (err) {
-							return step("throw", err);
-						});
-					}
-				}
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 	
-				return step("next");
-			});
-		};
-	}
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
-	function _defineProperty(obj, key, value) {
-		if (key in obj) {
-			Object.defineProperty(obj, key, {
-				value: value,
-				enumerable: true,
-				configurable: true,
-				writable: true
-			});
-		} else {
-			obj[key] = value;
-		}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-		return obj;
-	}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _classCallCheck(instance, Constructor) {
-		if (!(instance instanceof Constructor)) {
-			throw new TypeError("Cannot call a class as a function");
-		}
-	}
-	
-	var _createClass = function () {
-		function defineProperties(target, props) {
-			for (var i = 0; i < props.length; i++) {
-				var descriptor = props[i];
-				descriptor.enumerable = descriptor.enumerable || false;
-				descriptor.configurable = true;
-				if ("value" in descriptor) descriptor.writable = true;
-				Object.defineProperty(target, descriptor.key, descriptor);
-			}
-		}
-	
-		return function (Constructor, protoProps, staticProps) {
-			if (protoProps) defineProperties(Constructor.prototype, protoProps);
-			if (staticProps) defineProperties(Constructor, staticProps);
-			return Constructor;
-		};
-	}();
-	
-	function _possibleConstructorReturn(self, call) {
-		if (!self) {
-			throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-		}
-	
-		return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	}
-	
-	function _inherits(subClass, superClass) {
-		if (typeof superClass !== "function" && superClass !== null) {
-			throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-		}
-	
-		subClass.prototype = Object.create(superClass && superClass.prototype, {
-			constructor: {
-				value: subClass,
-				enumerable: false,
-				writable: true,
-				configurable: true
-			}
-		});
-		if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var $ = MK.$b;
 	
@@ -379,7 +301,7 @@ var app =
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;;(function(__root) {
 	/*
-		Matreshka v1.8.1 (2016-04-23)
+		Matreshka v1.9.1 (2016-05-21)
 		JavaScript Framework by Andrey Gubanov
 		Released under the MIT license
 		More info: http://matreshka.io
@@ -773,6 +695,7 @@ var app =
 	    },
 	    output: function () {
 	      return {
+	        on: null,
 	        getValue: function () {
 	          var _this = this;
 	          return _this.value || _this.textContent;
@@ -840,6 +763,7 @@ var app =
 	    },
 	    style: function (property) {
 	      return {
+	        on: null,
 	        getValue: function () {
 	          var _this = this;
 	          return _this.style[property] || getComputedStyle(_this, null).getPropertyValue(property);
@@ -865,7 +789,8 @@ var app =
 	        getValue: function (evt) {
 	          var files = evt.domEvent || [];
 	          return this.multiple ? files : files[0] || null;
-	        }
+	        },
+	        setValue: null
 	      };
 	    },
 	    dropFiles: function (readAs) {
@@ -888,7 +813,18 @@ var app =
 	        },
 	        getValue: function (o) {
 	          return o.domEvent || [];
-	        }
+	        },
+	        setValue: null
+	      };
+	    },
+	    dragOver: function () {
+	      return {
+	        on: 'dragover dragenter dragleave dragend drop',
+	        getValue: function (evt) {
+	          var eventType = evt.domEvent && evt.domEvent.type;
+	          return eventType == 'dragover' || eventType == 'dragenter';
+	        },
+	        setValue: null
 	      };
 	    }
 	  };
@@ -1344,7 +1280,7 @@ var app =
 	            values.push(util.deepFind(_this, _key));
 	          }
 	        }
-	        _protect[key + objectData.id] = 1;
+	        _protect[evt.key + objectData.id] = 1;
 	        core._defineSpecial(object, key, evtOptions.hideProperty);
 	        core.set(object, key, getter.apply(object, values), evt);
 	      }
@@ -1748,7 +1684,7 @@ var app =
 	        self: object,
 	        key: key,
 	        $nodes: $nodes,
-	        node: node
+	        node: $nodes[0]
 	      }, node = $nodes[index], isUndefined = typeof special.value == 'undefined', _binder, _evt, foundBinder, _options, i, domEvt, mkHandler, val;
 	    if (binder === null) {
 	      _binder = {};
@@ -1786,7 +1722,7 @@ var app =
 	        var v = objectData.special[key].value,
 	          // dirty hack for this one https://github.com/matreshkajs/matreshka/issues/19
 	          _v = evt && typeof evt.onChangeValue == 'string' && typeof v == 'number' ? v + '' : v, i;
-	        if (evt && evt.changedNode == node && evt.onChangeValue == _v)
+	        if (evt && evt.changedNode == node && evt.onChangeValue == _v && evt.binder == _binder)
 	          return;
 	        _options = { value: v };
 	        for (i in options) {
@@ -1832,7 +1768,8 @@ var app =
 	            core.set(object, key, value, {
 	              fromNode: true,
 	              changedNode: node,
-	              onChangeValue: value
+	              onChangeValue: value,
+	              binder: _binder
 	            });
 	          }
 	        }
@@ -3011,11 +2948,11 @@ var app =
 	      MK._defineSpecial(_this, key);
 	      return _this.set(key, v, evt);
 	    },
-	    addDataKeys: function (keys) {
-	      var _this = this._initMK(), objectData = map.get(_this), args = arguments, i;
-	      if (!args.length || !keys)
+	    addDataKeys: function (_keys) {
+	      var _this = this._initMK(), objectData = map.get(_this), args = arguments, i, keys;
+	      if (!args.length || !_keys)
 	        return _this;
-	      keys = args.length > 1 ? args : keys instanceof Array ? keys : MK.trim(keys).split(/\s+/);
+	      keys = args.length > 1 ? args : _keys instanceof Array ? _keys : MK.trim(_keys).split(/\s+/);
 	      for (i = 0; i < keys.length; i++) {
 	        if (!objectData.keys[keys[i]]) {
 	          objectData.keys[keys[i]] = 1;
@@ -3929,7 +3866,7 @@ var app =
 	matreshka = function (MK) {
 	  return MK;
 	}(matreshka_dir_amd_modules_matreshka);
-	 matreshka.version="1.8.1";									(function () {
+	 matreshka.version="1.9.1";									(function () {
 				// hack for systemjs builder
 				var d = "define";
 				// I don't know how to define modules with no dependencies (since we use AMDClean)
@@ -3982,35 +3919,11 @@ var app =
 	
 	var DiffTab = __webpack_require__(9);
 	
-	function _classCallCheck(instance, Constructor) {
-		if (!(instance instanceof Constructor)) {
-			throw new TypeError("Cannot call a class as a function");
-		}
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	function _possibleConstructorReturn(self, call) {
-		if (!self) {
-			throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-		}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-		return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	}
-	
-	function _inherits(subClass, superClass) {
-		if (typeof superClass !== "function" && superClass !== null) {
-			throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-		}
-	
-		subClass.prototype = Object.create(superClass && superClass.prototype, {
-			constructor: {
-				value: subClass,
-				enumerable: false,
-				writable: true,
-				configurable: true
-			}
-		});
-		if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Tabs = function (_MK$Object) {
 		_inherits(Tabs, _MK$Object);
@@ -4112,59 +4025,19 @@ var app =
 
 	'use strict';
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var Tab = __webpack_require__(4);
 	
 	var CodeMirror = __webpack_require__(5);
 	
 	var MK = __webpack_require__(1);
 	
-	function _classCallCheck(instance, Constructor) {
-		if (!(instance instanceof Constructor)) {
-			throw new TypeError("Cannot call a class as a function");
-		}
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var _createClass = function () {
-		function defineProperties(target, props) {
-			for (var i = 0; i < props.length; i++) {
-				var descriptor = props[i];
-				descriptor.enumerable = descriptor.enumerable || false;
-				descriptor.configurable = true;
-				if ("value" in descriptor) descriptor.writable = true;
-				Object.defineProperty(target, descriptor.key, descriptor);
-			}
-		}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-		return function (Constructor, protoProps, staticProps) {
-			if (protoProps) defineProperties(Constructor.prototype, protoProps);
-			if (staticProps) defineProperties(Constructor, staticProps);
-			return Constructor;
-		};
-	}();
-	
-	function _possibleConstructorReturn(self, call) {
-		if (!self) {
-			throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-		}
-	
-		return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	}
-	
-	function _inherits(subClass, superClass) {
-		if (typeof superClass !== "function" && superClass !== null) {
-			throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-		}
-	
-		subClass.prototype = Object.create(superClass && superClass.prototype, {
-			constructor: {
-				value: subClass,
-				enumerable: false,
-				writable: true,
-				configurable: true
-			}
-		});
-		if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var SimpleTab = function (_Tab) {
 		_inherits(SimpleTab, _Tab);
@@ -4214,35 +4087,11 @@ var app =
 	
 	var MK = __webpack_require__(1);
 	
-	function _classCallCheck(instance, Constructor) {
-		if (!(instance instanceof Constructor)) {
-			throw new TypeError("Cannot call a class as a function");
-		}
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	function _possibleConstructorReturn(self, call) {
-		if (!self) {
-			throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-		}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-		return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	}
-	
-	function _inherits(subClass, superClass) {
-		if (typeof superClass !== "function" && superClass !== null) {
-			throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-		}
-	
-		subClass.prototype = Object.create(superClass && superClass.prototype, {
-			constructor: {
-				value: subClass,
-				enumerable: false,
-				writable: true,
-				configurable: true
-			}
-		});
-		if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var className = MK.binders.className;
 	
@@ -13204,59 +13053,19 @@ var app =
 
 	'use strict';
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var Tab = __webpack_require__(4);
 	
 	var MK = __webpack_require__(1);
 	
 	var Batch = __webpack_require__(7);
 	
-	function _classCallCheck(instance, Constructor) {
-		if (!(instance instanceof Constructor)) {
-			throw new TypeError("Cannot call a class as a function");
-		}
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var _createClass = function () {
-		function defineProperties(target, props) {
-			for (var i = 0; i < props.length; i++) {
-				var descriptor = props[i];
-				descriptor.enumerable = descriptor.enumerable || false;
-				descriptor.configurable = true;
-				if ("value" in descriptor) descriptor.writable = true;
-				Object.defineProperty(target, descriptor.key, descriptor);
-			}
-		}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-		return function (Constructor, protoProps, staticProps) {
-			if (protoProps) defineProperties(Constructor.prototype, protoProps);
-			if (staticProps) defineProperties(Constructor, staticProps);
-			return Constructor;
-		};
-	}();
-	
-	function _possibleConstructorReturn(self, call) {
-		if (!self) {
-			throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-		}
-	
-		return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	}
-	
-	function _inherits(subClass, superClass) {
-		if (typeof superClass !== "function" && superClass !== null) {
-			throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-		}
-	
-		subClass.prototype = Object.create(superClass && superClass.prototype, {
-			constructor: {
-				value: subClass,
-				enumerable: false,
-				writable: true,
-				configurable: true
-			}
-		});
-		if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var $ = MK.$b;
 	
@@ -13315,47 +13124,13 @@ var app =
 	
 	var BatchItem = __webpack_require__(8);
 	
-	function _toConsumableArray(arr) {
-		if (Array.isArray(arr)) {
-			for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
-				arr2[i] = arr[i];
-			}
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
-			return arr2;
-		} else {
-			return Array.from(arr);
-		}
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	function _classCallCheck(instance, Constructor) {
-		if (!(instance instanceof Constructor)) {
-			throw new TypeError("Cannot call a class as a function");
-		}
-	}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _possibleConstructorReturn(self, call) {
-		if (!self) {
-			throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-		}
-	
-		return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	}
-	
-	function _inherits(subClass, superClass) {
-		if (typeof superClass !== "function" && superClass !== null) {
-			throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-		}
-	
-		subClass.prototype = Object.create(superClass && superClass.prototype, {
-			constructor: {
-				value: subClass,
-				enumerable: false,
-				writable: true,
-				configurable: true
-			}
-		});
-		if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var BatchTab = function (_MK$Array) {
 		_inherits(BatchTab, _MK$Array);
@@ -13394,55 +13169,15 @@ var app =
 
 	'use strict';
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var MK = __webpack_require__(1);
 	
-	function _classCallCheck(instance, Constructor) {
-		if (!(instance instanceof Constructor)) {
-			throw new TypeError("Cannot call a class as a function");
-		}
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var _createClass = function () {
-		function defineProperties(target, props) {
-			for (var i = 0; i < props.length; i++) {
-				var descriptor = props[i];
-				descriptor.enumerable = descriptor.enumerable || false;
-				descriptor.configurable = true;
-				if ("value" in descriptor) descriptor.writable = true;
-				Object.defineProperty(target, descriptor.key, descriptor);
-			}
-		}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-		return function (Constructor, protoProps, staticProps) {
-			if (protoProps) defineProperties(Constructor.prototype, protoProps);
-			if (staticProps) defineProperties(Constructor, staticProps);
-			return Constructor;
-		};
-	}();
-	
-	function _possibleConstructorReturn(self, call) {
-		if (!self) {
-			throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-		}
-	
-		return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	}
-	
-	function _inherits(subClass, superClass) {
-		if (typeof superClass !== "function" && superClass !== null) {
-			throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-		}
-	
-		subClass.prototype = Object.create(superClass && superClass.prototype, {
-			constructor: {
-				value: subClass,
-				enumerable: false,
-				writable: true,
-				configurable: true
-			}
-		});
-		if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var BatchItem = function (_MK$Object) {
 		_inherits(BatchItem, _MK$Object);
@@ -13480,57 +13215,17 @@ var app =
 
 	'use strict';
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var Tab = __webpack_require__(4);
 	
 	var CodeMirror = __webpack_require__(5);
 	
-	function _classCallCheck(instance, Constructor) {
-		if (!(instance instanceof Constructor)) {
-			throw new TypeError("Cannot call a class as a function");
-		}
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var _createClass = function () {
-		function defineProperties(target, props) {
-			for (var i = 0; i < props.length; i++) {
-				var descriptor = props[i];
-				descriptor.enumerable = descriptor.enumerable || false;
-				descriptor.configurable = true;
-				if ("value" in descriptor) descriptor.writable = true;
-				Object.defineProperty(target, descriptor.key, descriptor);
-			}
-		}
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-		return function (Constructor, protoProps, staticProps) {
-			if (protoProps) defineProperties(Constructor.prototype, protoProps);
-			if (staticProps) defineProperties(Constructor, staticProps);
-			return Constructor;
-		};
-	}();
-	
-	function _possibleConstructorReturn(self, call) {
-		if (!self) {
-			throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-		}
-	
-		return call && (typeof call === "object" || typeof call === "function") ? call : self;
-	}
-	
-	function _inherits(subClass, superClass) {
-		if (typeof superClass !== "function" && superClass !== null) {
-			throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-		}
-	
-		subClass.prototype = Object.create(superClass && superClass.prototype, {
-			constructor: {
-				value: subClass,
-				enumerable: false,
-				writable: true,
-				configurable: true
-			}
-		});
-		if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var DiffTab = function (_Tab) {
 		_inherits(DiffTab, _Tab);
@@ -13805,13 +13500,13 @@ var app =
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {/*istanbul ignore next*/"use strict";
+	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
 	
-	/*istanbul ignore next*/__webpack_require__(12);
+	__webpack_require__(12);
 	
-	/*istanbul ignore next*/__webpack_require__(304);
+	__webpack_require__(304);
 	
-	/*istanbul ignore next*/__webpack_require__(306);
+	__webpack_require__(306);
 	
 	/* eslint max-len: 0 */
 	
@@ -21066,8 +20761,9 @@ var app =
 	
 	  var hasOwn = Object.prototype.hasOwnProperty;
 	  var undefined; // More compressible than void 0.
-	  var iteratorSymbol =
-	    typeof Symbol === "function" && Symbol.iterator || "@@iterator";
+	  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+	  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+	  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
 	
 	  var inModule = typeof module === "object";
 	  var runtime = global.regeneratorRuntime;
@@ -21137,7 +20833,7 @@ var app =
 	  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype;
 	  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
 	  GeneratorFunctionPrototype.constructor = GeneratorFunction;
-	  GeneratorFunction.displayName = "GeneratorFunction";
+	  GeneratorFunctionPrototype[toStringTagSymbol] = GeneratorFunction.displayName = "GeneratorFunction";
 	
 	  // Helper for defining the .next, .throw, and .return methods of the
 	  // Iterator interface in terms of a single ._invoke method.
@@ -21164,6 +20860,9 @@ var app =
 	      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
 	    } else {
 	      genFun.__proto__ = GeneratorFunctionPrototype;
+	      if (!(toStringTagSymbol in genFun)) {
+	        genFun[toStringTagSymbol] = "GeneratorFunction";
+	      }
 	    }
 	    genFun.prototype = Object.create(Gp);
 	    return genFun;
@@ -21183,46 +20882,54 @@ var app =
 	  }
 	
 	  function AsyncIterator(generator) {
-	    // This invoke function is written in a style that assumes some
-	    // calling function (or Promise) will handle exceptions.
-	    function invoke(method, arg) {
-	      var result = generator[method](arg);
-	      var value = result.value;
-	      return value instanceof AwaitArgument
-	        ? Promise.resolve(value.arg).then(invokeNext, invokeThrow)
-	        : Promise.resolve(value).then(function(unwrapped) {
-	            // When a yielded Promise is resolved, its final value becomes
-	            // the .value of the Promise<{value,done}> result for the
-	            // current iteration. If the Promise is rejected, however, the
-	            // result for this iteration will be rejected with the same
-	            // reason. Note that rejections of yielded Promises are not
-	            // thrown back into the generator function, as is the case
-	            // when an awaited Promise is rejected. This difference in
-	            // behavior between yield and await is important, because it
-	            // allows the consumer to decide what to do with the yielded
-	            // rejection (swallow it and continue, manually .throw it back
-	            // into the generator, abandon iteration, whatever). With
-	            // await, by contrast, there is no opportunity to examine the
-	            // rejection reason outside the generator function, so the
-	            // only option is to throw it from the await expression, and
-	            // let the generator function handle the exception.
-	            result.value = unwrapped;
-	            return result;
+	    function invoke(method, arg, resolve, reject) {
+	      var record = tryCatch(generator[method], generator, arg);
+	      if (record.type === "throw") {
+	        reject(record.arg);
+	      } else {
+	        var result = record.arg;
+	        var value = result.value;
+	        if (value instanceof AwaitArgument) {
+	          return Promise.resolve(value.arg).then(function(value) {
+	            invoke("next", value, resolve, reject);
+	          }, function(err) {
+	            invoke("throw", err, resolve, reject);
 	          });
+	        }
+	
+	        return Promise.resolve(value).then(function(unwrapped) {
+	          // When a yielded Promise is resolved, its final value becomes
+	          // the .value of the Promise<{value,done}> result for the
+	          // current iteration. If the Promise is rejected, however, the
+	          // result for this iteration will be rejected with the same
+	          // reason. Note that rejections of yielded Promises are not
+	          // thrown back into the generator function, as is the case
+	          // when an awaited Promise is rejected. This difference in
+	          // behavior between yield and await is important, because it
+	          // allows the consumer to decide what to do with the yielded
+	          // rejection (swallow it and continue, manually .throw it back
+	          // into the generator, abandon iteration, whatever). With
+	          // await, by contrast, there is no opportunity to examine the
+	          // rejection reason outside the generator function, so the
+	          // only option is to throw it from the await expression, and
+	          // let the generator function handle the exception.
+	          result.value = unwrapped;
+	          resolve(result);
+	        }, reject);
+	      }
 	    }
 	
 	    if (typeof process === "object" && process.domain) {
 	      invoke = process.domain.bind(invoke);
 	    }
 	
-	    var invokeNext = invoke.bind(generator, "next");
-	    var invokeThrow = invoke.bind(generator, "throw");
-	    var invokeReturn = invoke.bind(generator, "return");
 	    var previousPromise;
 	
 	    function enqueue(method, arg) {
 	      function callInvokeWithMethodAndArg() {
-	        return invoke(method, arg);
+	        return new Promise(function(resolve, reject) {
+	          invoke(method, arg, resolve, reject);
+	        });
 	      }
 	
 	      return previousPromise =
@@ -21243,9 +20950,7 @@ var app =
 	          // Avoid propagating failures to Promises returned by later
 	          // invocations of the iterator.
 	          callInvokeWithMethodAndArg
-	        ) : new Promise(function (resolve) {
-	          resolve(callInvokeWithMethodAndArg());
-	        });
+	        ) : callInvokeWithMethodAndArg();
 	    }
 	
 	    // Define the unified helper method that is used to implement .next,
@@ -21353,13 +21058,10 @@ var app =
 	        }
 	
 	        if (method === "next") {
-	          context._sent = arg;
+	          // Setting context._sent for legacy support of Babel's
+	          // function.sent implementation.
+	          context.sent = context._sent = arg;
 	
-	          if (state === GenStateSuspendedYield) {
-	            context.sent = arg;
-	          } else {
-	            context.sent = undefined;
-	          }
 	        } else if (method === "throw") {
 	          if (state === GenStateSuspendedStart) {
 	            state = GenStateCompleted;
@@ -21420,6 +21122,8 @@ var app =
 	  Gp[iteratorSymbol] = function() {
 	    return this;
 	  };
+	
+	  Gp[toStringTagSymbol] = "Generator";
 	
 	  Gp.toString = function() {
 	    return "[object Generator]";
@@ -21529,7 +21233,9 @@ var app =
 	    reset: function(skipTempReset) {
 	      this.prev = 0;
 	      this.next = 0;
-	      this.sent = undefined;
+	      // Resetting context._sent for legacy support of Babel's
+	      // function.sent implementation.
+	      this.sent = this._sent = undefined;
 	      this.done = false;
 	      this.delegate = null;
 	
@@ -21718,6 +21424,11 @@ var app =
 	// shim for using process in browser
 	
 	var process = module.exports = {};
+	
+	// cached from whatever global is present so that test runners that stub it don't break things.
+	var cachedSetTimeout = setTimeout;
+	var cachedClearTimeout = clearTimeout;
+	
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -21742,7 +21453,7 @@ var app =
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 	
 	    var len = queue.length;
@@ -21759,7 +21470,7 @@ var app =
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 	
 	process.nextTick = function (fun) {
@@ -21771,7 +21482,7 @@ var app =
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 	
@@ -22270,6 +21981,8 @@ var app =
 	__webpack_require__(331);
 	
 	__webpack_require__(333);
+	
+	__webpack_require__(338);
 
 /***/ },
 /* 317 */
@@ -25940,6 +25653,86 @@ var app =
 	    return goNearbyDiff(cm, -1);
 	  };
 	});
+
+
+/***/ },
+/* 336 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(337);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(313)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/postcss-loader/index.js!./style.pcss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/postcss-loader/index.js!./style.pcss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 337 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(312)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "* {\n\tmargin: 0;\n\tpadding: 0;\n\tbox-sizing: border-box;\n}\n\nbody {\n\tfont-size: 14px;\n\tline-height: 1.6;\n\tfont-weight: 400;\n\tfont-family: \"Raleway\", \"HelveticaNeue\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n\tcolor: #222;\n}\n\n* {color: red}\n\nhtml, body {\n\theight: 100%;\n\tmargin: 0;\n\tpadding: 0;\n}\n\nmain {\n\tmin-height: 100%;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n}\n\nmain > .tabs {\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1;\n\t        flex: 1;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n}\n\n.tab-pane {\n\tdisplay: none;\n\tposition: relative;\n}\n\n#batch.tab-pane.active {\n\tdisplay: block;\n}\n\n#simple.tab-pane.active, #diff.tab-pane.active {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1;\n\t        flex: 1;\n}\n\n#simple.tab-pane > .content, #diff.tab-pane > .content {\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1;\n\t        flex: 1;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\tposition: relative;\n}\n\n#simple.tab-pane .CodeMirror, #simple.tab-pane .CodeMirror-merge, #diff.tab-pane .CodeMirror, #diff.tab-pane .CodeMirror-merge {\n\twidth: 100%;\n}\n\n#simple.tab-pane .CodeMirror, #simple.tab-pane .CodeMirror-merge, #simple.tab-pane .CodeMirror-merge-pane, #diff.tab-pane .CodeMirror, #diff.tab-pane .CodeMirror-merge, #diff.tab-pane .CodeMirror-merge-pane {\n\theight: 100%!important;\n}\n\n#simple.tab-pane .CodeMirror {\n\tposition: absolute;\n}\n\n#batch.tab-pane {\n\tmin-height: 80%;\n}\n\n#batch.tab-pane .add {\n\tposition: fixed;\n\tbottom: 20px;\n\tright: 20px;\n\tz-index: 5;\n\tbackground: #fff;\n}\n\n#diff.tab-pane .CodeMirror-merge {\n\tposition: absolute;\n}\n\n.tab-pane .tab-info {\n\twidth: 98%;\n\tmargin: 0 auto;\n}\n\nul.tab-nav {\n    list-style: none;\n    border-bottom: 1px solid #bbb;\n    padding: 0 5px;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: horizontal;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: row;\n\t        flex-direction: row;\n\tmargin-top: 20px;\n}\n\nul.tab-nav li.tab-nav-item {\n\tborder-radius: 4px;\n\tborder-bottom-left-radius: 0;\n\tborder-bottom-right-radius: 0;\n\tmargin-bottom: -1px;\n\tborder-bottom: none;\n\tborder: 1px solid #bbb;\n\tpadding: 0 30px;\n\tline-height: 38px;\n\tmargin-right: 3px;\n\tcolor: #555;\n\tcursor: pointer;\n}\n\nul.tab-nav li.tab-nav-item:hover {\n\tcolor: #333;\n\tborder-top-color: #888;\n\tborder-right-color: #888;\n\tborder-left-color: #888;\n}\n\nul.tab-nav li.tab-nav-item.active {\n\tborder-bottom: 1px solid #fff;\n}\n\n.CodeMirror {\n\tborder-top: 1px solid #ddd;\n}\n\n.CodeMirror-merge .CodeMirror {\n\tborder: none;\n}\n\n.CodeMirror .delete-editor, .CodeMirror .lint-button {\n\t/*background-color: #BCD183;\n\t\tborder: 1px solid #D2D4DB;\n\t\tborder-color: #9CBE43;*/\n\tbackground-color: rgba(229, 233,235,0.8);\n\tborder: 1px solid #D2D4DB;\n\tborder-radius: 3px;\n\tpadding: 8px;\n\tright: 20px;\n\tcursor: pointer;\n}\n\n.CodeMirror .delete-editor::before, .CodeMirror .lint-button::before {\n\tcontent: '';\n\topacity: .5;\n\tbackground-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAAWCAYAAAAB6jTvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABB5JREFUeNrsWk1IVFEUvscGIQjSxK0QuGtTtGoXRIEQChIkSTHhUBAtAjcFbaNVIdimEEaQoFBskyBICyEKhKH2uSkIAvNnQBAEOZ373nnz7r3v3pn3XjOOU/eTo+/nvjvjO9893znnPUBE0Uno7evvqC+8vbkBnfR9C4fxIT19/a5TpnMTN29nc0P8C+h134M8JGsdIeQXRfoBxReoeAcNL2Htd3wFj5+h/WWaayF05O+0JHCda7SyIOU82ljzZloiDmR1gryHKeZ14RjZwVEhbhfyPXB+e4wpoJJDv2tYpv0Jkp83RJMbIEB4pMIg2eKRk4wwEuixoOZ4iONA5GgjmpTpSDGIMgCS7dNkS2TVHCv7f8I1Edw7sdVuSVKjW1e84kERA2GRD2sUkZGhCPH1kgRDFjJgXuvpsCQyBbp50cyTnSAbyHA/0uAs2VSDMc94XOOkErRPxgRRZFXCUaOMTAZGlfav0IC1OKp4GDjNRDjfovmlkz+QnSI7SXbbMmaGbIKsSHaJ7KuWQ4iaXOhEMKVBKBJC42WoKyrk2aVjQ7S/Ji/BJJnB2E69v9NhZVsDSHn42cL5i0yGaLvsIIPgccVEUhn5IFj5ijyYsqHsBzmD4r09KRN0xef4Wh8hHJBSOkI2SbafU27qQc47axCkbCGD4HGTVkJAuPSFGi3U7TjplDKBqkwEZKAzHwXLCQprhPDQ8ZzsItkPNkhpjUgky9eShRTfLGQo2crdrsiRhGGyy9rq1vwK5SjEsMNDMiCuhkfC3AIcUuORgIyo57gic/Un8sBGisE0ZKj1IciRw+TCedp+T3a9JhNxchhUE3FeAXt0foRIsCoAvEz8XU5xz3Fu0XBkHlKsG8fX65GBIwRe4MxX6lM3ufU1OftOJBNhn0FLPvbp3Cj9XRGJEtVLRZMrhi/cr8iDGQuhBvm4qEMIqJAbF5Q6Q4aql7T1EKRMIGpkIBslxy+DUjxED8jUEtXDibQ9hwHuU8xz36I7w2eYi3jdkWgmCQHhir9F9iruRAb2NEgga8mm2MeADGIpIQ8AWufEi0fTcZ/sE/cxspJB5gxn6lQfwtaHkJpyl7NfW/tARoYxMBIg8+EXeNloJX4J9+OACFMWMpTYf7bqY8qSVGpdBlmXPjboIMkyTq5+h5bVD4m/Pj7UwfGcCeIjsqui8XOPOWWMWU2Y1ccWj9dQENqDqqBV/YQcX6Wj0xhMguN0bMHmaHTIg48STuxlUNTvnM+NCe7zpEBFyMcHQtzkxX3gqD6qTIZKghD6swuInnq+oF+7YRcS3qIhDyj0/jIm5MNHiSZghSND1rdhKjZHG6R44DpZqPPix6z3SVtRyjK4WW9RFdrwj2LG/bTzpBqb4r0B67yNrmvmK3LtRMEvxMPBdoe8G/pHgAEAQct309m5wIAAAAAASUVORK5CYII=');\n\tbackground-position: 0 0;\n\twidth: 22px;\n\theight: 22px;\n\tdisplay: inline-block;\n}\n\n.CodeMirror .delete-editor:hover, .CodeMirror .lint-button:hover {\n\tbackground-color: rgba(229, 233,235,0.5);\n}\n\n.CodeMirror .delete-editor:hover::before, .CodeMirror .lint-button:hover::before {\n\topacity: 1;\n}\n\n.CodeMirror .lint-button {\n\ttop: 20px;\n}\n\n.CodeMirror .lint-button.success {\n\tbackground-color: #BCD183;\n\tborder: 1px solid #D2D4DB;\n}\n\n.CodeMirror .lint-button.success::before {\n\topacity: 1;\n}\n\n.CodeMirror .lint-button::before {\n\tbackground-position: 0 0;\n}\n\n.CodeMirror .delete-editor {\n\tposition: absolute;\n\ttop: 70px;\n\tz-index: 3;\n}\n\n.CodeMirror .delete-editor::before {\n\tbackground-position: -22px 0;\n}\n\n.dnd-area {\n\tposition: absolute;\n\twidth: 100%;\n\theight: 100%;\n\tbackground: rgba(0,0,0,.5);\n\ttop: 0;\n\tleft: 0;\n\tborder: 50px dashed green;\n\tz-index: 5;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n  \t-webkit-box-pack: center;\n  \t    -ms-flex-pack: center;\n  \t        justify-content: center;\n\tpointer-events: none;\n}\n\n.dnd-area::before {\n\tcontent: 'Drop files here';\n\tfont-size: 36px;\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1;\n\t        flex: 1;\n\ttext-align: center;\n}\n\n.button,\nbutton,\ninput[type=\"submit\"],\ninput[type=\"reset\"],\ninput[type=\"button\"] {\n  display: inline-block;\n  height: 38px;\n  padding: 0 30px;\n  color: #555;\n  text-align: center;\n  font-size: 11px;\n  font-weight: 600;\n  line-height: 38px;\n  letter-spacing: 1.6px;\n  letter-spacing: .1rem;\n  text-transform: uppercase;\n  text-decoration: none;\n  white-space: nowrap;\n  background-color: transparent;\n  border-radius: 4px;\n  border: 1px solid #bbb;\n  cursor: pointer;\n  box-sizing: border-box; }\n\n.button:hover,\nbutton:hover,\ninput[type=\"submit\"]:hover,\ninput[type=\"reset\"]:hover,\ninput[type=\"button\"]:hover,\n.button:focus,\nbutton:focus,\ninput[type=\"submit\"]:focus,\ninput[type=\"reset\"]:focus,\ninput[type=\"button\"]:focus {\n  color: #333;\n  border-color: #888;\n  outline: 0; }\n\n.button.button-primary,\nbutton.button-primary,\ninput[type=\"submit\"].button-primary,\ninput[type=\"reset\"].button-primary,\ninput[type=\"button\"].button-primary {\n  color: #FFF;\n  background-color: #33C3F0;\n  border-color: #33C3F0; }\n\n.button.button-primary:hover,\nbutton.button-primary:hover,\ninput[type=\"submit\"].button-primary:hover,\ninput[type=\"reset\"].button-primary:hover,\ninput[type=\"button\"].button-primary:hover,\n.button.button-primary:focus,\nbutton.button-primary:focus,\ninput[type=\"submit\"].button-primary:focus,\ninput[type=\"reset\"].button-primary:focus,\ninput[type=\"button\"].button-primary:focus {\n  color: #FFF;\n  background-color: #1EAEDB;\n  border-color: #1EAEDB; }\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 338 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(339);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(313)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/postcss-loader/index.js!./codemirror-jsonlint-addon.pcss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/postcss-loader/index.js!./codemirror-jsonlint-addon.pcss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 339 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(312)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".CodeMirror .lint-button {\n\tposition: absolute;\n\tline-height: 1;\n\ttop: 10px;\n\tright: 10px;\n\t-webkit-transition: color .5s ease-out;\n\ttransition: color .5s ease-out;\n\tz-index: 3;\n}\n\n.CodeMirror .lint-button::before {\n\tcontent: '\\2713';\n\tfont-size: 36px;\n\tcursor: pointer;\n}\n\n.CodeMirror .lint-button.success {\n\tcolor: green;\n}\n\n.CodeMirror .lint-notifier {\n\tposition: absolute;\n\tbottom: 10px;\n\tz-index: 3;\n\tleft: 40px;\n\topacity: 0;\n\tpointer-events: none;\n\t-webkit-transition: opacity .5s ease-out;\n\ttransition: opacity .5s ease-out;\n}\n\n.CodeMirror .lint-notifier.shown {\n\topacity: 1;\n\tpointer-events: auto;\n}\n\n.CodeMirror .lint-line-error {\n    background-color: #FBE3E4;\n}\n", ""]);
+	
+	// exports
 
 
 /***/ }
