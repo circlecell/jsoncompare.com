@@ -12,7 +12,16 @@ export default class SimpleTab extends Tab {
 			.on({
 				'change:files': () => {
 					this.value = this.files[0].readerResult;
-				}
+				},
+				// 'change:value': () => this.trigger('modify')
 			});
 	}
+
+	/*toJSON() {
+		return encodeURIComponent(this.value);
+	}
+
+	fromJSON() {
+		return decodeURIComponent(value)
+	}*/
 }

@@ -4080,6 +4080,14 @@ var app =
 					}
 				});
 			}
+	
+			/*toJSON() {
+	  	return encodeURIComponent(this.value);
+	  }
+	  	fromJSON() {
+	  	return decodeURIComponent(value)
+	  }*/
+	
 		}]);
 	
 		return SimpleTab;
@@ -13260,6 +13268,11 @@ var app =
 					leftValue: this.editor.edit.display.wrapper,
 					rightValue: this.editor.right.orig.display.wrapper
 				});
+			}
+		}, {
+			key: 'toJSON',
+			value: function toJSON() {
+				return this.value;
 			}
 		}]);
 	

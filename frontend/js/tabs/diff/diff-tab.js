@@ -19,4 +19,8 @@ export default class DiffTab extends Tab {
 				rightValue: this.editor.right.orig.display.wrapper
 			});
 	}
+
+	toJSON() {
+		return this.value;
+	}
 }
