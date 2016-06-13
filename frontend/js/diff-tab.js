@@ -2,12 +2,8 @@ import Tab from './tab';
 import CodeMirror from 'codemirror';
 
 export default class DiffTab extends Tab {
-	constructor(...args) {
-		super(...args);
-	}
-
 	initialize() {
-		this.editor = CodeMirror.MergeView(this.nodes.content, {
+		this.editor = new CodeMirror.MergeView(this.nodes.content, {
 			dragDrop: true,
 			value: this.leftValue || '',
 			origLeft: null,
@@ -16,8 +12,6 @@ export default class DiffTab extends Tab {
 			collapseIdentical: false,
 			allowEditingOriginals: true
 		});
-
-		console.log(this.editor);
 
 		return this
 			.bindNode({

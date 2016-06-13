@@ -1,6 +1,6 @@
 import MK from 'matreshka';
 
-let {className} = MK.binders;
+const { className } = MK.binders;
 
 export default class Tab extends MK.Object {
 	constructor(data, parent, name) {
@@ -16,8 +16,8 @@ export default class Tab extends MK.Object {
 				content: ':sandbox .content'
 			})
 			.on({
-				'change:active': evt => {
-					if(!this.initialized) {
+				'change:active': () => {
+					if (!this.initialized) {
 						setTimeout(() => {
 							// need little timeout
 							this.initialize();

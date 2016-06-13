@@ -1,7 +1,6 @@
 import Tab from './tab';
 import MK from 'matreshka';
 import Batch from './batch';
-import $ from 'balajs';
 
 export default class BatchTab extends Tab {
 	constructor(...args) {
@@ -18,7 +17,7 @@ export default class BatchTab extends Tab {
 		return this
 			.bindNode('files', ':sandbox', MK.binders.dropFiles('text'))
 			.on({
-				'change:files': evt => {
+				'change:files': () => {
 					this.items.recreate(this.files.map(file => ({
 						value: file.readerResult
 					})));

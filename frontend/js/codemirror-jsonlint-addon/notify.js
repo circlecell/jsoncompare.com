@@ -1,14 +1,12 @@
-import $ from 'balajs';
-import assign from 'object.assign';
 import CodeMirror from 'codemirror';
 
 
-CodeMirror.defineExtension('notify', function(state, message) {
-	const {notifierBlock, validateButton} = this.display;
+CodeMirror.defineExtension('notify', function notify(state, message) {
+	const { notifierBlock, validateButton } = this.display;
 
-	if(!notifierBlock || !validateButton) return;
+	if (!notifierBlock || !validateButton) return;
 
-	switch(state) {
+	switch (state) {
 		case 'SUCCESS':
 			notifierBlock.classList.remove('shown');
 			validateButton.classList.add('success');

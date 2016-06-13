@@ -55,7 +55,7 @@ var app =
 	
 	var CodeMirror = __webpack_require__(5);
 	
-	var $ = __webpack_require__(9);
+	var $ = __webpack_require__(10);
 	
 	__webpack_require__(11);
 	
@@ -77,10 +77,9 @@ var app =
 	
 	MK.prototype.appendNode = function (key, selector) {
 		var nodes = this.$bound(key),
-		    container = this.select(selector),
-		    i = 0;
+		    container = this.select(selector);
 	
-		for (; i < nodes.length; i++) {
+		for (var i = 0; i < nodes.length; i++) {
 			container.appendChild(nodes[i]);
 		}
 	};
@@ -103,6 +102,8 @@ var app =
 		if (this.classList.contains('CodeMirror')) {
 			return MK.binders.codeMirror();
 		}
+	
+		return null;
 	});
 	
 	module.exports = new (function (_MK$Object) {
@@ -133,19 +134,18 @@ var app =
 					return evt.preventDefault();
 				},
 				'click::(.save)': _this.save,
-				'change:id': function changeId(evt) {
+				'change:id': function changeId() {
 					if (_this.id) {
 						_this.restore(_this.id);
 					}
 				},
-				'addevent': function addevent(evt) {
+				addevent: function addevent(evt) {
 					var prefix = 'codemirror:';
-					if (evt.name.indexOf(prefix) == 0) {
+					if (evt.name.indexOf(prefix) === 0) {
 						CodeMirror.on(CodeMirror, evt.name.replace(prefix, ''), evt.callback);
 					}
 				},
 				'codemirror:validate': function codemirrorValidate(editor) {
-					console.log(_this.reformat);
 					if (_this.reformat) {
 						var value = JSON.parse(editor.getValue());
 						if (_this.reformat === 'minify') {
@@ -154,19 +154,17 @@ var app =
 							editor.setValue(JSON.stringify(value, null, '\t'));
 						}
 					}
-				},
-	
-				'codemirror:errorvalidate': function codemirrorErrorvalidate(editor) {
-					console.log('errora', editor);
-				}
+				} /* ,
+	     'codemirror:errorvalidate': editor => {
+	     console.log('errora', editor);
+	     }*/
 			}).on({
-				'change:mode': function changeMode(evt) {
+				'change:mode': function changeMode() {
 					_this.tabs[_this.mode].active = true;
 				}
 			}, true)
 			// REFACTOR THIS SHIT
 			.onDebounce((_setClassFor$initRout = {}, _defineProperty(_setClassFor$initRout, 'dragover::(' + dndPlaceholderAreas + ')', function undefined(evt) {
-				console.log('yomanarofd');
 				if (!$.one('.dnd-area', evt.target.closest(dndPlaceholderAreas))) {
 					evt.target.closest(dndPlaceholderAreas).appendChild($.create('div', {
 						className: 'dnd-area'
@@ -190,7 +188,9 @@ var app =
 			value: function toJSONString() {
 				var tabs = this.tabs;
 				var encode = function encode(str) {
-					return str ? encodeURIComponent(str) : '';
+					// fix for linter
+					var result = str ? encodeURIComponent(str) : '';
+					return result;
 				};
 	
 				return JSON.stringify({
@@ -206,16 +206,18 @@ var app =
 			}
 		}, {
 			key: 'fromJSONString',
-			value: function fromJSONString(data) {
+			value: function fromJSONString(jsonData) {
 				var tabs = this.tabs;
 				var decode = function decode(str) {
 					return decodeURIComponent(str);
 				};
+				var data = JSON.parse(jsonData);
 	
-				data = JSON.parse(data);
 				tabs.simple.value = decode(data.simple);
 				tabs.batch.items.recreate(data.batch ? data.batch.map(function (item) {
-					return { value: decode(item) };
+					return {
+						value: decode(item)
+					};
 				}) : []);
 				tabs.diff.leftValue = decode(data.diff.left);
 				tabs.diff.rightValue = decode(data.diff.right);
@@ -3939,7 +3941,7 @@ var app =
 	
 	var BatchTab = __webpack_require__(6);
 	
-	var DiffTab = __webpack_require__(10);
+	var DiffTab = __webpack_require__(9);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -3950,7 +3952,7 @@ var app =
 	var Tabs = function (_MK$Object) {
 		_inherits(Tabs, _MK$Object);
 	
-		function Tabs(data, parent) {
+		function Tabs() {
 			var _this;
 	
 			_classCallCheck(this, Tabs);
@@ -3962,16 +3964,7 @@ var app =
 			})), _this).bindNode({
 				sandbox: 'main',
 				container: '.tabs'
-			})
-			/*.bindNode('activeTabName', ':sandbox .tab-nav li', {
-	  	on: 'click',
-	  	getValue() {
-	  		return this.dataset.tab;
-	  	},
-	  	setValue(v) {
-	  		}
-	  })*/
-			.setClassFor({
+			}).setClassFor({
 				simple: SimpleTab,
 				batch: BatchTab,
 				diff: DiffTab
@@ -3985,7 +3978,7 @@ var app =
 						for (var _iterator = _this[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 							var tab = _step.value;
 	
-							tab.active = evt.target.dataset.tab == tab.name;
+							tab.active = evt.target.dataset.tab === tab.name;
 						}
 					} catch (err) {
 						_didIteratorError = true;
@@ -4065,15 +4058,9 @@ var app =
 		_inherits(SimpleTab, _Tab);
 	
 		function SimpleTab() {
-			var _Object$getPrototypeO;
-	
 			_classCallCheck(this, SimpleTab);
 	
-			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-				args[_key] = arguments[_key];
-			}
-	
-			return _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(SimpleTab)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(SimpleTab).apply(this, arguments));
 		}
 	
 		_createClass(SimpleTab, [{
@@ -4081,10 +4068,10 @@ var app =
 			value: function initialize() {
 				var _this2 = this;
 	
-				this.editor = CodeMirror(this.nodes.content);
+				this.editor = new CodeMirror(this.nodes.content);
 	
 				return this.bindNode('value', this.editor.display.wrapper).bindNode('files', ':sandbox', MK.binders.dropFiles('text')).on({
-					'change:files': function changeFiles(evt) {
+					'change:files': function changeFiles() {
 						_this2.value = _this2.files[0].readerResult;
 					}
 				});
@@ -4129,7 +4116,7 @@ var app =
 				sandbox: parent.select('#' + name),
 				content: ':sandbox .content'
 			}).on({
-				'change:active': function changeActive(evt) {
+				'change:active': function changeActive() {
 					if (!_this.initialized) {
 						setTimeout(function () {
 							// need little timeout
@@ -13078,8 +13065,6 @@ var app =
 	
 	var Batch = __webpack_require__(7);
 	
-	var $ = __webpack_require__(9);
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -13114,7 +13099,7 @@ var app =
 				this.items.rerender();
 	
 				return this.bindNode('files', ':sandbox', MK.binders.dropFiles('text')).on({
-					'change:files': function changeFiles(evt) {
+					'change:files': function changeFiles() {
 						_this2.items.recreate(_this2.files.map(function (file) {
 							return {
 								value: file.readerResult
@@ -13164,7 +13149,7 @@ var app =
 			}).recreate(data, {
 				dontRender: true
 			}).on({
-				'click::(.add)': function clickAdd(evt) {
+				'click::(.add)': function clickAdd() {
 					_this.push({});
 				},
 				'*@click::deleteButton': function clickDeleteButton(evt) {
@@ -13200,10 +13185,10 @@ var app =
 	var BatchItem = function (_MK$Object) {
 		_inherits(BatchItem, _MK$Object);
 	
-		function BatchItem(data) {
+		function BatchItem() {
 			_classCallCheck(this, BatchItem);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(BatchItem).call(this, data));
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(BatchItem).apply(this, arguments));
 		}
 	
 		_createClass(BatchItem, [{
@@ -13212,7 +13197,7 @@ var app =
 				var _this2 = this;
 	
 				setTimeout(function () {
-					_this2.editor = CodeMirror(_this2.sandbox);
+					_this2.editor = new CodeMirror(_this2.sandbox);
 	
 					_this2.bindNode({
 						deleteButton: '<span class="delete-editor"></span>',
@@ -13229,6 +13214,58 @@ var app =
 
 /***/ },
 /* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var Tab = __webpack_require__(4);
+	
+	var CodeMirror = __webpack_require__(5);
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DiffTab = function (_Tab) {
+		_inherits(DiffTab, _Tab);
+	
+		function DiffTab() {
+			_classCallCheck(this, DiffTab);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(DiffTab).apply(this, arguments));
+		}
+	
+		_createClass(DiffTab, [{
+			key: 'initialize',
+			value: function initialize() {
+				this.editor = new CodeMirror.MergeView(this.nodes.content, {
+					dragDrop: true,
+					value: this.leftValue || '',
+					origLeft: null,
+					orig: this.rightValue || '',
+					highlightDifferences: true,
+					collapseIdentical: false,
+					allowEditingOriginals: true
+				});
+	
+				return this.bindNode({
+					leftValue: this.editor.edit.display.wrapper,
+					rightValue: this.editor.right.orig.display.wrapper
+				});
+			}
+		}]);
+	
+		return DiffTab;
+	}(Tab);
+	
+	module.exports = DiffTab;
+
+/***/ },
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, $) {
@@ -13282,66 +13319,6 @@ var app =
 		}
 	})(this);
 
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var Tab = __webpack_require__(4);
-	
-	var CodeMirror = __webpack_require__(5);
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var DiffTab = function (_Tab) {
-		_inherits(DiffTab, _Tab);
-	
-		function DiffTab() {
-			var _Object$getPrototypeO;
-	
-			_classCallCheck(this, DiffTab);
-	
-			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-				args[_key] = arguments[_key];
-			}
-	
-			return _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(DiffTab)).call.apply(_Object$getPrototypeO, [this].concat(args)));
-		}
-	
-		_createClass(DiffTab, [{
-			key: 'initialize',
-			value: function initialize() {
-				this.editor = CodeMirror.MergeView(this.nodes.content, {
-					dragDrop: true,
-					value: this.leftValue || '',
-					origLeft: null,
-					orig: this.rightValue || '',
-					highlightDifferences: true,
-					collapseIdentical: false,
-					allowEditingOriginals: true
-				});
-	
-				console.log(this.editor);
-	
-				return this.bindNode({
-					leftValue: this.editor.edit.display.wrapper,
-					rightValue: this.editor.right.orig.display.wrapper
-				});
-			}
-		}]);
-	
-		return DiffTab;
-	}(Tab);
-	
-	module.exports = DiffTab;
 
 /***/ },
 /* 11 */
@@ -21647,7 +21624,7 @@ var app =
 	Object.assign(CodeMirror.defaults, {
 		dragDrop: false,
 		lineNumbers: true,
-		mode: "text/html",
+		mode: 'text/html',
 		jsonlint: true,
 		viewportMargin: Infinity
 	});
@@ -21688,7 +21665,7 @@ var app =
 
 	'use strict';
 	
-	var $ = __webpack_require__(9);
+	var $ = __webpack_require__(10);
 	
 	var assign = __webpack_require__(315);
 	
@@ -21698,11 +21675,9 @@ var app =
 	
 	var isUri = _validUrl.isUri;
 	
-	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; } /* eslint no-param-reassign: ["error", { "props": false }]*/
 	
 	CodeMirror.defineOption('jsonlint', false, function (editor, value) {
-		var _this = this;
-	
 		var initialized = editor._jsonlint;
 	
 		if (value && !initialized) {
@@ -21721,61 +21696,54 @@ var app =
 				editor.notify(null);
 			});
 	
-			validateButton.addEventListener('click', function () {
-				var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(evt) {
-					var value, resp;
-					return regeneratorRuntime.wrap(function _callee$(_context) {
-						while (1) {
-							switch (_context.prev = _context.next) {
-								case 0:
-									value = editor.getValue();
+			validateButton.addEventListener('click', _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+				var editorValue, resp;
+				return regeneratorRuntime.wrap(function _callee$(_context) {
+					while (1) {
+						switch (_context.prev = _context.next) {
+							case 0:
+								editorValue = editor.getValue();
 	
-									if (!isUri(value.trim())) {
-										_context.next = 10;
-										break;
-									}
-	
-									_context.next = 4;
-									return fetch('/proxy', {
-										method: 'post',
-										body: JSON.stringify({
-											url: value
-										})
-									});
-	
-								case 4:
-									_context.next = 6;
-									return _context.sent.json();
-	
-								case 6:
-									resp = _context.sent;
-	
-	
-									if (!resp.error) {
-										editor.setValue(resp.body);
-										editor.validate();
-									} else {
-										alert('TODO: RESP ERROR');
-									}
-	
-									_context.next = 11;
+								if (!isUri(value.trim())) {
+									_context.next = 10;
 									break;
+								}
 	
-								case 10:
+								_context.next = 4;
+								return fetch('/proxy', {
+									method: 'post',
+									body: JSON.stringify({
+										url: editorValue
+									})
+								});
+	
+							case 4:
+								_context.next = 6;
+								return _context.sent.json();
+	
+							case 6:
+								resp = _context.sent;
+	
+	
+								if (!resp.error) {
+									editor.setValue(resp.body);
 									editor.validate();
+								} else {
+									alert('TODO: RESP ERROR');
+								}
+								_context.next = 11;
+								break;
 	
-								case 11:
-								case 'end':
-									return _context.stop();
-							}
+							case 10:
+								editor.validate();
+	
+							case 11:
+							case 'end':
+								return _context.stop();
 						}
-					}, _callee, _this);
-				}));
-	
-				return function (_x) {
-					return ref.apply(this, arguments);
-				};
-			}());
+					}
+				}, _callee, undefined);
+			})));
 	
 			editor._jsonlint = true;
 		} else if (!value && !initialized) {
@@ -22464,13 +22432,9 @@ var app =
 
 	'use strict';
 	
-	var $ = __webpack_require__(9);
-	
-	var assign = __webpack_require__(315);
-	
 	var CodeMirror = __webpack_require__(5);
 	
-	CodeMirror.defineExtension('notify', function (state, message) {
+	CodeMirror.defineExtension('notify', function notify(state, message) {
 		var _display = this.display;
 		var notifierBlock = _display.notifierBlock;
 		var validateButton = _display.validateButton;
@@ -22504,9 +22468,9 @@ var app =
 	
 	var CodeMirror = __webpack_require__(5);
 	
-	CodeMirror.defineExtension('validate', function () {
-		var code = this.getValue(),
-		    lineMatches = void 0;
+	CodeMirror.defineExtension('validate', function validate() {
+		var code = this.getValue();
+		var lineMatches = void 0;
 	
 		try {
 			JSON.parse(code);
@@ -22550,8 +22514,8 @@ var app =
 	
 	var CodeMirror = __webpack_require__(5);
 	
-	CodeMirror.defineExtension('highlightErrorLine', function (line) {
-		if (typeof line == 'number') {
+	CodeMirror.defineExtension('highlightErrorLine', function highlightErrorLine(line) {
+		if (typeof line === 'number') {
 			this._errorLine = this.addLineClass(line, 'background', 'lint-line-error');
 		} else if (this._errorLine) {
 			this.removeLineClass(this._errorLine, 'background', 'lint-line-error');

@@ -1,13 +1,15 @@
+/* eslint no-param-reassign: ["error", { "props": false }]*/
+
 import $ from 'balajs';
 import assign from 'object.assign';
 import CodeMirror from 'codemirror';
-import {isUri} from 'valid-url';
+import { isUri } from 'valid-url';
 
-CodeMirror.defineOption('jsonlint', false, function(editor, value) {
+CodeMirror.defineOption('jsonlint', false, (editor, value) => {
 	const initialized = editor._jsonlint;
 
-	if(value && !initialized) {
-		let wrapper = editor.display.wrapper,
+	if (value && !initialized) {
+		const wrapper = editor.display.wrapper,
 			validateButton = assign(wrapper.appendChild($.one('<div>')), {
 				className: 'lint-button'
 			}),
@@ -22,38 +24,36 @@ CodeMirror.defineOption('jsonlint', false, function(editor, value) {
 			editor.notify(null);
 		});
 
-		validateButton.addEventListener('click', async evt => {
-			const value = editor.getValue();
+		validateButton.addEventListener('click', async () => {
+			const editorValue = editor.getValue();
 
-			if(isUri(value.trim())) {
+			if (isUri(value.trim())) {
 				const resp = await (
 					await fetch('/proxy', {
 						method: 'post',
 						body: JSON.stringify({
-							url: value
+							url: editorValue
 						})
 					})
 				).json();
 
-				if(!resp.error) {
+				if (!resp.error) {
 					editor.setValue(resp.body);
 					editor.validate();
 				} else {
 					alert('TODO: RESP ERROR');
 				}
-
 			} else {
-				editor.validate()
+				editor.validate();
 			}
-
 		});
 
 		editor._jsonlint = true;
-	} else if(!value && !initialized) {
+	} else if (!value && !initialized) {
 		return;
-	} else if(!value && initialized) {
+	} else if (!value && initialized) {
 		editor.notifierBlock.style.display = editor.validateButton.style.display = 'none';
-	} else if(value && initialized) {
+	} else if (value && initialized) {
 		editor.notifierBlock.style.display = editor.validateButton.style.display = '';
 	}
 });

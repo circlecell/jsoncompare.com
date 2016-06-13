@@ -2,10 +2,11 @@
 	"parser": "babel-eslint",
 	"extends": "airbnb/base",
 	"rules": {
-		"indent": ["error", "tab"],
 		"one-var": 0,
 		"comma-dangle": 0,
-		"import/no-unresolved": 0
+		"import/no-unresolved": 0,
+		"no-underscore-dangle": 0,
+		"indent": ["error", "tab", { "SwitchCase": 1 }]
 	},
 	"env": {
 		"browser": true

@@ -8,17 +8,16 @@ import './codemirror-init';
 import '../pcss/style.pcss';
 
 
-MK.prototype.appendNode = function(key, selector) {
-	var nodes = this.$bound(key),
-		container = this.select(selector),
-		i = 0;
+MK.prototype.appendNode = function (key, selector) {
+	const nodes = this.$bound(key),
+		container = this.select(selector);
 
-	for(; i < nodes.length; i++) {
+	for (let i = 0; i < nodes.length; i++) {
 		container.appendChild(nodes[i]);
 	}
 };
 
-MK.binders.codeMirror = function() {
+MK.binders.codeMirror = function () {
 	return {
 		on(cbc) {
 			this.CodeMirror.on('change', cbc);
@@ -35,10 +34,12 @@ MK.binders.codeMirror = function() {
 };
 
 
-MK.defaultBinders.unshift(function() {
-	if(this.classList.contains('CodeMirror')) {
+MK.defaultBinders.unshift(function () {
+	if (this.classList.contains('CodeMirror')) {
 		return MK.binders.codeMirror();
 	}
+
+	return null;
 });
 
 module.exports = new class App extends MK.Object {
@@ -64,62 +65,66 @@ module.exports = new class App extends MK.Object {
 				},
 				'dragover::sandbox drop::sandbox': evt => evt.preventDefault(),
 				'click::(.save)': this.save,
-				'change:id': evt => {
-					if(this.id) {
+				'change:id': () => {
+					if (this.id) {
 						this.restore(this.id);
 					}
 				},
-				'addevent': evt => {
+				addevent: evt => {
 					const prefix = 'codemirror:';
-					if(evt.name.indexOf(prefix) == 0) {
-						CodeMirror.on(CodeMirror, evt.name.replace(prefix, ''), evt.callback)
+					if (evt.name.indexOf(prefix) === 0) {
+						CodeMirror.on(CodeMirror, evt.name.replace(prefix, ''), evt.callback);
 					}
 				},
-				'codemirror:validate': editor => {console.log(this.reformat)
-					if(this.reformat) {
+				'codemirror:validate': editor => {
+					if (this.reformat) {
 						const value = JSON.parse(editor.getValue());
-						if(this.reformat === 'minify') {
+						if (this.reformat === 'minify') {
 							editor.setValue(JSON.stringify(value));
-						} else if(this.reformat === 'beautify') {
-							editor.setValue(JSON.stringify(value, null, '\t'))
+						} else if (this.reformat === 'beautify') {
+							editor.setValue(JSON.stringify(value, null, '\t'));
 						}
 					}
-				},
+				}/* ,
 
 				'codemirror:errorvalidate': editor => {
 					console.log('errora', editor);
-				}
+				}*/
 			})
 			.on({
-				'change:mode': evt => {
+				'change:mode': () => {
 					this.tabs[this.mode].active = true;
 				}
 			}, true)
 			// REFACTOR THIS SHIT
 			.onDebounce({
-				[`dragover::(${dndPlaceholderAreas})`]: evt => {console.log('yomanarofd');
-					if(!$.one('.dnd-area', evt.target.closest(dndPlaceholderAreas))) {
+				[`dragover::(${dndPlaceholderAreas})`]: evt => {
+					if (!$.one('.dnd-area', evt.target.closest(dndPlaceholderAreas))) {
 						evt.target.closest(dndPlaceholderAreas).appendChild($.create('div', {
 							className: 'dnd-area'
 						}));
 					}
 				},
 				[`dragleave::(${dndPlaceholderAreas}) drop::(${dndPlaceholderAreas})`]: evt => {
-					var area = $.one('.dnd-area', evt.target.closest(dndPlaceholderAreas));
-					if(area) {
+					const area = $.one('.dnd-area', evt.target.closest(dndPlaceholderAreas));
+					if (area) {
 						area.parentNode.removeChild(area);
 					}
 				}
 			});
 
-		if(this.id) {
+		if (this.id) {
 			this.restore(this.id);
 		}
 	}
 
 	toJSONString() {
-		const {tabs} = this,
-			encode = str => str ? encodeURIComponent(str) : '';
+		const { tabs } = this,
+			encode = str => {
+				// fix for linter
+				const result = str ? encodeURIComponent(str) : '';
+				return result;
+			};
 
 		return JSON.stringify({
 			simple: encode(tabs.simple.value),
@@ -131,13 +136,15 @@ module.exports = new class App extends MK.Object {
 		});
 	}
 
-	fromJSONString(data) {
-		const {tabs} = this,
-			decode = str => decodeURIComponent(str);
+	fromJSONString(jsonData) {
+		const { tabs } = this,
+			decode = str => decodeURIComponent(str),
+			data = JSON.parse(jsonData);
 
-		data = JSON.parse(data);
 		tabs.simple.value = decode(data.simple);
-		tabs.batch.items.recreate(data.batch ? data.batch.map(item => ({value: decode(item)})) : []);
+		tabs.batch.items.recreate(data.batch ? data.batch.map(item => ({
+			value: decode(item)
+		})) : []);
 		tabs.diff.leftValue = decode(data.diff.left);
 		tabs.diff.rightValue = decode(data.diff.right);
 
@@ -147,20 +154,20 @@ module.exports = new class App extends MK.Object {
 	async save() {
 		const body = this.toJSONString();
 		const resp = await(
-		 	await fetch('/save', {
+			await fetch('/save', {
 				method: 'post',
 				body
 			})
 		).json();
 
-		if(!resp.error) {
+		if (!resp.error) {
 			this.id = resp.key;
 			this.memo[resp.key] = body;
 		}
 	}
 
 	async restore(id) {
-		if(this.memo[id]) {
+		if (this.memo[id]) {
 			this.fromJSONString(this.memo[id]);
 		} else {
 			const resp = await (
@@ -170,6 +177,5 @@ module.exports = new class App extends MK.Object {
 			this.memo[id] = resp;
 			this.fromJSONString(resp);
 		}
-
 	}
-}
+};

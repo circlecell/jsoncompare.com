@@ -4,7 +4,7 @@ import BatchTab from './batch-tab';
 import DiffTab from './diff-tab';
 
 export default class Tabs extends MK.Object {
-	constructor(data, parent) {
+	constructor() {
 		super({
 			simple: { title: 'Simple' },
 			batch: { title: 'Batch' },
@@ -14,15 +14,6 @@ export default class Tabs extends MK.Object {
 			sandbox: 'main',
 			container: '.tabs'
 		})
-		/*.bindNode('activeTabName', ':sandbox .tab-nav li', {
-			on: 'click',
-			getValue() {
-				return this.dataset.tab;
-			},
-			setValue(v) {
-
-			}
-		})*/
 		.setClassFor({
 			simple: SimpleTab,
 			batch: BatchTab,
@@ -30,13 +21,13 @@ export default class Tabs extends MK.Object {
 		})
 		.on({
 			'*@click::tabHeader': evt => {
-				for(let tab of this) {
-					tab.active = evt.target.dataset.tab == tab.name;
+				for (const tab of this) {
+					tab.active = evt.target.dataset.tab === tab.name;
 				}
 			},
 			'*@change:active': evt => {
-				if(evt.value) {
-					for(let tab of this) {
+				if (evt.value) {
+					for (const tab of this) {
 						tab.active = tab === evt.self;
 					}
 

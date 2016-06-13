@@ -9,7 +9,7 @@ require('codemirror/addon/merge/merge');
 Object.assign(CodeMirror.defaults, {
 	dragDrop: false,
 	lineNumbers: true,
-	mode: "text/html",
+	mode: 'text/html',
 	jsonlint: true,
 	viewportMargin: Infinity
 });
