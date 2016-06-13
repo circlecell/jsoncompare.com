@@ -1,4 +1,4 @@
-import Tab from './tab';
+import Tab from '../tab';
 import CodeMirror from 'codemirror';
 
 export default class DiffTab extends Tab {

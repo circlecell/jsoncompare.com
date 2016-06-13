@@ -1,4 +1,4 @@
-import Tab from './tab';
+import Tab from '../tab';
 import MK from 'matreshka';
 import Batch from './batch';
 

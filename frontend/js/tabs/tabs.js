@@ -1,7 +1,7 @@
 import MK from 'matreshka';
-import SimpleTab from './simple-tab';
-import BatchTab from './batch-tab';
-import DiffTab from './diff-tab';
+import SimpleTab from './simple/simple-tab';
+import BatchTab from './batch/batch-tab';
+import DiffTab from './diff/diff-tab';
 
 export default class Tabs extends MK.Object {
 	constructor() {

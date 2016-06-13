@@ -154,10 +154,14 @@ var app =
 							editor.setValue(JSON.stringify(value, null, '\t'));
 						}
 					}
-				} /* ,
-	     'codemirror:errorvalidate': editor => {
-	     console.log('errora', editor);
-	     }*/
+				},
+				'*@modify': function modify(evt) {
+					console.log(evt, 'modufyyeye');
+				}
+				/* ,
+	   	'codemirror:errorvalidate': editor => {
+	   	console.log('errora', editor);
+	   }*/
 			}).on({
 				'change:mode': function changeMode() {
 					_this.tabs[_this.mode].active = true;

@@ -1,5 +1,5 @@
 import MK from 'matreshka';
-import Tabs from './tabs';
+import Tabs from './tabs/tabs';
 import CodeMirror from 'codemirror';
 import $ from 'balajs';
 import 'matreshka-router';
@@ -85,7 +85,11 @@ module.exports = new class App extends MK.Object {
 							editor.setValue(JSON.stringify(value, null, '\t'));
 						}
 					}
-				}/* ,
+				},
+				'*@modify': evt => {
+					console.log(evt, 'modufyyeye');
+				}
+				/* ,
 
 				'codemirror:errorvalidate': editor => {
 					console.log('errora', editor);
