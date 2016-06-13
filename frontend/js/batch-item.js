@@ -8,7 +8,7 @@ export default class BatchItem extends MK.Object {
 
 			this
 				.bindNode({
-					deleteButton: '<span class="delete-editor"></span>',
+					deleteButton: '<span class="delete-editor" title="Delete"></span>',
 					value: this.editor.display.wrapper
 				})
 				.appendNode('deleteButton', ':sandbox .CodeMirror');

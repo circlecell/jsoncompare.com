@@ -13200,7 +13200,7 @@ var app =
 					_this2.editor = new CodeMirror(_this2.sandbox);
 	
 					_this2.bindNode({
-						deleteButton: '<span class="delete-editor"></span>',
+						deleteButton: '<span class="delete-editor" title="Delete"></span>',
 						value: _this2.editor.display.wrapper
 					}).appendNode('deleteButton', ':sandbox .CodeMirror');
 				});
@@ -21683,7 +21683,12 @@ var app =
 		if (value && !initialized) {
 			var wrapper = editor.display.wrapper,
 			    validateButton = assign(wrapper.appendChild($.one('<div>')), {
-				className: 'lint-button'
+				className: 'lint-button',
+				title: 'Validate'
+			}),
+			    clearButton = assign(wrapper.appendChild($.one('<div>')), {
+				className: 'clear-button',
+				title: 'Clear'
 			}),
 			    notifierBlock = wrapper.appendChild(assign($.one('<div>'), {
 				className: 'lint-notifier'
@@ -21704,7 +21709,7 @@ var app =
 							case 0:
 								editorValue = editor.getValue();
 	
-								if (!isUri(value.trim())) {
+								if (!isUri(editorValue.trim())) {
 									_context.next = 10;
 									break;
 								}
@@ -21744,6 +21749,10 @@ var app =
 					}
 				}, _callee, undefined);
 			})));
+	
+			clearButton.addEventListener('click', function () {
+				editor.setValue('');
+			});
 	
 			editor._jsonlint = true;
 		} else if (!value && !initialized) {

@@ -11,7 +11,12 @@ CodeMirror.defineOption('jsonlint', false, (editor, value) => {
 	if (value && !initialized) {
 		const wrapper = editor.display.wrapper,
 			validateButton = assign(wrapper.appendChild($.one('<div>')), {
-				className: 'lint-button'
+				className: 'lint-button',
+				title: 'Validate'
+			}),
+			clearButton = assign(wrapper.appendChild($.one('<div>')), {
+				className: 'clear-button',
+				title: 'Clear'
 			}),
 			notifierBlock = wrapper.appendChild(assign($.one('<div>'), {
 				className: 'lint-notifier',
@@ -27,7 +32,7 @@ CodeMirror.defineOption('jsonlint', false, (editor, value) => {
 		validateButton.addEventListener('click', async () => {
 			const editorValue = editor.getValue();
 
-			if (isUri(value.trim())) {
+			if (isUri(editorValue.trim())) {
 				const resp = await (
 					await fetch('/proxy', {
 						method: 'post',
@@ -46,6 +51,10 @@ CodeMirror.defineOption('jsonlint', false, (editor, value) => {
 			} else {
 				editor.validate();
 			}
+		});
+
+		clearButton.addEventListener('click', () => {
+			editor.setValue('');
 		});
 
 		editor._jsonlint = true;
