@@ -134,8 +134,10 @@ var app =
 					return evt.preventDefault();
 				},
 				'click::(.save)': _this.save,
-				'change:id': function changeId() {
-					if (_this.id) {
+				'change:id': function changeId(_ref) {
+					var fromSave = _ref.fromSave;
+	
+					if (_this.id && !fromSave) {
 						_this.restore(_this.id);
 					}
 				},
@@ -190,41 +192,21 @@ var app =
 		_createClass(App, [{
 			key: 'toJSONString',
 			value: function toJSONString() {
-				var tabs = this.tabs;
-				var encode = function encode(str) {
-					// fix for linter
-					var result = str ? encodeURIComponent(str) : '';
-					return result;
-				};
-	
-				return JSON.stringify({
-					simple: encode(tabs.simple.value),
-					batch: tabs.batch.items.map(function (item) {
-						return encode(item.value);
-					}),
-					diff: {
-						left: encode(tabs.diff.leftValue),
-						right: encode(tabs.diff.rightValue)
-					}
+				var data = {};
+				this.tabs.each(function (tab, name) {
+					data[name] = tab.toJSON();
 				});
+	
+				return JSON.stringify(data);
 			}
 		}, {
 			key: 'fromJSONString',
-			value: function fromJSONString(jsonData) {
-				var tabs = this.tabs;
-				var decode = function decode(str) {
-					return decodeURIComponent(str);
-				};
-				var data = JSON.parse(jsonData);
+			value: function fromJSONString(str) {
+				var data = JSON.parse(str);
 	
-				tabs.simple.value = decode(data.simple);
-				tabs.batch.items.recreate(data.batch ? data.batch.map(function (item) {
-					return {
-						value: decode(item)
-					};
-				}) : []);
-				tabs.diff.leftValue = decode(data.diff.left);
-				tabs.diff.rightValue = decode(data.diff.right);
+				this.tabs.each(function (tab, name) {
+					tab.fromJSON(data[name] || null);
+				});
 	
 				return this;
 			}
@@ -253,7 +235,9 @@ var app =
 	
 	
 									if (!resp.error) {
-										this.id = resp.key;
+										this.set('id', resp.key, {
+											fromSave: true
+										});
 										this.memo[resp.key] = body;
 									}
 	
@@ -4062,9 +4046,18 @@ var app =
 		_inherits(SimpleTab, _Tab);
 	
 		function SimpleTab() {
+			var _Object$getPrototypeO;
+	
+			var _this;
+	
 			_classCallCheck(this, SimpleTab);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(SimpleTab).apply(this, arguments));
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+	
+			(_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(SimpleTab)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this).jset({ value: '' });
+			return _this;
 		}
 	
 		_createClass(SimpleTab, [{
@@ -4080,14 +4073,18 @@ var app =
 					}
 				});
 			}
-	
-			/*toJSON() {
-	  	return encodeURIComponent(this.value);
-	  }
-	  	fromJSON() {
-	  	return decodeURIComponent(value)
-	  }*/
-	
+		}, {
+			key: 'toJSON',
+			// 'change:value': () => this.trigger('modify')
+			value: function toJSON() {
+				return encodeURIComponent(this.value);
+			}
+		}, {
+			key: 'fromJSON',
+			value: function fromJSON(value) {
+				this.value = decodeURIComponent(value);
+				return this;
+			}
 		}]);
 	
 		return SimpleTab;
@@ -7088,10 +7085,23 @@ var app =
 	    for (;;) {
 	      if (bidi ? to == from || to == moveVisually(lineObj, from, 1) : to - from <= 1) {
 	        var ch = x < fromX || x - fromX <= toX - x ? from : to;
+	        var outside = ch == from ? fromOutside : toOutside
 	        var xDiff = x - (ch == from ? fromX : toX);
+	        // This is a kludge to handle the case where the coordinates
+	        // are after a line-wrapped line. We should replace it with a
+	        // more general handling of cursor positions around line
+	        // breaks. (Issue #4078)
+	        if (toOutside && !bidi && !/\s/.test(lineObj.text.charAt(ch)) && xDiff > 0 &&
+	            ch < lineObj.text.length && preparedMeasure.view.measure.heights.length > 1) {
+	          var charSize = measureCharPrepared(cm, preparedMeasure, ch, "right");
+	          if (innerOff <= charSize.bottom && innerOff >= charSize.top && Math.abs(x - charSize.right) < xDiff) {
+	            outside = false
+	            ch++
+	            xDiff = x - charSize.right
+	          }
+	        }
 	        while (isExtendingChar(lineObj.text.charAt(ch))) ++ch;
-	        var pos = PosWithInfo(lineNo, ch, ch == from ? fromOutside : toOutside,
-	                              xDiff < -1 ? -1 : xDiff > 1 ? 1 : 0);
+	        var pos = PosWithInfo(lineNo, ch, outside, xDiff < -1 ? -1 : xDiff > 1 ? 1 : 0);
 	        return pos;
 	      }
 	      var step = Math.ceil(dist / 2), middle = from + step;
@@ -7815,6 +7825,7 @@ var app =
 	    // Let the drag handler handle this.
 	    if (webkit) display.scroller.draggable = true;
 	    cm.state.draggingText = dragEnd;
+	    dragEnd.copy = mac ? e.altKey : e.ctrlKey
 	    // IE's approach to draggable
 	    if (display.scroller.dragDrop) display.scroller.dragDrop();
 	    on(document, "mouseup", dragEnd);
@@ -8045,7 +8056,7 @@ var app =
 	      try {
 	        var text = e.dataTransfer.getData("Text");
 	        if (text) {
-	          if (cm.state.draggingText && !(mac ? e.altKey : e.ctrlKey))
+	          if (cm.state.draggingText && !cm.state.draggingText.copy)
 	            var selected = cm.listSelections();
 	          setSelectionNoUndo(cm.doc, simpleSelection(pos, pos));
 	          if (selected) for (var i = 0; i < selected.length; ++i)
@@ -13057,7 +13068,7 @@ var app =
 	
 	  // THE END
 	
-	  CodeMirror.version = "5.15.2";
+	  CodeMirror.version = "5.16.0";
 	
 	  return CodeMirror;
 	});
@@ -13119,6 +13130,24 @@ var app =
 						}));
 					}
 				});
+			}
+		}, {
+			key: 'toJSON',
+			value: function toJSON() {
+				return this.items.map(function (item) {
+					return encodeURIComponent(item.value);
+				});
+			}
+		}, {
+			key: 'fromJSON',
+			value: function fromJSON(value) {
+				this.items.recreate(value.map(function (item) {
+					return {
+						value: decodeURIComponent(item)
+					};
+				}));
+	
+				return this;
 			}
 		}]);
 	
@@ -13198,9 +13227,20 @@ var app =
 		_inherits(BatchItem, _MK$Object);
 	
 		function BatchItem() {
+			var _Object$getPrototypeO;
+	
 			_classCallCheck(this, BatchItem);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(BatchItem).apply(this, arguments));
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+	
+			var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(BatchItem)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+	
+			_this.jset({
+				value: _this.value || ''
+			});
+			return _this;
 		}
 	
 		_createClass(BatchItem, [{
@@ -13246,9 +13286,21 @@ var app =
 		_inherits(DiffTab, _Tab);
 	
 		function DiffTab() {
+			var _Object$getPrototypeO;
+	
+			var _this;
+	
 			_classCallCheck(this, DiffTab);
 	
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(DiffTab).apply(this, arguments));
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+	
+			(_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(DiffTab)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this).jset({
+				leftValue: '',
+				rightValue: ''
+			});
+			return _this;
 		}
 	
 		_createClass(DiffTab, [{
@@ -13272,7 +13324,17 @@ var app =
 		}, {
 			key: 'toJSON',
 			value: function toJSON() {
-				return this.value;
+				return {
+					left: encodeURIComponent(this.leftValue),
+					right: encodeURIComponent(this.rightValue)
+				};
+			}
+		}, {
+			key: 'fromJSON',
+			value: function fromJSON(value) {
+				this.leftValue = decodeURIComponent(value.left);
+				this.rightValue = decodeURIComponent(value.right);
+				return this;
 			}
 		}]);
 	
@@ -21793,13 +21855,15 @@ var app =
 	var getPolyfill = __webpack_require__(324);
 	var shim = __webpack_require__(325);
 	
-	defineProperties(implementation, {
+	var polyfill = getPolyfill();
+	
+	defineProperties(polyfill, {
 		implementation: implementation,
 		getPolyfill: getPolyfill,
 		shim: shim
 	});
 	
-	module.exports = implementation;
+	module.exports = polyfill;
 
 
 /***/ },
@@ -21875,8 +21939,9 @@ var app =
 	var toStr = Object.prototype.toString;
 	var slice = Array.prototype.slice;
 	var isArgs = __webpack_require__(318);
-	var hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString');
-	var hasProtoEnumBug = function () {}.propertyIsEnumerable('prototype');
+	var isEnumerable = Object.prototype.propertyIsEnumerable;
+	var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
+	var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
 	var dontEnums = [
 		'toString',
 		'toLocaleString',
@@ -21890,12 +21955,23 @@ var app =
 		var ctor = o.constructor;
 		return ctor && ctor.prototype === o;
 	};
-	var blacklistedKeys = {
+	var excludedKeys = {
 		$console: true,
+		$external: true,
 		$frame: true,
 		$frameElement: true,
 		$frames: true,
+		$innerHeight: true,
+		$innerWidth: true,
+		$outerHeight: true,
+		$outerWidth: true,
+		$pageXOffset: true,
+		$pageYOffset: true,
 		$parent: true,
+		$scrollLeft: true,
+		$scrollTop: true,
+		$scrollX: true,
+		$scrollY: true,
 		$self: true,
 		$webkitIndexedDB: true,
 		$webkitStorageInfo: true,
@@ -21906,7 +21982,7 @@ var app =
 		if (typeof window === 'undefined') { return false; }
 		for (var k in window) {
 			try {
-				if (!blacklistedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
+				if (!excludedKeys['$' + k] && has.call(window, k) && window[k] !== null && typeof window[k] === 'object') {
 					try {
 						equalsConstructorPrototype(window[k]);
 					} catch (e) {
@@ -22065,6 +22141,7 @@ var app =
 	var toObject = Object;
 	var push = bind.call(Function.call, Array.prototype.push);
 	var propIsEnumerable = bind.call(Function.call, Object.prototype.propertyIsEnumerable);
+	var originalGetSymbols = hasSymbols ? Object.getOwnPropertySymbols : null;
 	
 	module.exports = function assign(target, source1) {
 		if (!canBeObject(target)) { throw new TypeError('target must be an object'); }
@@ -22073,8 +22150,9 @@ var app =
 		for (s = 1; s < arguments.length; ++s) {
 			source = toObject(arguments[s]);
 			props = keys(source);
-			if (hasSymbols && Object.getOwnPropertySymbols) {
-				syms = Object.getOwnPropertySymbols(source);
+			var getSymbols = hasSymbols && (Object.getOwnPropertySymbols || originalGetSymbols);
+			if (getSymbols) {
+				syms = getSymbols(source);
 				for (i = 0; i < syms.length; ++i) {
 					key = syms[i];
 					if (propIsEnumerable(source, key)) {
@@ -22171,12 +22249,16 @@ var app =
 	
 		var obj = {};
 		var sym = Symbol('test');
+		var symObj = Object(sym);
 		if (typeof sym === 'string') { return false; }
+	
+		if (Object.prototype.toString.call(sym) !== '[object Symbol]') { return false; }
+		if (Object.prototype.toString.call(symObj) !== '[object Symbol]') { return false; }
 	
 		// temp disabled per https://github.com/ljharb/object.assign/issues/17
 		// if (sym instanceof Symbol) { return false; }
 		// temp disabled per https://github.com/WebReflection/get-own-property-symbols/issues/4
-		// if (!(Object(sym) instanceof Symbol)) { return false; }
+		// if (!(symObj instanceof Symbol)) { return false; }
 	
 		var symVal = 42;
 		obj[sym] = symVal;
@@ -22240,6 +22322,7 @@ var app =
 		} catch (e) {
 			return thrower[1] === 'y';
 		}
+		return false;
 	};
 	
 	module.exports = function getPolyfill() {

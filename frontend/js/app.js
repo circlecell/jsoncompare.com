@@ -65,8 +65,8 @@ module.exports = new class App extends MK.Object {
 				},
 				'dragover::sandbox drop::sandbox': evt => evt.preventDefault(),
 				'click::(.save)': this.save,
-				'change:id': () => {
-					if (this.id) {
+				'change:id': ({ fromSave }) => {
+					if (this.id && !fromSave) {
 						this.restore(this.id);
 					}
 				},
@@ -123,41 +123,27 @@ module.exports = new class App extends MK.Object {
 	}
 
 	toJSONString() {
-		const { tabs } = this,
-			encode = str => {
-				// fix for linter
-				const result = str ? encodeURIComponent(str) : '';
-				return result;
-			};
-
-		return JSON.stringify({
-			simple: encode(tabs.simple.value),
-			batch: tabs.batch.items.map(item => encode(item.value)),
-			diff: {
-				left: encode(tabs.diff.leftValue),
-				right: encode(tabs.diff.rightValue)
-			}
+		const data = {};
+		this.tabs.each((tab, name) => {
+			data[name] = tab.toJSON();
 		});
+
+		return JSON.stringify(data);
 	}
 
-	fromJSONString(jsonData) {
-		const { tabs } = this,
-			decode = str => decodeURIComponent(str),
-			data = JSON.parse(jsonData);
+	fromJSONString(str) {
+		const data = JSON.parse(str);
 
-		tabs.simple.value = decode(data.simple);
-		tabs.batch.items.recreate(data.batch ? data.batch.map(item => ({
-			value: decode(item)
-		})) : []);
-		tabs.diff.leftValue = decode(data.diff.left);
-		tabs.diff.rightValue = decode(data.diff.right);
+		this.tabs.each((tab, name) => {
+			tab.fromJSON(data[name] || null);
+		});
 
 		return this;
 	}
 
 	async save() {
 		const body = this.toJSONString();
-		const resp = await(
+		const resp = await (
 			await fetch('/save', {
 				method: 'post',
 				body
@@ -165,7 +151,9 @@ module.exports = new class App extends MK.Object {
 		).json();
 
 		if (!resp.error) {
-			this.id = resp.key;
+			this.set('id', resp.key, {
+				fromSave: true
+			});
 			this.memo[resp.key] = body;
 		}
 	}

@@ -40,7 +40,7 @@ module.exports = [{
 		}]
 	},
 	postcss: postcssPlugins,
-	devtool: 'source-map',
+	devtool: 'module-source-map',
     plugins: [
 	   new ExtractTextPlugin("style.css", {
 		   allChunks: true

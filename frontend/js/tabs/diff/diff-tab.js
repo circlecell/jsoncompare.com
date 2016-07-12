@@ -2,6 +2,13 @@ import Tab from '../tab';
 import CodeMirror from 'codemirror';
 
 export default class DiffTab extends Tab {
+	constructor(...args) {
+		super(...args).jset({
+			leftValue: '',
+			rightValue: ''
+		});
+	}
+
 	initialize() {
 		this.editor = new CodeMirror.MergeView(this.nodes.content, {
 			dragDrop: true,
@@ -21,6 +28,15 @@ export default class DiffTab extends Tab {
 	}
 
 	toJSON() {
-		return this.value;
+		return {
+			left: encodeURIComponent(this.leftValue),
+			right: encodeURIComponent(this.rightValue)
+		};
+	}
+
+	fromJSON(value) {
+		this.leftValue = decodeURIComponent(value.left);
+		this.rightValue = decodeURIComponent(value.right);
+		return this;
 	}
 }

@@ -24,4 +24,16 @@ export default class BatchTab extends Tab {
 				}
 			});
 	}
+
+	toJSON() {
+		return this.items.map(item => encodeURIComponent(item.value));
+	}
+
+	fromJSON(value) {
+		this.items.recreate(value.map(item => ({
+			value: decodeURIComponent(item)
+		})));
+
+		return this;
+	}
 }

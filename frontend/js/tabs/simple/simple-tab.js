@@ -3,6 +3,10 @@ import CodeMirror from 'codemirror';
 import MK from 'matreshka';
 
 export default class SimpleTab extends Tab {
+	constructor(...args) {
+		super(...args).jset({ value: '' });
+	}
+
 	initialize() {
 		this.editor = new CodeMirror(this.nodes.content);
 
@@ -17,11 +21,12 @@ export default class SimpleTab extends Tab {
 			});
 	}
 
-	/*toJSON() {
+	toJSON() {
 		return encodeURIComponent(this.value);
 	}
 
-	fromJSON() {
-		return decodeURIComponent(value)
-	}*/
+	fromJSON(value) {
+		this.value = decodeURIComponent(value);
+		return this;
+	}
 }

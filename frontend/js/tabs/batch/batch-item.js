@@ -2,6 +2,13 @@ import MK from 'matreshka';
 import CodeMirror from 'codemirror';
 
 export default class BatchItem extends MK.Object {
+	constructor(...args) {
+		super(...args);
+		this.jset({
+			value: this.value || ''
+		});
+	}
+
 	onRender() {
 		setTimeout(() => {
 			this.editor = new CodeMirror(this.sandbox);
