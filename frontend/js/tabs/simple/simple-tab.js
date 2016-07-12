@@ -4,13 +4,19 @@ import MK from 'matreshka';
 
 export default class SimpleTab extends Tab {
 	constructor(...args) {
-		super(...args).jset({ value: '' });
+		super(...args)
+			.jset({ value: '' })
+			.on({
+				tabfocus: () => {
+					this.editor.focus();
+				}
+			});
 	}
 
 	initialize() {
 		this.editor = new CodeMirror(this.nodes.content);
 
-		return this
+		this
 			.bindNode('value', this.editor.display.wrapper)
 			.bindNode('files', ':sandbox', MK.binders.dropFiles('text'))
 			.on({

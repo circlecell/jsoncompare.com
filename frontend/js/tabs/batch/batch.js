@@ -16,6 +16,7 @@ export default class BatchTab extends MK.Array {
 			.on({
 				'click::(.add)': () => {
 					this.push({});
+					this[this.length - 1].once('initialize', item => item.editor.focus());
 				},
 				'*@click::deleteButton': evt => {
 					this.pull(evt.self);

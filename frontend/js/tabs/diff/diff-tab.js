@@ -3,10 +3,16 @@ import CodeMirror from 'codemirror';
 
 export default class DiffTab extends Tab {
 	constructor(...args) {
-		super(...args).jset({
-			leftValue: '',
-			rightValue: ''
-		});
+		super(...args)
+			.jset({
+				leftValue: '',
+				rightValue: ''
+			})
+			.on({
+				tabfocus: () => {
+					this.editor.edit.focus();
+				}
+			});
 	}
 
 	initialize() {
@@ -20,7 +26,7 @@ export default class DiffTab extends Tab {
 			allowEditingOriginals: true
 		});
 
-		return this
+		this
 			.bindNode({
 				leftValue: this.editor.edit.display.wrapper,
 				rightValue: this.editor.right.orig.display.wrapper

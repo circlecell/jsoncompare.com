@@ -17,13 +17,18 @@ export default class Tab extends MK.Object {
 			})
 			.on({
 				'change:active': () => {
-					if (!this.initialized) {
-						setTimeout(() => {
-							// need little timeout
-							this.initialize();
-						}, 300);
+					if (this.active) {
+						if (!this.initialized) {
+							setTimeout(() => {
+								// need little timeout
+								this.initialize();
+								this.trigger('tabfocus', this);
+							}, 200);
 
-						this.initialized = true;
+							this.initialized = true;
+						} else {
+							this.trigger('tabfocus', this);
+						}
 					}
 				}
 			})

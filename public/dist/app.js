@@ -82,6 +82,8 @@ var app =
 		for (var i = 0; i < nodes.length; i++) {
 			container.appendChild(nodes[i]);
 		}
+	
+		return this;
 	};
 	
 	MK.binders.codeMirror = function () {
@@ -4056,7 +4058,11 @@ var app =
 				args[_key] = arguments[_key];
 			}
 	
-			(_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(SimpleTab)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this).jset({ value: '' });
+			(_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(SimpleTab)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this).jset({ value: '' }).on({
+				tabfocus: function tabfocus() {
+					_this.editor.focus();
+				}
+			});
 			return _this;
 		}
 	
@@ -4067,7 +4073,7 @@ var app =
 	
 				this.editor = new CodeMirror(this.nodes.content);
 	
-				return this.bindNode('value', this.editor.display.wrapper).bindNode('files', ':sandbox', MK.binders.dropFiles('text')).on({
+				this.bindNode('value', this.editor.display.wrapper).bindNode('files', ':sandbox', MK.binders.dropFiles('text')).on({
 					'change:files': function changeFiles() {
 						_this2.value = _this2.files[0].readerResult;
 					}
@@ -4126,13 +4132,18 @@ var app =
 				content: ':sandbox .content'
 			}).on({
 				'change:active': function changeActive() {
-					if (!_this.initialized) {
-						setTimeout(function () {
-							// need little timeout
-							_this.initialize();
-						}, 300);
+					if (_this.active) {
+						if (!_this.initialized) {
+							setTimeout(function () {
+								// need little timeout
+								_this.initialize();
+								_this.trigger('tabfocus', _this);
+							}, 200);
 	
-						_this.initialized = true;
+							_this.initialized = true;
+						} else {
+							_this.trigger('tabfocus', _this);
+						}
 					}
 				}
 			}).bindNode('active', ':bound(tabHeader), :sandbox', className('active'), {
@@ -13110,6 +13121,14 @@ var app =
 	
 			(_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(BatchTab)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this).set('items', []).setClassFor({
 				items: Batch
+			}).on({
+				'change:files': function changeFiles() {
+					_this.items.recreate(_this.files.map(function (file) {
+						return {
+							value: file.readerResult
+						};
+					}));
+				}
 			});
 			return _this;
 		}
@@ -13117,19 +13136,9 @@ var app =
 		_createClass(BatchTab, [{
 			key: 'initialize',
 			value: function initialize() {
-				var _this2 = this;
-	
 				this.items.rerender();
 	
-				return this.bindNode('files', ':sandbox', MK.binders.dropFiles('text')).on({
-					'change:files': function changeFiles() {
-						_this2.items.recreate(_this2.files.map(function (file) {
-							return {
-								value: file.readerResult
-							};
-						}));
-					}
-				});
+				return this.bindNode('files', ':sandbox', MK.binders.dropFiles('text'));
 			}
 		}, {
 			key: 'toJSON',
@@ -13192,6 +13201,9 @@ var app =
 			}).on({
 				'click::(.add)': function clickAdd() {
 					_this.push({});
+					_this[_this.length - 1].once('initialize', function (item) {
+						return item.editor.focus();
+					});
 				},
 				'*@click::deleteButton': function clickDeleteButton(evt) {
 					_this.pull(evt.self);
@@ -13254,7 +13266,7 @@ var app =
 					_this2.bindNode({
 						deleteButton: '<span class="delete-editor" title="Delete"></span>',
 						value: _this2.editor.display.wrapper
-					}).appendNode('deleteButton', ':sandbox .CodeMirror');
+					}).appendNode('deleteButton', ':sandbox .CodeMirror').trigger('initialize', _this2);
 				});
 			}
 		}]);
@@ -13299,6 +13311,10 @@ var app =
 			(_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(DiffTab)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this).jset({
 				leftValue: '',
 				rightValue: ''
+			}).on({
+				tabfocus: function tabfocus() {
+					_this.editor.edit.focus();
+				}
 			});
 			return _this;
 		}
@@ -13316,7 +13332,7 @@ var app =
 					allowEditingOriginals: true
 				});
 	
-				return this.bindNode({
+				this.bindNode({
 					leftValue: this.editor.edit.display.wrapper,
 					rightValue: this.editor.right.orig.display.wrapper
 				});

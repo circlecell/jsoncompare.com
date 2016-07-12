@@ -8,14 +8,7 @@ export default class BatchTab extends Tab {
 			.set('items', [])
 			.setClassFor({
 				items: Batch
-			});
-	}
-
-	initialize() {
-		this.items.rerender();
-
-		return this
-			.bindNode('files', ':sandbox', MK.binders.dropFiles('text'))
+			})
 			.on({
 				'change:files': () => {
 					this.items.recreate(this.files.map(file => ({
@@ -23,6 +16,13 @@ export default class BatchTab extends Tab {
 					})));
 				}
 			});
+	}
+
+	initialize() {
+		this.items.rerender();
+
+		return this
+			.bindNode('files', ':sandbox', MK.binders.dropFiles('text'));
 	}
 
 	toJSON() {

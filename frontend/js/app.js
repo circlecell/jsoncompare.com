@@ -15,6 +15,8 @@ MK.prototype.appendNode = function (key, selector) {
 	for (let i = 0; i < nodes.length; i++) {
 		container.appendChild(nodes[i]);
 	}
+
+	return this;
 };
 
 MK.binders.codeMirror = function () {
