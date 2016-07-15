@@ -47,6 +47,8 @@ var app =
 
 	'use strict';
 	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var MK = __webpack_require__(1);
@@ -101,7 +103,7 @@ var app =
 	};
 	
 	MK.defaultBinders.unshift(function () {
-		if (this.classList.contains('CodeMirror')) {
+		if (this.classList && this.classList.contains('CodeMirror')) {
 			return MK.binders.codeMirror();
 		}
 	
@@ -124,18 +126,22 @@ var app =
 				tabs: Tabs
 			}).initRouter('mode/id').set({
 				memo: {},
-				mode: _this.mode || 'simple'
+				mode: _this.mode || 'simple',
+				defaultView: _this.toJSONString(),
+				saved: true
 			}).bindNode({
 				sandbox: 'body',
-				reformat: ':sandbox .reformat'
-			}).on({
+				reformat: ':sandbox .reformat',
+				saveButton: ':sandbox .save',
+				win: window
+			}).bindNode('saved', ':bound(saveButton)', MK.binders.className('disabled')).on({
 				'tabs@change:activeTab': function tabsChangeActiveTab(evt) {
 					_this.mode = evt.value.name;
 				},
 				'dragover::sandbox drop::sandbox': function dragoverSandboxDropSandbox(evt) {
 					return evt.preventDefault();
 				},
-				'click::(.save)': _this.save,
+				'click::saveButton': _this.save,
 				'change:id': function changeId(_ref) {
 					var fromSave = _ref.fromSave;
 	
@@ -159,8 +165,18 @@ var app =
 						}
 					}
 				},
-				'*@modify': function modify(evt) {
-					console.log(evt, 'modufyyeye');
+				'keydown::win': function keydownWin(evt) {
+					var S_KEY_CODE = 83;
+					var _evt$domEvent = evt.domEvent;
+					var ctrlKey = _evt$domEvent.ctrlKey;
+					var keyCode = _evt$domEvent.keyCode;
+	
+					if (keyCode === S_KEY_CODE && ctrlKey) {
+						evt.preventDefault();
+						if (!_this.saved) {
+							_this.save();
+						}
+					}
 				}
 				/* ,
 	   	'codemirror:errorvalidate': editor => {
@@ -171,7 +187,8 @@ var app =
 					_this.tabs[_this.mode].active = true;
 				}
 			}, true)
-			// REFACTOR THIS SHIT
+	
+			// TODO REFACTOR THIS
 			.onDebounce((_setClassFor$initRout = {}, _defineProperty(_setClassFor$initRout, 'dragover::(' + dndPlaceholderAreas + ')', function undefined(evt) {
 				if (!$.one('.dnd-area', evt.target.closest(dndPlaceholderAreas))) {
 					evt.target.closest(dndPlaceholderAreas).appendChild($.create('div', {
@@ -183,7 +200,12 @@ var app =
 				if (area) {
 					area.parentNode.removeChild(area);
 				}
-			}), _setClassFor$initRout));
+			}), _setClassFor$initRout)).onDebounce({
+				'tabs.*@modify': function tabsModify(evt) {
+					var currentView = _this.toJSONString();
+					_this.saved = _this.defaultView === currentView || _this.memo[_this.id] === currentView;
+				}
+			}, 300);
 	
 			if (_this.id) {
 				_this.restore(_this.id);
@@ -207,7 +229,7 @@ var app =
 				var data = JSON.parse(str);
 	
 				this.tabs.each(function (tab, name) {
-					tab.fromJSON(data[name] || null);
+					tab.fromJSON(typeof data[name] === 'undefined' ? null : data[name]);
 				});
 	
 				return this;
@@ -216,23 +238,89 @@ var app =
 			key: 'save',
 			value: function () {
 				var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-					var body, resp;
+					var body, foundId, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, _step$value, memoId, memoBody, resp;
+	
 					return regeneratorRuntime.wrap(function _callee$(_context) {
 						while (1) {
 							switch (_context.prev = _context.next) {
 								case 0:
 									body = this.toJSONString();
-									_context.next = 3;
+									foundId = void 0;
+									_iteratorNormalCompletion = true;
+									_didIteratorError = false;
+									_iteratorError = undefined;
+									_context.prev = 5;
+	
+	
+									for (_iterator = Object.entries(this.memo)[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+										_step$value = _slicedToArray(_step.value, 2);
+										memoId = _step$value[0];
+										memoBody = _step$value[1];
+	
+										if (memoBody === body) {
+											foundId = memoId;
+										}
+									}
+	
+									_context.next = 13;
+									break;
+	
+								case 9:
+									_context.prev = 9;
+									_context.t0 = _context['catch'](5);
+									_didIteratorError = true;
+									_iteratorError = _context.t0;
+	
+								case 13:
+									_context.prev = 13;
+									_context.prev = 14;
+	
+									if (!_iteratorNormalCompletion && _iterator.return) {
+										_iterator.return();
+									}
+	
+								case 16:
+									_context.prev = 16;
+	
+									if (!_didIteratorError) {
+										_context.next = 19;
+										break;
+									}
+	
+									throw _iteratorError;
+	
+								case 19:
+									return _context.finish(16);
+	
+								case 20:
+									return _context.finish(13);
+	
+								case 21:
+									if (!foundId) {
+										_context.next = 26;
+										break;
+									}
+	
+									this.set('id', foundId, {
+										fromSave: true
+									});
+	
+									this.saved = true;
+									_context.next = 32;
+									break;
+	
+								case 26:
+									_context.next = 28;
 									return fetch('/save', {
 										method: 'post',
 										body: body
 									});
 	
-								case 3:
-									_context.next = 5;
+								case 28:
+									_context.next = 30;
 									return _context.sent.json();
 	
-								case 5:
+								case 30:
 									resp = _context.sent;
 	
 	
@@ -241,14 +329,15 @@ var app =
 											fromSave: true
 										});
 										this.memo[resp.key] = body;
+										this.saved = true;
 									}
 	
-								case 7:
+								case 32:
 								case 'end':
 									return _context.stop();
 							}
 						}
-					}, _callee, this);
+					}, _callee, this, [[5, 9, 13, 21], [14,, 16, 20]]);
 				}));
 	
 				function save() {
@@ -13128,6 +13217,9 @@ var app =
 							value: file.readerResult
 						};
 					}));
+				},
+				'items@modify': function itemsModify() {
+					return _this.trigger('modify');
 				}
 			});
 			return _this;

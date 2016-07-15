@@ -14,7 +14,8 @@ export default class BatchTab extends Tab {
 					this.items.recreate(this.files.map(file => ({
 						value: file.readerResult
 					})));
-				}
+				},
+				'items@modify': () => this.trigger('modify')
 			});
 	}
 
