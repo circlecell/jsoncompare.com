@@ -1,4 +1,5 @@
-import './option';
+import './jsonlint-option';
+import './showsize-option';
 import './notify';
 import './validate';
 import './highlight-line';

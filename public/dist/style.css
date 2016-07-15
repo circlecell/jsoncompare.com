@@ -571,7 +571,14 @@ span.CodeMirror-selectedtext { background: none; }
 }
 
 .CodeMirror .lint-line-error {
-    background-color: #FBE3E4;
+	background-color: #FBE3E4;
+}
+
+.CodeMirror .size-block {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	color: #999;
 }
 * {
 	margin: 0;
@@ -795,7 +802,7 @@ ul.tab-nav li.tab-nav-item.active {
 
 .CodeMirror .delete-editor {
 	position: absolute;
-	bottom: 70px;
+	bottom: 90px;
 	z-index: 3;
 }
 
@@ -805,7 +812,7 @@ ul.tab-nav li.tab-nav-item.active {
 
 .CodeMirror .clear-button {
 	position: absolute;
-	bottom: 20px;
+	bottom: 40px;
 	z-index: 3;
 }
 

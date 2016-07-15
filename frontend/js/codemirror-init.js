@@ -11,6 +11,7 @@ Object.assign(CodeMirror.defaults, {
 	lineNumbers: true,
 	mode: 'text/html',
 	jsonlint: true,
+	showSize: true,
 	viewportMargin: Infinity
 });
 
