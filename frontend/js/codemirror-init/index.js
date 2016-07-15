@@ -1,6 +1,6 @@
 import 'codemirror/addon/merge/merge.css';
 import 'codemirror/lib/codemirror.css';
-import './codemirror-jsonlint-addon';
+import './codemirror-addons';
 import CodeMirror from 'codemirror';
 
 Object.assign(window, require('diff-match-patch'));
