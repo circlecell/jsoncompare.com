@@ -10,8 +10,8 @@
     "open-in-browser": "opn http://localhost:5001",
     "watch": "webpack --watch --progress",
     "bundle": "NODE_ENV=production webpack --config ./tools/webpack.config.babel.js",
-    "check-updates": "ncu && ncu --packageFile ./frontend/package.json",
-    "upgrade": "ncu --upgradeAll && npm install; ncu --packageFile ./frontend/package.json --upgradeAll && cd ./frontend && npm install",
+    "check-updates": "ncu; ncu --packageFile ./frontend/package.json",
+    "upgrade": "ncu -a; npm install; ncu --packageFile ./frontend/package.json -a; cd ./frontend; npm install",
     "npm-frontend": "cd frontend; npm",
     "lint": "eslint . --ext .js --cache --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'"
   },
