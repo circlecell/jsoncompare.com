@@ -1,44 +1,44 @@
 .CodeMirror .lint-button {
-	position: absolute;
-	line-height: 1;
-	top: 10px;
-	right: 10px;
-	transition: color .5s ease-out;
-	z-index: 3;
+    position: absolute;
+    line-height: 1;
+    top: 10px;
+    right: 10px;
+    transition: color .5s ease-out;
+    z-index: 3;
 }
 
 .CodeMirror .lint-button::before {
-	content: '\2713';
-	font-size: 36px;
-	cursor: pointer;
+    content: '\2713';
+    font-size: 36px;
+    cursor: pointer;
 }
 
 .CodeMirror .lint-button.success {
-	color: green;
+    color: green;
 }
 
 .CodeMirror .lint-notifier {
-	position: absolute;
-	bottom: 10px;
-	z-index: 3;
-	left: 40px;
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity .5s ease-out;
+    position: absolute;
+    bottom: 10px;
+    z-index: 3;
+    left: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .5s ease-out;
 }
 
 .CodeMirror .lint-notifier.shown {
-	opacity: 1;
-	pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .CodeMirror .lint-line-error {
-	background-color: #FBE3E4;
+    background-color: #FBE3E4;
 }
 
 .CodeMirror .size-block {
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
-	color: #999;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #999;
 }

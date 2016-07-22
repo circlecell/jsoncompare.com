@@ -3,14 +3,17 @@
   "version": "0.0.0",
   "description": "Jsonlint website",
   "main": "app.js",
+  "private": true,
   "scripts": {
     "develop": "npm-run-all --parallel serve watch open-in-browser",
-    "serve": "PORT=5001 nodemon app.js --ignore 'frontend/*' --ignore 'public/*' --ignore 'node_modules/*' --ignore webpack.config.js --ignore package.json",
+    "serve": "PORT=5001 nodemon index.js --ignore 'frontend/*' --ignore 'public/*' --ignore 'node_modules/*' --ignore webpack.config.js --ignore package.json",
     "open-in-browser": "opn http://localhost:5001",
     "watch": "webpack --watch --progress",
-    "bundle": "webpack",
-    "check-updates": "ncu",
-    "upgrade": "ncu --upgradeAll && npm install"
+    "bundle": "NODE_ENV=production webpack --config ./tools/webpack.config.babel.js",
+    "check-updates": "ncu && ncu --packageFile ./frontend/package.json",
+    "upgrade": "ncu --upgradeAll && npm install; ncu --packageFile ./frontend/package.json --upgradeAll && cd ./frontend && npm install",
+    "npm-frontend": "cd frontend; npm",
+    "lint": "eslint . --ext .js --cache --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'"
   },
   "repository": {
     "type": "git",
@@ -26,23 +29,25 @@
   },
   "homepage": "https://github.com/circlecell/jsonlint#readme",
   "devDependencies": {
-    "babel-core": "^6.10.4",
+    "babel-core": "^6.11.4",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-es2015-modules-simple-commonjs": "0.3.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
-    "balajs": "^0.1.9",
+    "babel-register": "^6.9.0",
+    "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
-    "eslint": "^3.0.1",
+    "eslint": "^3.1.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-loader": "^1.4.1",
-    "eslint-plugin-import": "^1.10.2",
+    "eslint-plugin-import": "^1.11.1",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^5.2.2",
     "exports-loader": "^0.6.3",
     "extract-text-webpack-plugin": "^1.0.1",
-    "jsonlint": "^1.6.2",
     "nodemon": "^1.9.2",
-    "npm-check-updates": "^2.7.0",
+    "npm-check-updates": "^2.7.2",
     "npm-run-all": "^2.3.0",
     "object.assign": "^4.0.4",
     "opn-cli": "^3.1.0",
@@ -57,17 +62,10 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "aws-sdk": "^2.4.6",
-    "babel-polyfill": "^6.9.1",
+    "aws-sdk": "^2.4.9",
     "body-parser": "^1.15.2",
-    "codemirror": "^5.16.0",
-    "diff-match-patch": "^1.0.0",
     "express": "^4.14.0",
     "jsonschema": "^1.1.0",
-    "matreshka": "^1.9.1",
-    "matreshka-router": "0.0.5",
-    "md5": "^2.1.0",
-    "request": "^2.73.0",
-    "valid-url": "^1.0.9"
+    "request": "^2.73.0"
   }
 }

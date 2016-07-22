@@ -1,46 +1,44 @@
-"use strict";
-
 const bodyParser = require('body-parser'),
-	http = require('http'),
-	path = require('path'),
-	express = require('express'),
-	app = express();
+    http = require('http'),
+    path = require('path'),
+    express = require('express'),
+    app = express();
 
 app.set('port', process.env.PORT || 5000);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 app.use(bodyParser.urlencoded({
-	extended: true
+    extended: true
 }));
 
 app.use((req, res, next) => {
-	let rawBody = '';
+    let rawBody = '';
 
-	req.on('data', function(chunk) {
-		rawBody += chunk;
-	});
+    req.on('data', function(chunk) {
+        rawBody += chunk;
+    });
 
-	req.on('end', function() {
-		if(rawBody) {
-			req.rawBody = rawBody;
-			req.jsonBody = JSON.parse(rawBody);
-		}
+    req.on('end', function() {
+        if(rawBody) {
+            req.rawBody = rawBody;
+            req.jsonBody = JSON.parse(rawBody);
+        }
 
-		next();
-	});
+        next();
+    });
 });
 
 
 
 
-require('./app/routes.js')(app);
+require('./routes.js')(app);
 
 app.use(function(error, req, res, next) {
-	if (error) {
-		res.json(400, {
-			error: String(error)
-		});
-	}
+    if (error) {
+        res.json(400, {
+            error: String(error)
+        });
+    }
 });
 
 app.listen(app.get('port'));
@@ -94,7 +92,7 @@ app.get('/sign_s3', function(req, res){
 });
 
 app.get('/account', function(req, res){
-	res.send(`<input type="file" id="file_input"/>
+    res.send(`<input type="file" id="file_input"/>
 <p id="status">Please select a file</p>
 <img id="preview" src="/images/default.png" />
 
@@ -108,14 +106,14 @@ app.get('/account', function(req, res){
 <script>
 (function() {
 document.getElementById("file_input").onchange = function(){
-	var files = document.getElementById("file_input").files;
-	var file = files[0];
-	if(file == null){
-		alert("No file selected.");
-	}
-	else{
-		get_signed_request(file);
-	}
+    var files = document.getElementById("file_input").files;
+    var file = files[0];
+    if(file == null){
+        alert("No file selected.");
+    }
+    else{
+        get_signed_request(file);
+    }
 };
 
 function get_signed_request(file){
@@ -125,7 +123,7 @@ function get_signed_request(file){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
                 var response = JSON.parse(xhr.responseText);
-				console.log(file, response.signed_request, response.url)
+                console.log(file, response.signed_request, response.url)
                 upload_file(file, response.signed_request, response.url);
             }
             else{

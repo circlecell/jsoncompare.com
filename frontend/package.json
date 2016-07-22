@@ -1,0 +1,32 @@
+{
+  "name": "jsonlint-pro-frontend",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/circlecell/jsonlint.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/circlecell/jsonlint/issues"
+  },
+  "homepage": "https://github.com/circlecell/jsonlint#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.9.1",
+    "balajs": "^0.1.9",
+    "codemirror": "^5.17.0",
+    "diff-match-patch": "^1.0.0",
+    "jsonlint": "^1.6.2",
+    "matreshka": "^1.9.1",
+    "matreshka-router": "0.0.5",
+    "md5": "^2.1.0",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {}
+}

@@ -1,14 +1,16 @@
 {
-	"parser": "babel-eslint",
-	"extends": "airbnb/base",
-	"rules": {
-		"one-var": 0,
-		"comma-dangle": 0,
-		"import/no-unresolved": 0,
-		"no-underscore-dangle": 0,
-		"indent": ["error", "tab", { "SwitchCase": 1 }]
-	},
-	"env": {
-		"browser": true
-	}
+    "parser": "babel-eslint",
+    "extends": [
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "airbnb"
+    ],
+    "rules": {
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "no-var": "error",
+        "comma-dangle": 0
+    },
+    "env": {
+        "browser": true
+    }
 }

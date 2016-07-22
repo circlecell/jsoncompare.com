@@ -7,12 +7,12 @@ Object.assign(window, require('diff-match-patch'));
 require('codemirror/addon/merge/merge');
 
 Object.assign(CodeMirror.defaults, {
-	dragDrop: false,
-	lineNumbers: true,
-	mode: 'text/html',
-	jsonlint: true,
-	showSize: true,
-	viewportMargin: Infinity
+    dragDrop: false,
+    lineNumbers: true,
+    mode: 'text/html',
+    jsonlint: true,
+    showSize: true,
+    viewportMargin: Infinity
 });
 
 export default CodeMirror;
