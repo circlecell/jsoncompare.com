@@ -1,11 +1,39 @@
+import api from './api';
 const bodyParser = require('body-parser'),
     http = require('http'),
     path = require('path'),
     express = require('express'),
     app = express();
 
-app.set('port', process.env.PORT || 5000);
-app.use(express.static(path.resolve(__dirname, '..', 'public')));
+app.set('port', process.env.PORT);
+
+if(process.env.NODE_ENV === 'development') {
+    var config = require('../tools/webpack.config.babel');
+    var webpackMiddleware = require("webpack-dev-middleware");
+    var webpack = require('webpack');
+    var compiler = webpack(config);
+
+    app.use(webpackMiddleware(compiler, {
+        headers: { "X-Served-By": "Webpack" },
+        hot: true,
+        filename: 'js/app.js',
+        publicPath: '/',
+        stats: {
+          colors: true,
+        },
+        historyApiFallback: true,
+    }));
+
+    app.use(require("webpack-hot-middleware")(compiler, {
+        log: console.log,
+        path: '/__webpack_hmr',
+        heartbeat: 10 * 1000,
+
+      }));
+} else {
+    app.use(express.static(path.resolve(__dirname, '..', 'public')));
+}
+
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -31,7 +59,7 @@ app.use((req, res, next) => {
 
 
 
-require('./routes.js')(app);
+app.use('/api', api);
 
 app.use(function(error, req, res, next) {
     if (error) {

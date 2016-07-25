@@ -5,10 +5,10 @@
   "main": "app.js",
   "private": true,
   "scripts": {
-    "develop": "npm-run-all --parallel serve watch open-in-browser",
-    "serve": "PORT=5001 nodemon index.js --ignore 'frontend/*' --ignore 'public/*' --ignore 'node_modules/*' --ignore webpack.config.js --ignore package.json",
+    "develop": "npm-run-all --parallel serve-dev open-in-browser",
+    "serve-dev": "PORT=5001 NODE_ENV=development nodemon index.js --ignore 'frontend/*' --ignore 'public/*' --ignore 'node_modules/*' --ignore webpack.config.js --ignore package.json",
     "open-in-browser": "opn http://localhost:5001",
-    "watch": "webpack --watch --progress",
+    "TOREMOE_watch": "webpack --watch --progress",
     "bundle": "NODE_ENV=production webpack --config ./tools/webpack.config.babel.js",
     "check-updates": "ncu; ncu --packageFile ./frontend/package.json",
     "upgrade": "ncu -a; npm install; ncu --packageFile ./frontend/package.json -a; cd ./frontend; npm install",
@@ -35,7 +35,7 @@
     "babel-plugin-transform-es2015-modules-simple-commonjs": "0.3.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.9.0",
+    "babel-register": "^6.11.5",
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
     "eslint": "^3.1.1",
@@ -59,13 +59,15 @@
     "postcss-url": "^5.1.2",
     "script-loader": "^0.7.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.1"
+    "webpack": "^1.12.2",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.4.1"
   },
   "dependencies": {
     "aws-sdk": "^2.4.9",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "jsonschema": "^1.1.0",
-    "request": "^2.73.0"
+    "request": "^2.74.0"
   }
 }

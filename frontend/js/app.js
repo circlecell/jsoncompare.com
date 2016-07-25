@@ -102,7 +102,6 @@ module.exports = new class App extends MK.Object {
                             this.save();
                         }
                     }
-
                 }
                 /* ,
 
@@ -181,7 +180,7 @@ module.exports = new class App extends MK.Object {
             this.saved = true;
         } else {
             const resp = await (
-                await fetch('/save', {
+                await fetch('/api/save', {
                     method: 'post',
                     body
                 })
@@ -211,3 +210,7 @@ module.exports = new class App extends MK.Object {
         }
     }
 };
+
+if (module.hot) {
+    module.hot.accept();
+}

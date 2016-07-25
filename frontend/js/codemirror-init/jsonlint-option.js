@@ -34,7 +34,7 @@ CodeMirror.defineOption('jsonlint', false, (editor, value) => {
 
             if (isUri(editorValue.trim())) {
                 const resp = await (
-                    await fetch('/proxy', {
+                    await fetch('/api/proxy', {
                         method: 'post',
                         body: JSON.stringify({
                             url: editorValue
