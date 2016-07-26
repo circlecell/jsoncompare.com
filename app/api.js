@@ -5,9 +5,14 @@ import AWS from 'aws-sdk';
 import md5 from 'md5';
 
 const validator = new Validator();
-const { AWS_ACCESS_KEY, AWS_SECRET_KEY } = process.env;
+const { AWS_ACCESS_KEY, AWS_SECRET_KEY, NODE_ENV } = process.env;
 const s3 = new AWS.S3();
 const router = Router();
+
+
+if(NODE_ENV === 'production' && (!AWS_ACCESS_KEY || !AWS_SECRET_KEY)) {
+    throw Error('AWS_SECRET_KEY, AWS_SECRET_KEY are not set')
+}
 
 AWS.config.update({
     accessKeyId: AWS_ACCESS_KEY,
@@ -15,10 +20,10 @@ AWS.config.update({
 });
 
 router.post('/save', ({ jsonBody, rawBody }, res) => {
-    const validation = validator.validate(jsonBody, AppState);
-    if(validation.errors.length) {
+    const { errors } = validator.validate(jsonBody, AppState);
+    if(errors.length) {
         res.json(400, {
-            error: validation.errors.join('; ')
+            error: errors.join('; ')
         });
     } else {
         const key = md5(rawBody);
@@ -31,7 +36,10 @@ router.post('/save', ({ jsonBody, rawBody }, res) => {
 
         s3.putObject(params, (error, data) => {
             if (error) {
-                res.json(400, { error });
+                const { code, message } = error;
+                res.json(400, {
+                    error: `${code}: ${message}`
+                });
             } else {
                 res.json({key, error: null})
             }
@@ -41,7 +49,7 @@ router.post('/save', ({ jsonBody, rawBody }, res) => {
 });
 
 router.post('/proxy', (req, res) => {
-    const { url } = req.jsonBody;
+    const url = String(req.jsonBody.url).trim();
     const request = require('request');
     const { isUri } = require('valid-url');
 

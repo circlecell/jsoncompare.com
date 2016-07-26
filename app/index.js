@@ -7,10 +7,14 @@ import express from 'express';
 const app = express();
 const { PORT, NODE_ENV, API_ONLY } = process.env;
 
+if(!PORT) {
+    throw Error('PORT is not set')
+}
+
 app.set('port', PORT);
 
 if(NODE_ENV === 'development') {
-    const config = require('../tools/webpack.config.babel');
+    const config = require('../webpack/webpack.config.babel');
     const webpackDevMiddleware = require("webpack-dev-middleware");
     const webpackHotMiddleware = require("webpack-hot-middleware");
     const webpack = require('webpack');
@@ -22,7 +26,7 @@ if(NODE_ENV === 'development') {
         filename: 'js/app.js',
         publicPath: '/',
         stats: {
-          colors: true,
+            colors: true,
         },
         historyApiFallback: true,
     }));
