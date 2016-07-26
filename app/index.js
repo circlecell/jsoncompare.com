@@ -11,6 +11,10 @@ if(!PORT) {
     throw Error('PORT is not set')
 }
 
+if(!NODE_ENV) {
+    throw Error('NODE_ENV is not set');
+}
+
 app.set('port', PORT);
 
 if(NODE_ENV === 'development') {

@@ -9,11 +9,12 @@
     "serve-prod": "NODE_ENV=production forever start --watch index.js >> server.log 2>&1",
     "serve-prod-api-only": "API_ONLY=yes npm run serve",
     "serve-dev": "opn http://localhost:5001; PORT=5001 NODE_ENV=development nodemon index.js --ignore 'frontend/*' --ignore 'public/*' --ignore 'node_modules/*' --ignore webpack.config.js --ignore package.json",
-    "bundle": "NODE_ENV=production webpack --config ./webpack/webpack.config.babel.js",
+    "bundle": "npm run clean; NODE_ENV=production webpack --config ./webpack/webpack.config.babel.js",
     "check-updates": "ncu; ncu --packageFile ./frontend/package.json",
     "upgrade": "ncu -a; npm install; ncu --packageFile ./frontend/package.json -a; cd ./frontend; npm install",
     "npm-frontend": "cd frontend; npm",
-    "lint": "eslint . --ext .js --cache --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'"
+    "lint": "eslint . --ext .js --cache --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'",
+    "clean": "rimraf public"
   },
   "repository": {
     "type": "git",
@@ -61,7 +62,8 @@
     "style-loader": "^0.13.1",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.4.1"
+    "webpack-hot-middleware": "^2.4.1",
+    "webpack-split-by-path": "^0.1.0"
   },
   "dependencies": {
     "aws-sdk": "^2.4.9",
