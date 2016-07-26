@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "npm run serve-prod",
-    "serve-prod": "NODE_ENV=production forever start --watch index.js >> server.log 2>&1",
+    "serve-prod": "pm2 restart index.js --name=jsonlint --watch",
     "serve-prod-api-only": "API_ONLY=yes npm run serve",
     "serve-dev": "opn http://localhost:5001; PORT=5001 NODE_ENV=development nodemon index.js --ignore 'frontend/*' --ignore 'public/*' --ignore 'node_modules/*' --ignore webpack.config.js --ignore package.json",
     "bundle": "npm run clean; NODE_ENV=production webpack --config ./webpack/webpack.config.babel.js",
@@ -71,5 +71,8 @@
     "express": "^4.14.0",
     "jsonschema": "^1.1.0",
     "request": "^2.74.0"
+  },
+  "peerDependencies": {
+    "pm2": "^1.1.3"
   }
 }
