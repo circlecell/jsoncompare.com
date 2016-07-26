@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const { NODE_ENV, PORT } = process.env;
 
@@ -8,9 +8,9 @@ const plugins = [
     new ExtractTextPlugin('css/style.css', {
         allChunks: true
     }),
-    new CopyWebpackPlugin([
-        { from: 'index.html', to: 'index.html' },
-    ])
+    new HtmlWebpackPlugin({
+        template: 'index.html'
+    })
 ];
 
 if(NODE_ENV === 'development') {
