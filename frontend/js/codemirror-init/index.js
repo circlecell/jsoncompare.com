@@ -1,9 +1,16 @@
 import 'codemirror/addon/merge/merge.css';
 import 'codemirror/lib/codemirror.css';
-import './codemirror-addons';
+import './jsonlint-option';
+import './showsize-option';
+import './notify-extension';
+import './validate-extension';
+import './highlight-line-extension';
+import './style.pcss';
+import assign from 'object.assign';
 import CodeMirror from 'codemirror';
+import diff_match_patch from 'diff-match-patch';
 
-Object.assign(window, require('diff-match-patch'));
+assign(window, diff_match_patch);
 require('codemirror/addon/merge/merge');
 
 Object.assign(CodeMirror.defaults, {

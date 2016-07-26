@@ -1,5 +1,6 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 import postcssImport from 'postcss-import';
 import postcssUrl from 'postcss-url';
 import postcssNested from 'postcss-nested';
@@ -7,6 +8,8 @@ import postcssCssnext from 'postcss-cssnext';
 import postcssCalc from 'postcss-calc';
 import path from 'path';
 import webpack from 'webpack';
+
+const { NODE_ENV, PORT } = process.env;
 
 const postcssPlugins = webpack => [
     postcssImport({ addDependencyTo: webpack }),
@@ -20,7 +23,11 @@ const postcssPlugins = webpack => [
 ];
 
 
-const entry = [ './js/app' ];
+const entry = [
+    'babel-polyfill',
+    './js/index'
+];
+
 const plugins = [
     new ExtractTextPlugin('css/style.css', {
         allChunks: true
@@ -30,13 +37,15 @@ const plugins = [
     ])
 ];
 
-if(process.env.NODE_ENV === 'development') {
+if(NODE_ENV === 'development') {
     entry.unshift('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000');
 
     plugins.push(
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        //new webpack.NoErrorsPlugin()
+        new OpenBrowserPlugin({
+            url: `http://localhost:${PORT}`
+        })
     )
 }
 

@@ -1,13 +1,13 @@
 import Tab from '../tab';
 import MK from 'matreshka';
-import Batch from './batch';
+import BatchItems from './batch-list';
 
 export default class BatchTab extends Tab {
     constructor(...args) {
         super(...args)
             .set('items', [])
             .setClassFor({
-                items: Batch
+                items: BatchItems
             })
             .on({
                 'change:files': () => {

@@ -4,11 +4,11 @@ import BatchItem from './batch-item';
 export default class BatchTab extends MK.Array {
     Model = BatchItem;
     itemRenderer = '<div></div>';
-    constructor(data, parent) {
+    constructor(data, { nodes }) {
         super(...data)
             .bindNode({
-                sandbox: parent.nodes.sandbox,
-                container: parent.nodes.content
+                sandbox: nodes.sandbox,
+                container: nodes.content
             })
             .recreate(data, {
                 dontRender: true

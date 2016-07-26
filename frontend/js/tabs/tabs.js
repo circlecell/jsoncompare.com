@@ -1,7 +1,7 @@
 import MK from 'matreshka';
-import SimpleTab from './simple/simple-tab';
-import BatchTab from './batch/batch-tab';
-import DiffTab from './diff/diff-tab';
+import SimpleTab from './simple';
+import BatchTab from './batch';
+import DiffTab from './diff';
 
 export default class Tabs extends MK.Object {
     constructor() {
@@ -21,7 +21,7 @@ export default class Tabs extends MK.Object {
         })
         .on({
             '*@click::tabHeader': evt => {
-                for (const tab of this) {
+                for (let tab of this) {
                     tab.active = evt.target.dataset.tab === tab.name;
                 }
             },

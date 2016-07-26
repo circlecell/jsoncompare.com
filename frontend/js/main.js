@@ -2,52 +2,9 @@ import MK from 'matreshka';
 import Tabs from './tabs/tabs';
 import CodeMirror from 'codemirror';
 import $ from 'balajs';
-import 'matreshka-router';
-import 'babel-polyfill';
-import './codemirror-init';
-import '../pcss/style.pcss';
 
-
-MK.prototype.appendNode = function (key, selector) {
-    const nodes = this.$bound(key),
-        container = this.select(selector);
-
-    for (let i = 0; i < nodes.length; i++) {
-        container.appendChild(nodes[i]);
-    }
-
-    return this;
-};
-
-MK.binders.codeMirror = function () {
-    return {
-        on(cbc) {
-            this.CodeMirror.on('change', cbc);
-        },
-
-        getValue() {
-            return this.CodeMirror.getValue();
-        },
-
-        setValue(v) {
-            this.CodeMirror.setValue(String(v));
-        }
-    };
-};
-
-
-MK.defaultBinders.unshift(function () {
-    if (this.classList && this.classList.contains('CodeMirror')) {
-        return MK.binders.codeMirror();
-    }
-
-    return null;
-});
-
-module.exports = new class App extends MK.Object {
+export default class Main extends MK.Object {
     constructor() {
-        const dndPlaceholderAreas = '#simple, #batch';
-
         super()
             .setClassFor({
                 tabs: Tabs
@@ -66,6 +23,16 @@ module.exports = new class App extends MK.Object {
                 win: window
             })
             .bindNode('saved', ':bound(saveButton)', MK.binders.className('disabled'))
+            .events()
+
+        if (this.id) {
+            this.restore(this.id);
+        }
+    }
+
+    events() {
+        const dndPlaceholderAreas = '#simple, #batch';
+        return this
             .on({
                 'tabs@change:activeTab': evt => {
                     this.mode = evt.value.name;
@@ -95,7 +62,7 @@ module.exports = new class App extends MK.Object {
                 },
                 'keydown::win': evt => {
                     const S_KEY_CODE = 83;
-                    const {domEvent: { ctrlKey, keyCode }} = evt;
+                    const { domEvent: { ctrlKey, keyCode } } = evt;
                     if(keyCode === S_KEY_CODE && ctrlKey) {
                         evt.preventDefault();
                         if(!this.saved) {
@@ -103,16 +70,9 @@ module.exports = new class App extends MK.Object {
                         }
                     }
                 }
-                /* ,
-
-                'codemirror:errorvalidate': editor => {
-                    console.log('errora', editor);
-                }*/
             })
-            .on({
-                'change:mode': () => {
-                    this.tabs[this.mode].active = true;
-                }
+            .on('change:mode', () => {
+                this.tabs[this.mode].active = true;
             }, true)
 
             // TODO REFACTOR THIS
@@ -137,10 +97,6 @@ module.exports = new class App extends MK.Object {
                     this.saved = this.defaultView === currentView || this.memo[this.id] === currentView;
                 }
             }, 300);
-
-        if (this.id) {
-            this.restore(this.id);
-        }
     }
 
     toJSONString() {
@@ -209,8 +165,4 @@ module.exports = new class App extends MK.Object {
             this.fromJSONString(resp);
         }
     }
-};
-
-if (module.hot) {
-    module.hot.accept();
 }

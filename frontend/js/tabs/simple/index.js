@@ -9,6 +9,13 @@ export default class SimpleTab extends Tab {
             .on({
                 tabfocus: () => {
                     this.editor.focus();
+                },
+                'change:files': () => {
+                    const { files } = this;
+                    if(files.length) {
+                        this.value = files[0].readerResult;
+                    }
+
                 }
             });
     }
@@ -19,12 +26,6 @@ export default class SimpleTab extends Tab {
         this
             .bindNode('value', this.editor.display.wrapper)
             .bindNode('files', ':sandbox', MK.binders.dropFiles('text'))
-            .on({
-                'change:files': () => {
-                    this.value = this.files[0].readerResult;
-                },
-                // 'change:value': () => this.trigger('modify')
-            });
     }
 
     toJSON() {
