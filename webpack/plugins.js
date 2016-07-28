@@ -12,7 +12,7 @@ const plugins = [
     }),
     new HtmlWebpackPlugin({
         template: 'index.html',
-        chunksSortMode: 'dependency'
+        chunksSortMode: 'auto'
     }),
     new SplitByPathPlugin([{
         name: 'vendor',
