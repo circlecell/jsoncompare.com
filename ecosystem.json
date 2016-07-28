@@ -9,7 +9,8 @@
       "script"    : "index.js",
       "env": {},
       "env_production" : {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "PORT": "5001"
       }
     }
   ],
@@ -26,7 +27,7 @@
       "repo" : "git@github.com:circlecell/jsonlint.git",
       "path" : "/var/web/beta.jsonlint.com",
       "ssh_options": ["StrictHostKeyChecking=no", "PasswordAuthentication=no"],
-      "post-deploy" : "npm install && PORT=5001 npm run serve-prod"
+      "post-deploy" : "npm install && npm run bundle && npm run serve-prod"
     },
   }
 }
