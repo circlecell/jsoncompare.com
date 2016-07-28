@@ -29,9 +29,9 @@ if (NODE_ENV === 'development') {
         filename: 'js/app.js',
         publicPath: '/',
         stats: {
-            colors: true,
+            colors: true
         },
-        historyApiFallback: true,
+        historyApiFallback: true
     }));
 
     app.use(webpackHotMiddleware(compiler, {
