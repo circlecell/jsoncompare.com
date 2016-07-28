@@ -21,7 +21,7 @@ export default class Tabs extends MK.Object {
         })
         .on({
             '*@click::tabHeader': evt => {
-                for (let tab of this) {
+                for (const tab of this) {
                     tab.active = evt.target.dataset.tab === tab.name;
                 }
             },

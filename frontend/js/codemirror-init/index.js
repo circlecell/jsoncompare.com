@@ -8,9 +8,9 @@ import './highlight-line-extension';
 import './style.pcss';
 import assign from 'object.assign';
 import CodeMirror from 'codemirror';
-import diff_match_patch from 'diff-match-patch';
+import diffMatchPatch from 'diff-match-patch';
 
-assign(window, diff_match_patch);
+assign(window, diffMatchPatch);
 require('codemirror/addon/merge/merge');
 
 Object.assign(CodeMirror.defaults, {

@@ -1,6 +1,6 @@
 import MK from 'matreshka';
 
-MK.defaultBinders.unshift(function () {
+MK.defaultBinders.unshift(function codeMirrorDefaultBinder() {
     if (this.classList && this.classList.contains('CodeMirror')) {
         return {
             on(cbc) {

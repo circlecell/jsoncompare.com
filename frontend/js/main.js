@@ -23,7 +23,7 @@ export default class Main extends MK.Object {
                 win: window
             })
             .bindNode('saved', ':bound(saveButton)', MK.binders.className('disabled'))
-            .events()
+            .events();
 
         if (this.id) {
             this.restore(this.id);
@@ -63,9 +63,9 @@ export default class Main extends MK.Object {
                 'keydown::win': evt => {
                     const S_KEY_CODE = 83;
                     const { domEvent: { ctrlKey, keyCode } } = evt;
-                    if(keyCode === S_KEY_CODE && ctrlKey) {
+                    if (keyCode === S_KEY_CODE && ctrlKey) {
                         evt.preventDefault();
-                        if(!this.saved) {
+                        if (!this.saved) {
                             this.save();
                         }
                     }
@@ -92,9 +92,10 @@ export default class Main extends MK.Object {
                 }
             })
             .onDebounce({
-                'tabs.*@modify': evt => {
+                'tabs.*@modify': () => {
                     const currentView = this.toJSONString();
-                    this.saved = this.defaultView === currentView || this.memo[this.id] === currentView;
+                    this.saved = this.defaultView === currentView
+                        || this.memo[this.id] === currentView;
                 }
             }, 300);
     }
@@ -122,13 +123,13 @@ export default class Main extends MK.Object {
         const body = this.toJSONString();
         let foundId;
 
-        for(let [memoId, memoBody] of Object.entries(this.memo)) {
-            if(memoBody === body)  {
-                foundId = memoId
+        for (const [memoId, memoBody] of Object.entries(this.memo)) {
+            if (memoBody === body)  {
+                foundId = memoId;
             }
         }
 
-        if(foundId) {
+        if (foundId) {
             this.set('id', foundId, {
                 fromSave: true
             });
@@ -150,7 +151,6 @@ export default class Main extends MK.Object {
                 this.saved = true;
             }
         }
-
     }
 
     async restore(id) {

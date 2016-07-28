@@ -1,17 +1,16 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import path from 'path';
-import webpack from 'webpack';
 import entry from './entry';
 import plugins from './plugins';
 import postcss from './postcss';
 
-const { NODE_ENV, PORT } = process.env;
+const { NODE_ENV } = process.env;
 const root = path.resolve(__dirname, '..');
 
 let filename;
 let chunkFilename;
 
-if(!NODE_ENV) {
+if (!NODE_ENV) {
     throw Error('NODE_ENV is not set');
 }
 
@@ -38,7 +37,7 @@ module.exports = {
     module: {
         loaders: [{
             test: /.js?$/,
-            loaders: ['babel'/*, 'eslint'*/],
+            loaders: ['babel', 'eslint'],
             exclude: /node_modules/
         }, {
             test: /\.css$|\.pcss$/,

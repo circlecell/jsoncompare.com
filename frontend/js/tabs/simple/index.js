@@ -12,10 +12,9 @@ export default class SimpleTab extends Tab {
                 },
                 'change:files': () => {
                     const { files } = this;
-                    if(files.length) {
+                    if (files.length) {
                         this.value = files[0].readerResult;
                     }
-
                 }
             });
     }
@@ -25,7 +24,7 @@ export default class SimpleTab extends Tab {
 
         this
             .bindNode('value', this.editor.display.wrapper)
-            .bindNode('files', ':sandbox', MK.binders.dropFiles('text'))
+            .bindNode('files', ':sandbox', MK.binders.dropFiles('text'));
     }
 
     toJSON() {

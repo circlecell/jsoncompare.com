@@ -5,9 +5,9 @@ const entry = {
         'babel-polyfill',
         './js/index'
     ]
-}
+};
 
-if(NODE_ENV === 'development') {
+if (NODE_ENV === 'development') {
     entry.app.unshift('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000');
 }
 
