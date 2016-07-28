@@ -72,12 +72,4 @@ app.use((req, res, next) => {
 
 app.use('/api', api);
 
-app.use((error, req, res) => {
-    if (error) {
-        res.json(400, {
-            error: String(error)
-        });
-    }
-});
-
 app.listen(app.get('port'));

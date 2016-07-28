@@ -15,7 +15,7 @@ let { AWS_ACCESS_KEY: accessKeyId, AWS_SECRET_KEY: secretAccessKey } = process.e
 
 let credentialFileContents;
 
-if(!accessKey || !secretKey) {
+if(!accessKeyId || !secretAccessKey) {
     try {
         credentialFileContents = require('../../jsonlint_aws_credentials.json');
         accessKeyId = credentialFileContents.accessKey;
@@ -75,5 +75,6 @@ router.post('/proxy', (req, res) => {
         res.json(400, { error: 'Wrong URL format' });
     }
 });
+
 
 export default router;
