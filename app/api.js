@@ -7,12 +7,22 @@ import request from 'request';
 import { isUri } from 'valid-url';
 
 const validator = new Validator();
-const { AWS_ACCESS_KEY, AWS_SECRET_KEY, NODE_ENV } = process.env;
+
 const s3 = new AWS.S3();
 const router = new Router();
+const { NODE_ENV } = process.env;
+let { AWS_ACCESS_KEY: accessKey, AWS_SECRET_KEY: secretKey } = process.env;
 
-if (NODE_ENV === 'production' && (!AWS_ACCESS_KEY || !AWS_SECRET_KEY)) {
-    throw Error('AWS_SECRET_KEY, AWS_SECRET_KEY are not set');
+let credentialFileContents;
+
+if(!accessKey || !secretKey) {
+    try {
+        credentialFileContents = require('../../jsonlint_aws_credentials.json');
+        accessKey = credentialFileContents.accessKey;
+        secretKey = credentialFileContents.secretKey;
+    } catch(e) {
+        throw Error('AWS access key and AWS secret key are not set');
+    }
 }
 
 AWS.config.update({
