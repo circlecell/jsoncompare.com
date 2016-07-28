@@ -1,0 +1,31 @@
+{
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+    {
+      name      : "jsonlint",
+      script    : "index.js",
+      env: {},
+      env_production : {
+        NODE_ENV: "production"
+      }
+    }
+  ],
+
+  /**
+   * Deployment section
+   * http://pm2.keymetrics.io/docs/usage/deployment/
+   */
+  deploy : {
+    production : {
+      user : "root",
+      host : "192.241.157.86",
+      ref  : "origin/master",
+      repo : "git@github.com:circlecell/jsonlint.git",
+      path : "/var/web/beta.jsonlint.com",
+      "post-deploy" : "nvm use 6 && npm install && pm2 startOrRestart ecosystem.json --env production"
+    },
+  }
+}
