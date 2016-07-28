@@ -18,13 +18,14 @@
    * Deployment section
    * http://pm2.keymetrics.io/docs/usage/deployment/
    */
-  deploy : {
-    production : {
-      user : "deployer",
-      host : "192.241.157.86",
-      ref  : "origin/master",
-      repo : "git@github.com:circlecell/jsonlint.git",
-      path : "/var/web/beta.jsonlint.com",
+  "deploy" : {
+    "production" : {
+      "user" : "deployer",
+      "host" : "192.241.157.86",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:circlecell/jsonlint.git",
+      "path" : "/var/web/beta.jsonlint.com",
+      "ssh_options": "StrictHostKeyChecking=no",
       "post-deploy" : "npm install && echo 'Hey!'"
     },
   }
