@@ -1,31 +1,30 @@
 import api from './api';
 import bodyParser from 'body-parser';
-import http from 'http';
 import path from 'path';
 import express from 'express';
 
 const app = express();
 const { PORT, NODE_ENV, API_ONLY } = process.env;
 
-if(!PORT) {
-    throw Error('PORT is not set')
+if (!PORT) {
+    throw Error('PORT is not set');
 }
 
-if(!NODE_ENV) {
+if (!NODE_ENV) {
     throw Error('NODE_ENV is not set');
 }
 
 app.set('port', PORT);
 
-if(NODE_ENV === 'development') {
+if (NODE_ENV === 'development') {
     const config = require('../webpack/webpack.config.babel');
-    const webpackDevMiddleware = require("webpack-dev-middleware");
-    const webpackHotMiddleware = require("webpack-hot-middleware");
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
     const webpack = require('webpack');
     const compiler = webpack(config);
 
     app.use(webpackDevMiddleware(compiler, {
-        headers: { "X-Served-By": "Webpack" },
+        headers: { 'X-Served-By': 'Webpack' },
         hot: true,
         filename: 'js/app.js',
         publicPath: '/',
@@ -36,12 +35,12 @@ if(NODE_ENV === 'development') {
     }));
 
     app.use(webpackHotMiddleware(compiler, {
-        log: console.log,
+        log: console.log, // eslint-disable-line no-console
         path: '/__webpack_hmr',
         heartbeat: 10 * 1000
     }));
 } else {
-    if(!API_ONLY) {
+    if (!API_ONLY) {
         app.use(
             express.static(
                 path.resolve(__dirname, '..', 'public')
@@ -57,14 +56,14 @@ app.use(bodyParser.urlencoded({
 app.use((req, res, next) => {
     let rawBody = '';
 
-    req.on('data', function(chunk) {
+    req.on('data', chunk => {
         rawBody += chunk;
     });
 
-    req.on('end', function() {
-        if(rawBody) {
-            req.rawBody = rawBody;
-            req.jsonBody = JSON.parse(rawBody);
+    req.on('end', () => {
+        if (rawBody) {
+            req.rawBody = rawBody; // eslint-disable-line no-param-reassign
+            req.jsonBody = JSON.parse(rawBody); // eslint-disable-line no-param-reassign
         }
 
         next();
@@ -73,7 +72,7 @@ app.use((req, res, next) => {
 
 app.use('/api', api);
 
-app.use((error) => {
+app.use((error, req, res) => {
     if (error) {
         res.json(400, {
             error: String(error)

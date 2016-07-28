@@ -124,7 +124,7 @@ export default class Main extends MK.Object {
         let foundId;
 
         for (const [memoId, memoBody] of Object.entries(this.memo)) {
-            if (memoBody === body)  {
+            if (memoBody === body) {
                 foundId = memoId;
             }
         }

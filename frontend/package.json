@@ -25,7 +25,6 @@
     "jsonlint": "^1.6.2",
     "matreshka": "^1.9.1",
     "matreshka-router": "0.0.5",
-    "md5": "^2.1.0",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {}

@@ -6,21 +6,21 @@ import CodeMirror from 'codemirror';
 import { isUri } from 'valid-url';
 
 CodeMirror.defineOption('jsonlint', false, (editor, value) => {
-    const initialized = editor._jsonlint;
+    const initialized = editor.jsonlint;
 
     if (value && !initialized) {
-        const wrapper = editor.display.wrapper,
-            validateButton = assign(wrapper.appendChild($.one('<div>')), {
-                className: 'lint-button',
-                title: 'Validate'
-            }),
-            clearButton = assign(wrapper.appendChild($.one('<div>')), {
-                className: 'clear-button',
-                title: 'Clear'
-            }),
-            notifierBlock = wrapper.appendChild(assign($.one('<div>'), {
-                className: 'lint-notifier',
-            }));
+        const wrapper = editor.display.wrapper;
+        const validateButton = assign(wrapper.appendChild($.one('<div>')), {
+            className: 'lint-button',
+            title: 'Validate'
+        });
+        const clearButton = assign(wrapper.appendChild($.one('<div>')), {
+            className: 'clear-button',
+            title: 'Clear'
+        });
+        const notifierBlock = wrapper.appendChild(assign($.one('<div>'), {
+            className: 'lint-notifier',
+        }));
 
         assign(editor.display, { notifierBlock, validateButton });
 
@@ -46,7 +46,7 @@ CodeMirror.defineOption('jsonlint', false, (editor, value) => {
                     editor.setValue(resp.body);
                     editor.validate();
                 } else {
-                    alert('TODO: RESP ERROR');
+                    console.error('TODO: RESP ERROR');
                 }
             } else {
                 editor.validate();
@@ -57,7 +57,7 @@ CodeMirror.defineOption('jsonlint', false, (editor, value) => {
             editor.setValue('');
         });
 
-        editor._jsonlint = true;
+        editor.jsonlint = true;
     } else if (!value && !initialized) {
         return;
     } else if (!value && initialized) {
