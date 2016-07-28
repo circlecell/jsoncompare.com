@@ -26,7 +26,7 @@
       "repo" : "git@github.com:circlecell/jsonlint.git",
       "path" : "/var/web/beta.jsonlint.com",
       "ssh_options": ["StrictHostKeyChecking=no", "PasswordAuthentication=no"],
-      "post-deploy" : "npm install && /etc/init.d/pm2-init.sh start ecosystem.json --env production --watch"
+      "post-deploy" : "npm install && npm run serve-prod"
     },
   }
 }
