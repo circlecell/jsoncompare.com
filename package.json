@@ -15,7 +15,7 @@
     "npm-frontend": "cd frontend; npm",
     "lint": "eslint . --ext .js --cache --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'",
     "clean": "rimraf public",
-    "deploy": "pm2 deploy ecosystem.json production update"
+    "deploy": "pm2 deploy ecosystem.json production"
   },
   "repository": {
     "type": "git",
