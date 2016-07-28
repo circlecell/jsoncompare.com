@@ -20,7 +20,7 @@
    */
   deploy : {
     production : {
-      user : "root",
+      user : "deployer",
       host : "192.241.157.86",
       ref  : "origin/master",
       repo : "git@github.com:circlecell/jsonlint.git",
