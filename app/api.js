@@ -11,23 +11,23 @@ const validator = new Validator();
 const s3 = new AWS.S3();
 const router = new Router();
 const { NODE_ENV } = process.env;
-let { AWS_ACCESS_KEY: accessKey, AWS_SECRET_KEY: secretKey } = process.env;
+let { AWS_ACCESS_KEY: accessKeyId, AWS_SECRET_KEY: secretAccessKey } = process.env;
 
 let credentialFileContents;
 
 if(!accessKey || !secretKey) {
     try {
         credentialFileContents = require('../../jsonlint_aws_credentials.json');
-        accessKey = credentialFileContents.accessKey;
-        secretKey = credentialFileContents.secretKey;
+        accessKeyId = credentialFileContents.accessKey;
+        secretAccessKey = credentialFileContents.secretKey;
     } catch(e) {
         throw Error('AWS access key and AWS secret key are not set');
     }
 }
 
 AWS.config.update({
-    accessKeyId: AWS_ACCESS_KEY,
-    secretAccessKey: AWS_SECRET_KEY
+    accessKeyId,
+    secretAccessKey
 });
 
 router.post('/save', ({ jsonBody, rawBody }, res) => {
