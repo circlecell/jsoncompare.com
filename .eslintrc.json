@@ -9,7 +9,8 @@
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "no-var": "error",
         "comma-dangle": 0,
-        "global-require": 0
+        "global-require": 0,
+        "import/no-unresolved": 0
     },
     "env": {
         "browser": true
