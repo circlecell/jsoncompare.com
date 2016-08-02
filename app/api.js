@@ -14,8 +14,6 @@ AWS.config.loadFromPath(
 const validator = new Validator();
 const s3 = new AWS.S3();
 const router = new Router();
-let { AWS_ACCESS_KEY: accessKeyId, AWS_SECRET_KEY: secretAccessKey } = process.env;
-
 
 router.post('/save', ({ jsonBody, rawBody }, res) => {
     const { errors } = validator.validate(jsonBody, AppState);

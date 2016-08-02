@@ -17,7 +17,7 @@ const plugins = [
             const nameA = a.names[0];
             const nameB = b.names[0];
 
-            return order.indexOf(nameA) - order.indexOf(nameB)
+            return order.indexOf(nameA) - order.indexOf(nameB);
         }
     }),
     new SplitByPathPlugin([{
