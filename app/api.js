@@ -5,29 +5,17 @@ import AWS from 'aws-sdk';
 import md5 from 'md5';
 import request from 'request';
 import { isUri } from 'valid-url';
+import path from 'path';
+
+AWS.config.loadFromPath(
+    path.resolve(__dirname, '../../jsonlint_aws_credentials.json')
+);
 
 const validator = new Validator();
-
 const s3 = new AWS.S3();
 const router = new Router();
 let { AWS_ACCESS_KEY: accessKeyId, AWS_SECRET_KEY: secretAccessKey } = process.env;
 
-let credentialFileContents;
-
-if (!accessKeyId || !secretAccessKey) {
-    try {
-        credentialFileContents = require('../../jsonlint_aws_credentials.json');
-        accessKeyId = credentialFileContents.accessKey;
-        secretAccessKey = credentialFileContents.secretKey;
-    } catch (e) {
-        throw Error('AWS access key and AWS secret key are not set');
-    }
-}
-
-AWS.config.update({
-    accessKeyId,
-    secretAccessKey
-});
 
 router.post('/save', ({ jsonBody, rawBody }, res) => {
     const { errors } = validator.validate(jsonBody, AppState);

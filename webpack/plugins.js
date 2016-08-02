@@ -12,7 +12,13 @@ const plugins = [
     }),
     new HtmlWebpackPlugin({
         template: 'index.html',
-        chunksSortMode: 'auto'
+        chunksSortMode: (a, b) => {
+            const order = ['manifest', 'vendor', 'app'];
+            const nameA = a.names[0];
+            const nameB = b.names[0];
+
+            return order.indexOf(nameA) - order.indexOf(nameB)
+        }
     }),
     new SplitByPathPlugin([{
         name: 'vendor',
