@@ -25,10 +25,7 @@ const plugins = [
         path: path.join(__dirname, '..', 'frontend/node_modules/'),
     }], {
         // fix https://github.com/webpack/extract-text-webpack-plugin/issues/92
-        ignore: [
-            `${__dirname}/node_modules/css-loader${__dirname}/node_modules/style-loader`,
-            /\.css/
-        ]
+        ignore: [/\.css/]
     }),
 ];
 
