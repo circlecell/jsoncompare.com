@@ -1,6 +1,6 @@
 import 'matreshka-router';
 import './matreshka-addons';
-import './codemirror-init';
+import './editor-init';
 import '../pcss/style.pcss';
 
 import Main from './main';

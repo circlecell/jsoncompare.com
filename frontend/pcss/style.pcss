@@ -82,6 +82,32 @@ main > .tabs {
             z-index: 5;
             background: #fff;
         }
+
+        .from-files {
+            position: fixed;
+            bottom: 20px;
+            right: 180px;
+            z-index: 5;
+            background: #fff;
+        }
+
+        .dnd-message {
+            z-index: 1000;
+            font-size: 30px;
+            display: none;
+            position: absolute;
+            top: 24px;
+            width: 500px;
+            left: 50%;
+            margin-left: -250px;
+            background: white;
+        }
+
+        &.dragovered {
+            .dnd-message {
+                display: block;
+            }
+        }
     }
 
     #diff& {
@@ -230,6 +256,7 @@ ul.tab-nav {
     }
 }
 
+/*
 .dnd-area {
     position: absolute;
     width: 100%;
@@ -249,8 +276,7 @@ ul.tab-nav {
         flex: 1;
         text-align: center;
     }
-}
-
+}*/
 
 .button,
 button,

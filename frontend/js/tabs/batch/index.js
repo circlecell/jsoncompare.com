@@ -23,7 +23,9 @@ export default class BatchTab extends Tab {
         this.items.rerender();
 
         return this
-            .bindNode('files', ':sandbox', MK.binders.dropFiles('text'));
+            .bindNode('files', ':sandbox', MK.binders.dropFiles('text'))
+            .bindNode('dragovered', ':sandbox', MK.binders.dragOver())
+            .bindNode('dragovered', ':sandbox', MK.binders.className('dragovered'));
     }
 
     toJSON() {

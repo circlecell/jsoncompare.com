@@ -1,7 +1,6 @@
 import MK from 'matreshka';
 import Tabs from './tabs/tabs';
 import CodeMirror from 'codemirror';
-import $ from 'balajs';
 
 export default class Main extends MK.Object {
     constructor() {
@@ -31,7 +30,6 @@ export default class Main extends MK.Object {
     }
 
     events() {
-        const dndPlaceholderAreas = '#simple, #batch';
         return this
             .on({
                 'tabs@change:activeTab': evt => {
@@ -74,23 +72,6 @@ export default class Main extends MK.Object {
             .on('change:mode', () => {
                 this.tabs[this.mode].active = true;
             }, true)
-
-            // TODO REFACTOR THIS
-            .onDebounce({
-                [`dragover::(${dndPlaceholderAreas})`]: evt => {
-                    if (!$.one('.dnd-area', evt.target.closest(dndPlaceholderAreas))) {
-                        evt.target.closest(dndPlaceholderAreas).appendChild($.create('div', {
-                            className: 'dnd-area'
-                        }));
-                    }
-                },
-                [`dragleave::(${dndPlaceholderAreas}) drop::(${dndPlaceholderAreas})`]: evt => {
-                    const area = $.one('.dnd-area', evt.target.closest(dndPlaceholderAreas));
-                    if (area) {
-                        area.parentNode.removeChild(area);
-                    }
-                }
-            })
             .onDebounce({
                 'tabs.*@modify': () => {
                     const currentView = this.toJSONString();
