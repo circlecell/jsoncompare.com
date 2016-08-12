@@ -6,6 +6,7 @@ import './notify-extension';
 import './validate-extension';
 import './highlight-line-extension';
 import './style.pcss';
+import 'codemirror/mode/javascript/javascript';
 import assign from 'object.assign';
 import CodeMirror from 'codemirror';
 import diffMatchPatch from 'diff-match-patch';
@@ -16,7 +17,7 @@ require('codemirror/addon/merge/merge');
 Object.assign(CodeMirror.defaults, {
     dragDrop: false,
     lineNumbers: true,
-    mode: 'text/html',
+    mode: 'javascript',
     jsonlint: true,
     showSize: true,
     viewportMargin: Infinity

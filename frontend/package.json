@@ -20,6 +20,7 @@
   "dependencies": {
     "babel-polyfill": "^6.9.1",
     "balajs": "^0.1.9",
+    "byte-size": "^2.0.0",
     "codemirror": "^5.17.0",
     "diff-match-patch": "^1.0.0",
     "jsonlint": "^1.6.2",

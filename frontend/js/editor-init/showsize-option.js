@@ -3,8 +3,9 @@
 import $ from 'balajs';
 import assign from 'object.assign';
 import CodeMirror from 'codemirror';
+import byteSize from 'byte-size';
 
-const getByteSyze = str => new Blob([str], {
+const getBytes = str => new Blob([str], {
     type: 'text/javascript'
 }).size;
 
@@ -16,7 +17,10 @@ CodeMirror.defineOption('showSize', false, (editor, value) => {
             title: 'Size'
         });
         const changeSize = () => {
-            sizeBlock.innerHTML = `${getByteSyze(editor.getValue())} bytes`;
+            const bytes = getBytes(editor.getValue());
+            sizeBlock.innerHTML = bytes ? byteSize(bytes, {
+                units: 'iec'
+            }) : '';
         };
 
         assign(editor.display, { sizeBlock });

@@ -33,12 +33,19 @@
                     <h5>Batch</h5>
                     <p> User can drop files here or add fields manually.</p>
                 </article>-->
-                <button class="from-files">Open files</button>
-                <button class="add">Add field</button>
+                <div class="batch-buttons">
+                    <h3>Drop files there, open files or add fields manually</h3>
+
+                    <button class="from-files">
+                        <input type="file" class="from-files-input" multiple>
+                        Open files
+                    </button>
+                    <button class="add">Add field</button>
+                </div>
                 <div class="content"></div>
-                <div class="dnd-message">Drop files there create fields</div>
+                <div class="dnd-message">Drop files there</div>
             </div>
-            <div class="tab-pane " id="diff">
+            <div class="tab-pane" id="diff">
                 <!--<article class="tab-info">
                     <h5>♻ ✓ ✕ Merge</h5>
                     <p>User can look at difference between two JSON objects and merge them step by step using arrows in the middle.</p>

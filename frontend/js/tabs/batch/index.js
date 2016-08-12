@@ -11,6 +11,7 @@ export default class BatchTab extends Tab {
             })
             .on({
                 'change:files': () => {
+                    console.log(this.files);
                     this.items.recreate(this.files.map(file => ({
                         value: file.readerResult
                     })));
@@ -24,8 +25,10 @@ export default class BatchTab extends Tab {
 
         return this
             .bindNode('files', ':sandbox', MK.binders.dropFiles('text'))
+            .bindNode('files', ':sandbox .from-files-input', MK.binders.file('text'))
             .bindNode('dragovered', ':sandbox', MK.binders.dragOver())
-            .bindNode('dragovered', ':sandbox', MK.binders.className('dragovered'));
+            .bindNode('dragovered', ':sandbox', MK.binders.className('dragovered'))
+            .bindNode('items.length', ':sandbox', MK.binders.className('has-items'));
     }
 
     toJSON() {

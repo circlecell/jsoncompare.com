@@ -75,38 +75,76 @@ main > .tabs {
     #batch& {
         min-height: 80%;
 
-        .add {
+        .batch-buttons {
+            transition: bottom 0.5s ease-out 0s, left 0.5s ease-out 0s;
+            pointer-events: none;
+            text-align: center;
+            width: 380px;
+            left: calc(50% - 200px);
+            bottom: 50%;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 5;
-            background: #fff;
+            z-index: 4;
+
+            h3 {
+                transition: opacity  0.5s ease-out 0s;
+            }
+
+            .add {
+                pointer-events: all;
+                background: #fff;
+            }
+
+            .from-files {
+                pointer-events: all;
+                background: #fff;
+                position: relative;
+
+                .from-files-input {
+                    position: absolute;
+                    z-index: 1;
+                    height: 100%;
+                    width: 100%;
+                    opacity: 0;
+                }
+            }
         }
 
-        .from-files {
-            position: fixed;
-            bottom: 20px;
-            right: 180px;
-            z-index: 5;
-            background: #fff;
+        &.has-items {
+            .batch-buttons {
+
+                left: 20px;
+                bottom: 40px;
+
+                h3 {
+                    opacity: 0;
+                }
+            }
         }
+
 
         .dnd-message {
             z-index: 1000;
-            font-size: 30px;
             display: none;
             position: absolute;
-            top: 24px;
             width: 500px;
             left: 50%;
             margin-left: -250px;
-            background: white;
+            background: #eeeeee;
+            line-height: 200px;
+            text-align: center;
+            bottom: 40%;
+            border: 2px dashed #aaa;
+            pointer-events: none;
         }
 
         &.dragovered {
             .dnd-message {
                 display: block;
             }
+        }
+
+        .content > :last-child {
+            border-bottom: 1px solid #ddd;
         }
     }
 
