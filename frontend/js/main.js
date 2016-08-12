@@ -27,6 +27,16 @@ export default class Main extends MK.Object {
         if (this.id) {
             this.restore(this.id);
         }
+
+        window.onbeforeunload = this.beforeUnload.bind(this);
+    }
+
+    beforeUnload() {
+        if (!this.saved) {
+            return 'Entered data is not saved. Are you sure want to leave the page?';
+        }
+
+        return undefined;
     }
 
     events() {
