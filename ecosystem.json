@@ -1,24 +1,18 @@
 {
-  /**
-   * Application configuration section
-   * http://pm2.keymetrics.io/docs/usage/application-declaration/
-   */
-  apps : [
+
+  "apps" : [
     {
       "name"      : "jsonlint",
       "script"    : "index.js",
       "env": {},
       "env_production" : {
         "NODE_ENV": "production",
-        "PORT": "5001"
+        "PORT": "5001",
+        "API_ONLY": "yes"
       }
     }
   ],
 
-  /**
-   * Deployment section
-   * http://pm2.keymetrics.io/docs/usage/deployment/
-   */
   "deploy" : {
     "production" : {
       "user" : "deployer",
