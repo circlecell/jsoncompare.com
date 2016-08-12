@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/circlecell/jsonlint#readme",
   "dependencies": {
-    "babel-polyfill": "^6.9.1",
+    "babel-polyfill": "^6.13.0",
     "balajs": "^0.1.9",
     "byte-size": "^2.0.0",
     "codemirror": "^5.17.0",
