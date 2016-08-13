@@ -13,7 +13,8 @@ export default class Main extends MK.Object {
                 memo: {},
                 mode: this.mode || 'simple',
                 defaultView: this.toJSONString(),
-                saved: true
+                saved: true,
+                loading: false
             })
             .bindNode({
                 sandbox: 'body',
@@ -21,6 +22,7 @@ export default class Main extends MK.Object {
                 saveButton: ':sandbox .save',
                 win: window
             })
+            .bindNode('loading', '.loader', MK.binders.display())
             .bindNode('saved', ':bound(saveButton)', MK.binders.className('disabled'))
             .events();
 
