@@ -28,6 +28,16 @@ main {
     flex-direction: column;
 }
 
+.save {
+    &::before {
+        content: attr(data-save-text);
+    }
+
+    &.disabled::before {
+        content: attr(data-saved-text);
+    }
+}
+
 main > .tabs {
     flex: 1;
     display: flex;
