@@ -33,20 +33,24 @@ CodeMirror.defineOption('jsonlint', false, (editor, value) => {
             const editorValue = editor.getValue();
 
             if (isUri(editorValue.trim())) {
-                const resp = await (
-                    await fetch('/api/proxy', {
-                        method: 'post',
-                        body: JSON.stringify({
-                            url: editorValue
+                try {
+                    const resp = await (
+                        await fetch('/api/proxy', {
+                            method: 'post',
+                            body: JSON.stringify({
+                                url: editorValue
+                            })
                         })
-                    })
-                ).json();
+                    ).json();
 
-                if (!resp.error) {
-                    editor.setValue(resp.body);
-                    editor.validate();
-                } else {
-                    console.error('TODO: RESP ERROR');
+                    if (!resp.error) {
+                        editor.setValue(resp.body);
+                        editor.validate();
+                    } else {
+                        editor.notify('ERROR', resp.error);
+                    }
+                } catch(e) {
+                    editor.notify('ERROR', e);
                 }
             } else {
                 editor.validate();
