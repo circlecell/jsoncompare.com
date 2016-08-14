@@ -1,6 +1,7 @@
 import Tab from '../tab';
 import CodeMirror from 'codemirror';
 import MK from 'matreshka';
+import LintEditor from '../../linteditor';
 
 export default class SimpleTab extends Tab {
     constructor(...args) {
@@ -9,22 +10,14 @@ export default class SimpleTab extends Tab {
             .on({
                 tabfocus: () => {
                     this.editor.focus();
-                },
-                'change:files': () => {
-                    const { files } = this;
-                    if (files.length) {
-                        this.value = files[0].readerResult;
-                    }
                 }
             });
     }
 
     initialize() {
-        this.editor = new CodeMirror(this.nodes.content);
-
-        this
-            .bindNode('value', this.editor.display.wrapper)
-            .bindNode('files', ':sandbox', MK.binders.dropFiles('text'));
+        this.editor = new LintEditor(new CodeMirror(this.nodes.content));
+        //this.linkProps('value', [ this.editor, 'code' ]);
+        this.editor.linkCode(this, 'value');
     }
 
     toJSON() {

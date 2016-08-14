@@ -74,6 +74,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "jsonschema": "^1.1.0",
+    "makeelement": "0.0.1",
     "md5": "^2.1.0",
     "request": "^2.74.0",
     "valid-url": "^1.0.9"

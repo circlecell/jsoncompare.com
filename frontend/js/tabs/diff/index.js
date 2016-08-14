@@ -1,5 +1,6 @@
 import Tab from '../tab';
 import CodeMirror from 'codemirror';
+import LintEditor from '../../linteditor';
 
 export default class DiffTab extends Tab {
     constructor(...args) {
@@ -16,7 +17,7 @@ export default class DiffTab extends Tab {
     }
 
     initialize() {
-        this.editor = new CodeMirror.MergeView(this.nodes.content, {
+        const cccc = new CodeMirror.MergeView(this.nodes.content, {
             dragDrop: true,
             value: this.leftValue || '',
             origLeft: null,
@@ -26,11 +27,13 @@ export default class DiffTab extends Tab {
             allowEditingOriginals: true
         });
 
-        this
-            .bindNode({
-                leftValue: this.editor.edit.display.wrapper,
-                rightValue: this.editor.right.orig.display.wrapper
-            });
+        this.set({
+            leftEditor: new LintEditor(cccc),
+            rightEditor: new LintEditor(cccc.right)
+        });
+
+        this.leftEditor.linkCode(this, 'leftEditor');
+        this.rightEditor.linkCode(this, 'editorValue');
     }
 
     toJSON() {
