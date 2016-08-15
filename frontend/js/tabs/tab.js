@@ -1,4 +1,5 @@
 import MK from 'matreshka';
+import style from './tab.css';
 
 const { className } = MK.binders;
 
@@ -9,11 +10,6 @@ export default class Tab extends MK.Object {
                 parent,
                 name,
                 active: false
-            })
-            .bindNode({
-                tabHeader: parent.select(`.tab-nav [data-tab="${name}"]`),
-                sandbox: parent.select(`#${name}`),
-                content: ':sandbox .content'
             })
             .on({
                 'change:active': () => {
@@ -30,10 +26,15 @@ export default class Tab extends MK.Object {
                             this.trigger('tabfocus', this);
                         }
                     }
+                },
+                'bind:sandbox': () => {
+                    this.bindNode({
+                        tabHeader: parent.select(`.tab-nav [data-tab="${name}"]`)
+                    })
+                    .bindNode('active', ':sandbox', MK.binders.display())
+                    .appendNode('sandbox', parent.nodes.container);
                 }
             })
-            .bindNode('active', ':bound(tabHeader), :sandbox', className('active'), {
-                assignDefaultValue: true
-            });
+
     }
 }

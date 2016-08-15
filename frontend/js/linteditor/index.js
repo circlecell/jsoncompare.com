@@ -3,11 +3,17 @@ import makeElement from 'makeelement';
 import jsonlint from 'exports?jsonlint!jsonlint/web/jsonlint';
 import byteSize from 'byte-size';
 import { isUri } from 'valid-url';
+import styles from './linteditor.css';console.log(styles);
+import './codemirror-init';
 
-const { html,className } = Matreshka.binders;
+const { html, className } = Matreshka.binders;
 
 export default class Editor extends Matreshka.Object {
-    constructor(codeMirror) {
+    constructor({
+        codeMirror,
+        owner,
+        ownerCodeProperty
+    }) {
         super();
         this.set({
             codeMirror,
@@ -18,18 +24,18 @@ export default class Editor extends Matreshka.Object {
         this.bindNode({
             sandbox: this.codeMirror.display.wrapper,
             lintButton: makeElement('div', {
-                className: 'lint-button',
+                className: styles.lintButton,
                 title: 'Lint'
             }),
             clearButton: makeElement('div', {
-                className: 'clear-button',
+                className: styles.clearButton,
                 title: 'Clear'
             }),
             notifierBlock: makeElement('div', {
-                className: 'lint-notifier'
+                className: styles.lintNotifier
             }),
             sizeBlock: makeElement('div', {
-                className: 'size-block',
+                className: styles.sizeBlock,
                 title: 'Size'
             })
         })
@@ -48,9 +54,6 @@ export default class Editor extends Matreshka.Object {
             },
             setValue(value) {
                 this.CodeMirror.setValue(`${value}`);
-            },
-            destroy() {
-                // TODO
             }
         })
         .bindNode('errorLine', ':sandbox', {
@@ -77,8 +80,10 @@ export default class Editor extends Matreshka.Object {
                 units: 'iec'
             }) : '';
         })
-        //bindNode()
+        .linkProps('code', [owner, ownerCodeProperty])
         .events();
+
+        owner.linkProps(ownerCodeProperty, [this, 'code']);
     }
 
     events() {
@@ -152,10 +157,5 @@ export default class Editor extends Matreshka.Object {
         } catch(e) {
             this.errorText = e;
         }
-    }
-
-    linkCode(object, property) {
-        this.linkProps('code', [object, property]);
-        object.linkProps(property, [this, 'code']);
     }
 }

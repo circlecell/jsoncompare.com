@@ -6,56 +6,7 @@
 </head>
 
 <body>
-    <main>
-        <img src="https://placekitten.com/728/90" width="728" height="90">
-        <ul class="tab-nav">
-            <li data-tab="simple" class="tab-nav-item">Simple</li>
-            <li data-tab="batch" class="tab-nav-item">Batch</li>
-            <li data-tab="diff" class="tab-nav-item">Merge</li>
-            <li style="flex: 1;">
-                <select class="reformat">
-                    <option value="">Keep JSON as is</option>
-                    <option value="beautify">Beautify on validate</option>
-                    <option value="minify">Minify on validate</option>
-                </select>
-
-                <button class="save button-primary" style="float:right;" data-save-text="Save" data-saved-text="Saved"></button>
-            </li>
-        </ul>
-        <div class="tabs">
-            <div class="tab-pane" id="simple">
-                <!--<article class="tab-info">
-                    <h5>Simple</h5>
-                    <p>Very similar to jsonlint.com.</p>
-                </article>-->
-                <div class="content"></div>
-            </div>
-            <div class="tab-pane" id="batch">
-                <!--<article class="tab-info">
-                    <h5>Batch</h5>
-                    <p> User can drop files here or add fields manually.</p>
-                </article>-->
-                <div class="batch-buttons">
-                    <h3>Drop files there, open files or add fields manually</h3>
-
-                    <button class="from-files">
-                        <input type="file" class="from-files-input" multiple>
-                        Open files
-                    </button>
-                    <button class="add">Add field</button>
-                </div>
-                <div class="content"></div>
-                <div class="dnd-message">Drop files there</div>
-            </div>
-            <div class="tab-pane" id="diff">
-                <!--<article class="tab-info">
-                    <h5>♻ ✓ ✕ Merge</h5>
-                    <p>User can look at difference between two JSON objects and merge them step by step using arrows in the middle.</p>
-                </article>-->
-                <div class="content"></div>
-            </div>
-        </div>
-    </main>
+    <!-- <img src="https://placekitten.com/728/90" width="728" height="90"> -->
     <div class="loader">
       <span class="loader-inner">
           <span class="loader-bracket loader-bracket-left">{</span>

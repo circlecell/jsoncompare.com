@@ -1,6 +1,7 @@
 import Tab from '../tab';
 import CodeMirror from 'codemirror';
 import LintEditor from '../../linteditor';
+import style from './diff.css';
 
 export default class DiffTab extends Tab {
     constructor(...args) {
@@ -11,13 +12,19 @@ export default class DiffTab extends Tab {
             })
             .on({
                 tabfocus: () => {
-                    this.editor.edit.focus();
+                    this.leftEditor.focus();
                 }
+            })
+            .bindNode({
+                sandbox: <div class={style.diffTab}>
+                    <div class={`${style.flexContent} tab-content`}></div>
+                </div>,
+                content: ':sandbox .tab-content'
             });
     }
 
     initialize() {
-        const cccc = new CodeMirror.MergeView(this.nodes.content, {
+        const mergeView = new CodeMirror.MergeView(this.nodes.content, {
             dragDrop: true,
             value: this.leftValue || '',
             origLeft: null,
@@ -28,12 +35,17 @@ export default class DiffTab extends Tab {
         });
 
         this.set({
-            leftEditor: new LintEditor(cccc),
-            rightEditor: new LintEditor(cccc.right)
+            leftEditor: new LintEditor({
+                codeMirror: mergeView.edit,
+                owner: this,
+                ownerCodeProperty: 'leftValue'
+            }),
+            rightEditor: new LintEditor({
+                codeMirror: mergeView.right.orig,
+                owner: this,
+                ownerCodeProperty: 'rightValue'
+            })
         });
-
-        this.leftEditor.linkCode(this, 'leftEditor');
-        this.rightEditor.linkCode(this, 'editorValue');
     }
 
     toJSON() {

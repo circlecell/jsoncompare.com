@@ -1,2 +1,1 @@
 import './appendnode';
-import './binders';

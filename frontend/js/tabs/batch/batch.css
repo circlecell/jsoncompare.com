@@ -1,0 +1,77 @@
+.batchTab {
+    composes: tabPane from "../tab.css";
+
+    min-height: 80%;
+
+
+    &.has-items {
+        .batch-buttons {
+
+            left: 20px;
+            bottom: 40px;
+
+            h3 {
+                opacity: 0;
+            }
+        }
+    }
+
+    .dnd-message {
+        z-index: 1000;
+        display: none;
+        position: absolute;
+        width: 500px;
+        left: 50%;
+        margin-left: -250px;
+        background: #eeeeee;
+        line-height: 200px;
+        text-align: center;
+        bottom: 40%;
+        border: 2px dashed #aaa;
+        pointer-events: none;
+    }
+
+    &.dragovered {
+        .dnd-message {
+            display: block;
+        }
+    }
+
+    .content > :last-child {
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+.batchButtons {
+    transition: bottom 0.5s ease-out 0s, left 0.5s ease-out 0s;
+    pointer-events: none;
+    text-align: center;
+    width: 380px;
+    left: calc(50% - 200px);
+    bottom: 50%;
+    position: fixed;
+    z-index: 4;
+
+    h3 {
+        transition: opacity  0.5s ease-out 0s;
+    }
+}
+
+.addField {
+    pointer-events: all;
+    background: #fff;
+}
+
+.addFiles {
+    pointer-events: all;
+    background: #fff;
+    position: relative;
+
+    input {
+        position: absolute;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+    }
+}

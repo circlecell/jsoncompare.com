@@ -19,7 +19,7 @@ app.set('port', PORT);
 if (NODE_ENV === 'development') {
     const config = require('../webpack/webpack.config.babel');
     const webpackDevMiddleware = require('webpack-dev-middleware');
-    const webpackHotMiddleware = require('webpack-hot-middleware');
+    //const webpackHotMiddleware = require('webpack-hot-middleware');
     const webpack = require('webpack');
     const compiler = webpack(config);
 
@@ -34,11 +34,11 @@ if (NODE_ENV === 'development') {
         historyApiFallback: true
     }));
 
-    app.use(webpackHotMiddleware(compiler, {
+    /*app.use(webpackHotMiddleware(compiler, {
         log: console.log, // eslint-disable-line no-console
         path: '/__webpack_hmr',
         heartbeat: 10 * 1000
-    }));
+    }));*/
 } else {
     if (!API_ONLY) {
         app.use(

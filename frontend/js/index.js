@@ -1,7 +1,6 @@
 import 'matreshka-router';
-import './matreshka-addons';
-import './editor-init';
-import '../pcss/style.pcss';
+import './addons';
+import '../pcss/style.css';
 
 import Main from './main';
 

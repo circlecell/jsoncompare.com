@@ -7,6 +7,7 @@ import path from 'path';
 const { NODE_ENV } = process.env;
 
 const plugins = [
+    new webpack.ProvidePlugin({ realDOM: path.join(__dirname, '../frontend/js/addons/realdom') }),
     new ExtractTextPlugin('css/style.css', {
         allChunks: true
     }),

@@ -1,0 +1,27 @@
+.tabPane {
+    position: relative;
+}
+
+.flexTab {
+    composes: tabPane;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    :global {
+        .CodeMirror {
+            width: 100%;
+        }
+
+        .CodeMirror {
+             height: 100%!important;
+        }
+    }
+}
+
+.flexContent {
+    flex: 1;
+    display: flex;
+    position: relative;
+}
