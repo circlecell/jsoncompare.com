@@ -1,12 +1,8 @@
-
 :root {
     --main-text-color: #222;
 }
 
-
 :global {
-
-
     * {
         margin: 0;
         padding: 0;
@@ -84,10 +80,6 @@
         .CodeMirror-merge & {
             border: none;
         }
-
-
-
-
 
 
         .delete-editor {

@@ -20,8 +20,8 @@ export default class BatchTab extends Tab {
                 //[`click::(.${style.addField})`]: () => this.items.add()
             })
             .bindNode('sandbox',
-                <div class={style.batchTab} bind={{
-
+                <div class={style.batchTab} owner={this} bind={{
+                    //file: [foo()), bar()],
                 }}>
                     <div class={style.batchButtons}>
                         <h3>Drop files there, open files or add fields manually</h3>
