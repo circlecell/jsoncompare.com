@@ -1,0 +1,9 @@
+.saveButton {
+    &::before {
+        content: attr(data-save-text);
+    }
+
+    &:disabled::before {
+        content: attr(data-saved-text);
+    }
+}

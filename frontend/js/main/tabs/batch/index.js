@@ -5,7 +5,7 @@ import Tab from '../tab';
 import LintEditor from '../../../linteditor';
 import CodeMirror from 'codemirror';
 
-export default class SimpleTab extends Tab {
+export default class BatchTab extends Tab {
     constructor(...args) {
         super(...args)
             .bindNode('content', getContent(this))

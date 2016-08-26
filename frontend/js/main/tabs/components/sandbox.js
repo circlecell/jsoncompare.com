@@ -1,12 +1,7 @@
-import style from './style.css';
+import style from '../style.css';
 
-export default owner => (<div>
-    <ul class="tab-nav">
-        {owner.simple.nodes.menuItem}
-        
-    </ul>
-
-    <div>
-        {owner.simple.nodes.sandbox}
-    </div>
+export default owner => (<div class={style.tabs}>
+    {owner.simple.nodes.sandbox}
+    {owner.merge.nodes.sandbox}
+    {owner.batch.nodes.sandbox}
 </div>)

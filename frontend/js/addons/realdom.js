@@ -26,10 +26,10 @@ module.exports = function realDOM(element, attributes, ...children) {
                     if(bindKey !== 'owner') {
                         if(binders && 'length' in binders) {
                             for(const binder of binders) {
-                                bindNode(owner, element, bindKey, binder)
+                                bindNode(owner, bindKey, element, binder)
                             }
                         } else {
-                            bindNode(owner, element, bindKey, binders)
+                            bindNode(owner, bindKey, element, binders)
                         }
 
                     }
@@ -44,7 +44,11 @@ module.exports = function realDOM(element, attributes, ...children) {
         if(typeof child === 'string') {
             child = document.createTextNode(child);
         }
-        console.log(child);
+
+        if(!(child instanceof Node)) {
+            throw Error('Matreshka JSX can contain strings or nodes, not ' + typeof child);
+        }
+
         element.appendChild(child);
     }
 
