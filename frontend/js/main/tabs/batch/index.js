@@ -4,35 +4,43 @@ import getContent from './components/content';
 import Tab from '../tab';
 import LintEditor from '../../../linteditor';
 import CodeMirror from 'codemirror';
+import BatchItems from './batch-items';
 
 export default class BatchTab extends Tab {
     constructor(...args) {
         super(...args)
+            .jset({ items: [{}, {}] })
+            .setClassFor({
+                items: BatchItems
+            })
             .bindNode('content', getContent(this))
             .bindSandbox(getSandbox(this))
-            .jset({ value: '' })
             .on({
                 tabfocus: () => {
-                    this.editor.focus();
-                }
+                    // this.editor.focus();
+                },
+                'change:files': () => {
+                    this.items.recreate(this.files.map(file => ({
+                        value: file.readerResult
+                    })));
+                },
+                'items@modify': () => this.trigger('modify')
             });
-
     }
 
     initialize() {
-        this.editor = new LintEditor({
-            codeMirror: new CodeMirror(this.nodes.content),
-            owner: this,
-            ownerCodeProperty: 'value'
-        });
+        this.items.rerender();
     }
 
     toJSON() {
-        return encodeURIComponent(this.value);
+        return this.items.map(item => encodeURIComponent(item.value));
     }
 
     fromJSON(value) {
-        this.value = decodeURIComponent(value);
+        this.items.recreate(value.map(item => ({
+            value: decodeURIComponent(item)
+        })));
+
         return this;
     }
 }

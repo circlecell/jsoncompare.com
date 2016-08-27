@@ -1,1 +1,35 @@
 @import '../tab/style.css';
+
+.batchContent {
+    :global {
+        .CodeMirror {
+            height: 400px!important;
+            position: static;
+        }
+    }
+}
+
+.dragovered {
+    .dndMessage {
+        display: block;
+    }
+}
+
+.dndMessage {
+    z-index: 1000;
+    display: none;
+    position: absolute;
+    width: 500px;
+    left: 50%;
+    margin-left: -250px;
+    background: #eeeeee;
+    line-height: 200px;
+    text-align: center;
+    bottom: 40%;
+    border: 2px dashed #aaa;
+    pointer-events: none;
+}
+
+.hasItems {
+
+}
