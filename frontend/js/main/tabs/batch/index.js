@@ -32,6 +32,10 @@ export default class BatchTab extends Tab {
         this.items.rerender();
     }
 
+    onAddButtonClick() {
+        this.items.add({});
+    }
+
     toJSON() {
         return this.items.map(item => encodeURIComponent(item.value));
     }

@@ -3,7 +3,7 @@ import makeElement from 'makeelement';
 import jsonlint from 'exports?jsonlint!jsonlint/web/jsonlint';
 import byteSize from 'byte-size';
 import { isUri } from 'valid-url';
-import styles from './linteditor.css';console.log(styles);
+import styles from './linteditor.css';
 import './codemirror-init';
 
 const { html, className } = Matreshka.binders;
@@ -70,7 +70,7 @@ export default class Editor extends Matreshka.Object {
         })
         .bindNode('errorText', ':bound(notifierBlock)', html())
         .bindNode('size', ':bound(sizeBlock)', html())
-        .bindNode('validated', ':bound(lintButton)', className('success'))
+        .bindNode('validated', ':bound(lintButton)', className(styles.lintButtonSuccess))
         .linkProps('size', 'code', code => {
             const bytes = new Blob([code], {
                 type: 'text/javascript'

@@ -1,26 +1,29 @@
-import MK from 'matreshka';
+import Matreshka from 'matreshka';
 import CodeMirror from 'codemirror';
-import getRenderer from './components/renderer';
+import getSandbox from './components/sandbox';
+import LintEditor from '../../../../../linteditor';
 
-export default class BatchItem extends MK.Object {
-    renderer = getRenderer;
-    constructor(...args) {
-        super(...args);
-        this.jset({
+export default class BatchItem extends Matreshka.Object {
+    renderer = getSandbox;
+    constructor(data, parent) {
+        super(data).jset({
             value: this.value || ''
         })
+        .set({ parent })
         .on('afterrender', this.onAfterRender);
     }
 
     onAfterRender() {
-        this.editor = new CodeMirror(this.sandbox);
+        this.editor = new LintEditor({
+            codeMirror: new CodeMirror(this.nodes.sandbox),
+            owner: this,
+            ownerCodeProperty: 'value'
+        });
 
-        this
-            .bindNode({
-                deleteButton: '<span class="delete-editor" title="Delete"></span>',
-                value: this.editor.display.wrapper
-            })
-            .appendNode('deleteButton', ':sandbox .CodeMirror')
-            .trigger('initialize', this);
+        this.trigger('initialize', this);
+    }
+
+    onClickDelete() {
+        this.parent.onItemClickDelete(this);
     }
 }

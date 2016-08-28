@@ -1,0 +1,17 @@
+.batchItem {
+    position: relative;
+    border-bottom: 1px solid #bbb;
+}
+
+.deleteButton {
+    composes: lintEditorButton from "../../../../../linteditor/linteditor.css";
+    position: absolute;
+    bottom: 90px;
+    z-index: 3;
+
+    &::before {
+        content: '✕';
+        font-size: 2rem;
+        line-height: 40px;
+    }
+}

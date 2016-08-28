@@ -32,7 +32,7 @@
 
 
 
-    
+
 
     .CodeMirror {
         border-top: 1px solid #ddd;
@@ -40,20 +40,6 @@
         .CodeMirror-merge & {
             border: none;
         }
-
-
-        .delete-editor {
-            position: absolute;
-            bottom: 90px;
-            z-index: 3;
-
-            &::before {
-                content: '✕';
-            }
-        }
-
-
-
     }
 
 

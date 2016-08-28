@@ -30,6 +30,47 @@
     pointer-events: none;
 }
 
-.hasItems {
+.batchButtons {
+    transition: bottom 0.5s ease-out 0s, left 0.5s ease-out 0s;
+    pointer-events: none;
+    text-align: center;
+    width: 380px;
+    left: calc(50% - 190px);
+    bottom: 50%;
+    position: fixed;
+    z-index: 4;
 
+    h3 {
+        transition: opacity  0.5s ease-out 0s;
+    }
+}
+
+.hasItems {
+    .batchButtons {
+        left: 20px;
+        bottom: 40px;
+
+        h3 {
+            opacity: 0;
+        }
+    }
+}
+
+.addField {
+    pointer-events: all;
+    background: #fff;
+}
+
+.addFiles {
+    pointer-events: all;
+    background: #fff;
+    position: relative;
+
+    input {
+        position: absolute;
+        z-index: 1;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+    }
 }

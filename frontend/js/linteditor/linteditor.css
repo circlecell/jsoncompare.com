@@ -36,15 +36,17 @@
 .lintButton {
     composes: lintEditorButton;
     top: 20px;
-    &.success {
-        background-color: #BCD183;
-        border: 1px solid #D2D4DB;
-        &::before {
-            opacity: 1;
-        }
-    }
+
     &::before {
         content: '✓';
+    }
+}
+
+.lintButtonSuccess {
+    background-color: #BCD183;
+    border: 1px solid #D2D4DB;
+    &::before {
+        opacity: 1;
     }
 }
 

@@ -19,7 +19,7 @@ module.exports = function realDOM(element, attributes, ...children) {
             } else if(name === 'bind') {
                 const owner = value.owner;
                 if(!owner) {
-                    throw Error('owner is missing')
+                    throw Error('binding owner is missing');
                 }
 
                 for(let [bindKey, binders] of Object.entries(value)) {
