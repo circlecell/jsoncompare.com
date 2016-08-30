@@ -3,12 +3,12 @@ import makeElement from 'makeelement';
 import jsonlint from 'exports?jsonlint!jsonlint/web/jsonlint';
 import byteSize from 'byte-size';
 import { isUri } from 'valid-url';
-import styles from './linteditor.css';
+import styles from './style.css';
 import './codemirror-init';
 
 const { html, className } = Matreshka.binders;
 
-export default class Editor extends Matreshka.Object {
+export default class LintEditor extends Matreshka.Object {
     constructor({
         codeMirror,
         owner,
@@ -84,6 +84,8 @@ export default class Editor extends Matreshka.Object {
         .events();
 
         owner.linkProps(ownerCodeProperty, [this, 'code']);
+
+
     }
 
     events() {
@@ -105,6 +107,9 @@ export default class Editor extends Matreshka.Object {
                 this.errorLine = null;
                 this.errorText = '';
                 this.validated = false;
+            })
+            .on('lint', () => {
+                Matreshka.trigger(LintEditor, 'lint', this);
             });
     }
 
@@ -119,11 +124,13 @@ export default class Editor extends Matreshka.Object {
             JSON.parse(code);
             this.validated = true;
             this.errorText = '';
+            this.trigger('lint');
         } catch (_e) {
             try {
                 jsonlint.parse(code);
                 this.validated = true;
                 this.errorText = '';
+                this.trigger('lint');
             } catch (e) {
                 // retrieve line number from error
                 const lineMatches = e.message.match(/line ([0-9]*)/);

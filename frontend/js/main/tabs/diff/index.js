@@ -5,7 +5,7 @@ import Tab from '../tab';
 import LintEditor from '../../../linteditor';
 import CodeMirror from 'codemirror';
 
-export default class MergeTab extends Tab {
+export default class DiffTab extends Tab {
     constructor(...args) {
         super(...args)
             .jset({

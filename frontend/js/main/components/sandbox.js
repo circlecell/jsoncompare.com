@@ -1,21 +1,10 @@
 import style from '../style.css';
+import getLoader from './loader';
+import getSettings from './settings';
 
-/*<div>
-    <select class="reformat">
-        <option value="">Keep JSON as is</option>
-        <option value="beautify">Beautify on validate</option>
-        <option value="minify">Minify on validate</option>
-    </select>
-
-    <button
-        onClick={() => owner.onClickSave()}
-        class={style.saveButton}
-        data-save-text="Save"
-        data-saved-text="Saved"
-    ></button>
-</div>*/
-
-export default owner => (<main>
+export default owner => (<main class={style.main}>
+    {getSettings(owner)}
     {owner.tabs.nodes.nav}
     {owner.tabs.nodes.sandbox}
+    {getLoader(owner)}
 </main>)

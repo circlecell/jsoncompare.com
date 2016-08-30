@@ -16,7 +16,6 @@ export default class SimpleTab extends Tab {
                     this.editor.focus();
                 }
             });
-
     }
 
     initialize() {

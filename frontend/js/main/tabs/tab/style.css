@@ -10,24 +10,8 @@
     flex: 1;
 
     :global {
-        .CodeMirror {
-            width: 100%;
-        }
-
-        .CodeMirror {
+        .CodeMirror, .CodeMirror-merge {
             border-top: none;
-            height: 100%!important;
-            position: absolute;
-        }
-
-        .CodeMirror-merge {
-            border-top: none;
-            width: 100%;
-            position: absolute;
-        }
-
-        .CodeMirror-merge, .CodeMirror-merge-pane {
-            height: 100%!important;
         }
     }
 }

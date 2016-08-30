@@ -4,7 +4,7 @@
 }
 
 .deleteButton {
-    composes: lintEditorButton from "../../../../../linteditor/linteditor.css";
+    composes: lintEditorButton from "../../../../../linteditor/style.css";
     position: absolute;
     bottom: 90px;
     z-index: 3;

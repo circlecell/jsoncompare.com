@@ -1,3 +1,40 @@
+.main {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.settings {
+    position: absolute;
+    right: 5px;
+    top: 20px;
+
+    select {
+        /* TODO COMPOSE BUTTON */
+        height: 38px;
+        background: white;
+        border: 1px solid #bbb;
+        border-radius: 4px;
+        margin-right: 1rem;
+        color: #555;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 0 10px;
+
+        option {
+            font-weight: normal;
+            text-transform: none;
+        }
+
+        &:focus {
+            border-color: #888;
+            outline: none;
+        }
+    }
+}
+
 .saveButton {
     &::before {
         content: attr(data-save-text);
@@ -6,4 +43,40 @@
     &:disabled::before {
         content: attr(data-saved-text);
     }
+}
+
+
+.loader {
+    position: fixed;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+    z-index: 10;
+  color: #aaa;
+
+  font-family: Consolas, Menlo, Monaco, monospace;
+  font-weight: bold;
+  font-size: 2rem;
+
+  opacity: 0.8;
+
+}
+
+.loaderBracketLeft, .loaderBracketRight {
+  display: inline-block;
+  animation: pulse 0.4s alternate infinite ease-in-out;
+
+
+}
+
+.loaderBracketRight {
+   animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
 }

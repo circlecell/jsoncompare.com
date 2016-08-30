@@ -9,7 +9,7 @@ import BatchItems from './batch-items';
 export default class BatchTab extends Tab {
     constructor(...args) {
         super(...args)
-            .jset({ items: [{}, {}] })
+            .jset({ items: [] })
             .setClassFor({
                 items: BatchItems
             })
@@ -20,11 +20,16 @@ export default class BatchTab extends Tab {
                     // this.editor.focus();
                 },
                 'change:files': () => {
-                    this.items.recreate(this.files.map(file => ({
-                        value: file.readerResult
-                    })));
+                    this.items.recreate();
+
+                    for(const file of this.files) {
+                        this.items.push({
+                            value: file.readerResult,
+                            lintImmediately: true
+                        });
+                    }
                 },
-                'items@modify': () => this.trigger('modify')
+                'items@modify items.*@modify': () => this.trigger('modify')
             });
     }
 

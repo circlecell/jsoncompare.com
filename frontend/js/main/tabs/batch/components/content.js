@@ -5,7 +5,7 @@ const { dropFiles, file, dragOver, className } = Matreshka.binders;
 
 export default owner => (<div class={style.batchContent} bind={{
     owner,
-    files: [dropFiles('text')/*, file('text')*/],
+    files: [dropFiles('text')],
     dragovered: [dragOver(), className(style.dragovered)],
     'items.length': className(style.hasItems)
 }}>
@@ -15,7 +15,7 @@ export default owner => (<div class={style.batchContent} bind={{
         <h3>Drop files there, open files or add fields manually</h3>
 
         <button class={style.addFiles}>
-            <input type="file" multiple />
+            <input type="file" multiple bind={{ owner, files: file('text')}}/>
             Open files
         </button>
         <button

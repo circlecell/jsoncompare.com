@@ -59,12 +59,14 @@
 .addField {
     pointer-events: all;
     background: #fff;
+    margin-left: 5px;
 }
 
 .addFiles {
     pointer-events: all;
     background: #fff;
     position: relative;
+    margin-right: 5px;
 
     input {
         position: absolute;

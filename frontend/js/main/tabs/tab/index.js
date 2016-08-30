@@ -2,14 +2,18 @@ import Matreshka from 'matreshka';
 import getNavItem from './components/navitem';
 
 export default class Tab extends Matreshka.Object {
-    constructor(data, parent) {
+    constructor(data, parent, name) {
         super(data)
-            .set({ parent })
+            .set({ parent, name })
             .bindNode('navItem', getNavItem(this))
-            .onDebounce('change:isActive', () => {
-                if(!this.initialized) {
-                    this.initialize();
-                    this.initialized = true;
+            .onDebounce('change:isActive', evt => {
+                if(evt.value) {
+                    if(!this.initialized) {
+                        this.initialize();
+                        this.initialized = true;
+                    }
+
+                    this.trigger('tabfocus', this);
                 }
             });
     }

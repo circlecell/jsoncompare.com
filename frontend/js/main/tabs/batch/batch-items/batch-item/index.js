@@ -6,7 +6,9 @@ import LintEditor from '../../../../../linteditor';
 export default class BatchItem extends Matreshka.Object {
     renderer = getSandbox;
     constructor(data, parent) {
-        super(data).jset({
+        super()
+        .set(data)
+        .jset({
             value: this.value || ''
         })
         .set({ parent })
@@ -19,6 +21,10 @@ export default class BatchItem extends Matreshka.Object {
             owner: this,
             ownerCodeProperty: 'value'
         });
+
+        if(this.lintImmediately) {
+            this.editor.lint();
+        }
 
         this.trigger('initialize', this);
     }

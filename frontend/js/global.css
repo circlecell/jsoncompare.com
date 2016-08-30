@@ -30,19 +30,6 @@
         flex-direction: column;
     }
 
-
-
-
-
-    .CodeMirror {
-        border-top: 1px solid #ddd;
-
-        .CodeMirror-merge & {
-            border: none;
-        }
-    }
-
-
     .button,
     button,
     input[type="submit"],
@@ -107,38 +94,6 @@
       border-color: #1EAEDB; }
 
 
-      .loader {
-          position: fixed;
-          top: 50%;
-          width: 100%;
-          text-align: center;
-          pointer-events: none;
-          z-index: 10;
-        color: #aaa;
-
-        font-family: Consolas, Menlo, Monaco, monospace;
-        font-weight: bold;
-        font-size: 2rem;
-
-        opacity: 0.8;
-
-
-
-        .loader-bracket {
-          display: inline-block;
-          animation: pulse 0.4s alternate infinite ease-in-out;
-
-         &-right {
-            animation-delay: 0.4s;
-          }
-        }
-      }
-
-      @keyframes pulse {
-        to {
-          transform: scale(1.5);
-          opacity: 0.5;
-        }
-      }
+      
 
 }
