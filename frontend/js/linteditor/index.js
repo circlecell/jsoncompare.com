@@ -4,6 +4,7 @@ import jsonlint from 'exports?jsonlint!jsonlint/web/jsonlint';
 import byteSize from 'byte-size';
 import { isUri } from 'valid-url';
 import styles from './style.css';
+import getExtras from './components/extras';
 import './codemirror-init';
 
 const { html, className } = Matreshka.binders;
@@ -14,37 +15,17 @@ export default class LintEditor extends Matreshka.Object {
         owner,
         ownerCodeProperty
     }) {
-        super();
-        this.set({
+        super()
+        .set({
             codeMirror,
             errorLine: null,
             errorText: '',
             validated: false
         })
-        this.bindNode({
+        .bindNode({
             sandbox: this.codeMirror.display.wrapper,
-            lintButton: makeElement('div', {
-                className: styles.lintButton,
-                title: 'Lint'
-            }),
-            clearButton: makeElement('div', {
-                className: styles.clearButton,
-                title: 'Clear'
-            }),
-            notifierBlock: makeElement('div', {
-                className: styles.lintNotifier
-            }),
-            sizeBlock: makeElement('div', {
-                className: styles.sizeBlock,
-                title: 'Size'
-            })
+            extras: getExtras(this)
         })
-        .appendNode([
-            'lintButton',
-            'clearButton',
-            'notifierBlock',
-            'sizeBlock'
-        ], ':sandbox')
         .bindNode('code', ':sandbox', {
             on(callback) {
                 this.CodeMirror.on('change', callback);
@@ -68,9 +49,7 @@ export default class LintEditor extends Matreshka.Object {
                 }
             }
         })
-        .bindNode('errorText', ':bound(notifierBlock)', html())
-        .bindNode('size', ':bound(sizeBlock)', html())
-        .bindNode('validated', ':bound(lintButton)', className(styles.lintButtonSuccess))
+        .appendNode('extras', ':sandbox')
         .linkProps('size', 'code', code => {
             const bytes = new Blob([code], {
                 type: 'text/javascript'
@@ -88,21 +67,20 @@ export default class LintEditor extends Matreshka.Object {
 
     }
 
+    onClearButtonClick() {
+        this.code = '';
+    }
+
+    onLintButtonClick() {
+        if(isUri(this.code.trim())) {
+            this.lintRemoteResource();
+        } else {
+            this.lint();
+        }
+    }
+
     events() {
         return this
-            .on('click::clearButton', () => {
-                this.value = '';
-            })
-            .on('click::lintButton', () => {
-                if(isUri(this.code.trim())) {
-                    this.lintRemoteResource();
-                } else {
-                    this.lint();
-                }
-            })
-            .on('click::clearButton', () => {
-                this.code = '';
-            })
             .on('change:code', () => {
                 this.errorLine = null;
                 this.errorText = '';
