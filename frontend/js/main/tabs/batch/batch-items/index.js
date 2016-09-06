@@ -1,12 +1,12 @@
-import MK from 'matreshka';
+import MatreshkaArray from 'matreshka/array';
 import BatchItem from './batch-item';
-import getSandbox from './components/sandbox'
+import Sandbox from './components/sandbox';
 
-export default class BatchItems extends MK.Array {
+export default class BatchItems extends MatreshkaArray {
     Model = BatchItem;
-    constructor(data, { nodes }) {
+    constructor(data) {
         super(...data)
-            .bindSandbox(getSandbox(this))
+            .bindSandbox(<Sandbox owner={this} />)
             .recreate(data, {
                 dontRender: true
             });

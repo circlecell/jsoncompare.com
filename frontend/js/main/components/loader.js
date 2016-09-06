@@ -1,13 +1,14 @@
-import Matreshka from 'matreshka';
+import display from 'matreshka/binders/display';
 import style from '../style.css';
 
-const { display } = Matreshka.binders;
-
-export default owner => (<div class={style.loader} bind={{
-    owner,
-    loading: display()
-}}>
-      <span class={style.loaderBracketLeft}>{'{'}</span>
+export default ({ owner }) => (<div
+    className={style.loader}
+    bind={{
+        owner,
+        loading: display()
+    }}
+>
+    <span className={style.loaderBracketLeft}>{'{'}</span>
     "loading": true
-      <span class={style.loaderBracketRight}>{'}'}</span>
-</div>)
+    <span className={style.loaderBracketRight}>{'}'}</span>
+</div>);

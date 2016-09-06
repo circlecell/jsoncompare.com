@@ -1,16 +1,16 @@
-import Matreshka from 'matreshka';
-import getSandbox from '../tab/components/sandbox';
-import getContent from './components/content';
+import CodeMirror from 'codemirror';
+import Sandbox from '../tab/components/sandbox';
+import Content from './components/content';
 import Tab from '../tab';
 import LintEditor from '../../../linteditor';
-import CodeMirror from 'codemirror';
 
 export default class SimpleTab extends Tab {
     constructor(...args) {
         super(...args)
-            .bindNode('content', getContent(this))
-            .bindSandbox(getSandbox(this))
-            .jset({ value: '' })
+            .bindNode('content', <Content owner={this} />)
+            .bindSandbox(<Sandbox owner={this} />)
+            .addDataKeys('value')
+            .setData({ value: '' })
             .on({
                 tabfocus: () => {
                     this.editor.focus();

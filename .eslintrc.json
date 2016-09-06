@@ -6,11 +6,16 @@
         "airbnb"
     ],
     "rules": {
-        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-indent": ["error", 4],
         "no-var": "error",
-        "comma-dangle": 0,
-        "global-require": 0,
-        "import/no-unresolved": 0
+        "comma-dangle": ["error", "never"],
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+        "import/no-unresolved": 0,
+        "react/react-in-jsx-scope": 0,
+        "react/jsx-filename-extension": 0,
+        "react/prop-types": 0
     },
     "env": {
         "browser": true

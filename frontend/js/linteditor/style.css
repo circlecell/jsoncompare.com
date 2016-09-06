@@ -8,6 +8,7 @@
 }
 
 .lintEditorButton {
+    z-index: 2;
     position: absolute;
     background-color: rgba(229, 233,235,0.8);
     border: 1px solid #D2D4DB;

@@ -1,14 +1,16 @@
-import Matreshka from 'matreshka';
-import getSandbox from './components/sandbox'
+import Matreshka from 'matreshka/matreshka';
+import initRouter from 'matreshka-router';
+import beautify from 'js-beautify/js/lib/beautify';
+import minify from 'jsonminify';
+import Sandbox from './components/sandbox';
 import Tabs from './tabs';
 import LintEditor from '../linteditor';
 
 export default class Main extends Matreshka {
     constructor() {
         super();
-        this
-            .initRouter('mode/id')
-            .setClassFor('tabs', Tabs)
+        initRouter(this, 'mode/id')
+            .instantiate('tabs', Tabs)
             .set({
                 memo: {},
                 mode: this.mode || 'simple',
@@ -16,9 +18,8 @@ export default class Main extends Matreshka {
                 saved: true,
                 loading: false
             })
-            .bindSandbox(getSandbox(this))
+            .bindSandbox(<Sandbox owner={this} />)
             .bindNode('win', window)
-            .appendNode('sandbox', 'body')
             .on({
                 'tabs@change:activeTab': evt => {
                     this.mode = evt.value.name;
@@ -50,12 +51,27 @@ export default class Main extends Matreshka {
                 }
             }, 500);
 
+        document.body.appendChild(this.nodes.sandbox);
+
         if (this.id) {
             this.restore(this.id);
         }
 
         Matreshka.on(LintEditor, 'lint', instance => {
-            alert('lobal lint event');
+            const { reformat } = this;
+            let { code } = instance;
+
+            if (reformat === 'minify') {
+                code = minify(code);
+            } else if (reformat === 'beautify') {
+                code = beautify.js_beautify(code, {
+                    indent_with_tabs: true
+                });
+            }
+
+            instance.set({ code }, {
+                fromReformat: true
+            });
         });
 
         window.onbeforeunload = this.beforeUnload.bind(this);

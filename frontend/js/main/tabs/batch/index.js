@@ -1,20 +1,17 @@
-import Matreshka from 'matreshka';
-import getSandbox from '../tab/components/sandbox';
-import getContent from './components/content';
+import Sandbox from '../tab/components/sandbox';
+import Content from './components/content';
 import Tab from '../tab';
-import LintEditor from '../../../linteditor';
-import CodeMirror from 'codemirror';
 import BatchItems from './batch-items';
 
 export default class BatchTab extends Tab {
     constructor(...args) {
         super(...args)
-            .jset({ items: [] })
-            .setClassFor({
+            .setData({ items: [] })
+            .instantiate({
                 items: BatchItems
             })
-            .bindNode('content', getContent(this))
-            .bindSandbox(getSandbox(this))
+            .bindNode('content', <Content owner={this} />)
+            .bindSandbox(<Sandbox owner={this} />)
             .on({
                 tabfocus: () => {
                     // this.editor.focus();
@@ -22,7 +19,7 @@ export default class BatchTab extends Tab {
                 'change:files': () => {
                     this.items.recreate();
 
-                    for(const file of this.files) {
+                    for (const file of this.files) {
                         this.items.push({
                             value: file.readerResult,
                             lintImmediately: true

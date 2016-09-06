@@ -7,7 +7,9 @@ import path from 'path';
 const { NODE_ENV } = process.env;
 
 const plugins = [
-    new webpack.ProvidePlugin({ realDOM: path.join(__dirname, '../frontend/js/addons/realdom') }),
+    new webpack.ProvidePlugin({
+        RealDOM: path.join(__dirname, '../frontend/js/realdom')
+    }),
     new ExtractTextPlugin('css/style.css', {
         allChunks: true
     }),
@@ -23,11 +25,11 @@ const plugins = [
     }),
     new SplitByPathPlugin([{
         name: 'vendor',
-        path: path.join(__dirname, '..', 'frontend/node_modules/'),
+        path: path.join(__dirname, '..', 'frontend/node_modules/')
     }], {
         // fix https://github.com/webpack/extract-text-webpack-plugin/issues/92
         ignore: [/\.css/]
-    }),
+    })
 ];
 
 if (NODE_ENV === 'production') {

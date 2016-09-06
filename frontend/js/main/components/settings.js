@@ -1,9 +1,7 @@
+import className from 'matreshka/binders/classname';
 import style from '../style.css';
-import Matreshka from 'matreshka';
 
-const { className } = Matreshka.binders;
-
-export default owner => (<div class={style.settings}>
+export default ({ owner }) => (<div className={style.settings}>
     <select bind={{ owner, reformat: {} }}>
         <option value="">Keep JSON as is</option>
         <option value="beautify">Beautify on validate</option>
@@ -12,12 +10,12 @@ export default owner => (<div class={style.settings}>
 
     <button
         onClick={() => owner.onClickSave()}
-        class={style.saveButton}
+        className={style.saveButton}
         data-save-text="Save"
         data-saved-text="Saved"
         bind={{
             owner,
             saved: className('disabled')
         }}
-    ></button>
+    />
 </div>);

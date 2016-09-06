@@ -16,6 +16,7 @@
 }
 
 .dndMessage {
+    font-size: 1.5rem;
     z-index: 1000;
     display: none;
     position: absolute;

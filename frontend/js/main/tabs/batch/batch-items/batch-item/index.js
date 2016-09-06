@@ -1,14 +1,14 @@
-import Matreshka from 'matreshka';
+import MatreshkaObject from 'matreshka/object';
 import CodeMirror from 'codemirror';
-import getSandbox from './components/sandbox';
+import Sandbox from './components/sandbox';
 import LintEditor from '../../../../../linteditor';
 
-export default class BatchItem extends Matreshka.Object {
-    renderer = getSandbox;
+export default class BatchItem extends MatreshkaObject {
+    renderer = Sandbox;
     constructor(data, parent) {
         super()
         .set(data)
-        .jset({
+        .setData({
             value: this.value || ''
         })
         .set({ parent })
@@ -22,7 +22,7 @@ export default class BatchItem extends Matreshka.Object {
             ownerCodeProperty: 'value'
         });
 
-        if(this.lintImmediately) {
+        if (this.lintImmediately) {
             this.editor.lint();
         }
 

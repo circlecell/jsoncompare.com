@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { Validator } from 'jsonschema';
-import AppState from './app-state-schema';
 import AWS from 'aws-sdk';
 import md5 from 'md5';
 import request from 'request';
 import { isUri } from 'valid-url';
 import path from 'path';
+import AppState from './app-state-schema';
 
 AWS.config.loadFromPath(
     path.resolve(__dirname, '../../jsonlint_aws_credentials.json')

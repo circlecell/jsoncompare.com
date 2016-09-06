@@ -1,1 +1,1 @@
-export default owner => (<div></div>);
+export default () => (<div />);

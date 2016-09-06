@@ -1,24 +1,24 @@
-import Matreshka from 'matreshka';
+import MatreshkaObject from 'matreshka/object';
 import SimpleTab from './simple';
 import BatchTab from './batch';
 import DiffTab from './diff';
-import getSandbox from './components/sandbox';
-import getNav from './components/nav';
+import Sandbox from './components/sandbox';
+import Nav from './components/nav';
 
-export default class Tabs extends Matreshka.Object {
+export default class Tabs extends MatreshkaObject {
     constructor() {
         super({
             simple: { title: 'Simple' },
             batch: { title: 'Batch' },
             diff: { title: 'Merge' }
         })
-        .setClassFor({
+        .instantiate({
             simple: SimpleTab,
             batch: BatchTab,
             diff: DiffTab
         })
-        .bindSandbox(getSandbox(this))
-        .bindNode('nav', getNav(this))
+        .bindSandbox(<Sandbox owner={this} />)
+        .bindNode('nav', <Nav owner={this} />)
         .on({
             '*@change:isActive': evt => {
                 if (evt.value) {
@@ -35,7 +35,7 @@ export default class Tabs extends Matreshka.Object {
     }
 
     onNavItemClick(item) {
-        for(const tab of this) {
+        for (const tab of this) {
             tab.isActive = item === tab;
         }
     }

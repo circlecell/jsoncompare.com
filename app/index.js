@@ -1,7 +1,7 @@
-import api from './api';
 import bodyParser from 'body-parser';
 import path from 'path';
 import express from 'express';
+import api from './api';
 
 const app = express();
 const { PORT, NODE_ENV, API_ONLY } = process.env;
@@ -17,10 +17,13 @@ if (!NODE_ENV) {
 app.set('port', PORT);
 
 if (NODE_ENV === 'development') {
+    // eslint-disable-next-line global-require
     const config = require('../webpack/webpack.config.babel');
+    // eslint-disable-next-line global-require
     const webpackDevMiddleware = require('webpack-dev-middleware');
-    //const webpackHotMiddleware = require('webpack-hot-middleware');
+    // eslint-disable-next-line global-require
     const webpack = require('webpack');
+
     const compiler = webpack(config);
 
     app.use(webpackDevMiddleware(compiler, {
@@ -33,20 +36,12 @@ if (NODE_ENV === 'development') {
         },
         historyApiFallback: true
     }));
-
-    /*app.use(webpackHotMiddleware(compiler, {
-        log: console.log, // eslint-disable-line no-console
-        path: '/__webpack_hmr',
-        heartbeat: 10 * 1000
-    }));*/
-} else {
-    if (!API_ONLY) {
-        app.use(
-            express.static(
-                path.resolve(__dirname, '..', 'public')
-            )
-        );
-    }
+} else if (!API_ONLY) {
+    app.use(
+        express.static(
+            path.resolve(__dirname, '..', 'public')
+        )
+    );
 }
 
 app.use(bodyParser.urlencoded({

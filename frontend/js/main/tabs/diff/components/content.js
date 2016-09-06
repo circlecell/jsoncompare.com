@@ -1,3 +1,3 @@
 import style from '../style.css';
 
-export default owner => (<div class={style.flexContent}></div>)
+export default () => (<div className={style.flexContent} />);

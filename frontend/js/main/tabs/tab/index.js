@@ -1,14 +1,14 @@
-import Matreshka from 'matreshka';
-import getNavItem from './components/navitem';
+import MatreshkaObject from 'matreshka/object';
+import NavItem from './components/navitem';
 
-export default class Tab extends Matreshka.Object {
+export default class Tab extends MatreshkaObject {
     constructor(data, parent, name) {
         super(data)
             .set({ parent, name })
-            .bindNode('navItem', getNavItem(this))
+            .bindNode('navItem', <NavItem owner={this} />)
             .onDebounce('change:isActive', evt => {
-                if(evt.value) {
-                    if(!this.initialized) {
+                if (evt.value) {
+                    if (!this.initialized) {
                         this.initialize();
                         this.initialized = true;
                     }

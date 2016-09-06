@@ -1,4 +1,5 @@
 import path from 'path';
+
 const { NODE_ENV } = process.env;
 const root = path.resolve(__dirname, '..');
 let filename;
@@ -19,7 +20,7 @@ const output = {
     publicPath: '/'
 };
 
-if(NODE_ENV === 'development') {
+if (NODE_ENV === 'development') {
     Object.assign(output, {
         libraryTarget: 'var',
         library: '[name]'

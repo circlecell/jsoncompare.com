@@ -1,10 +1,10 @@
 import style from '../style.css';
-import getLoader from './loader';
-import getSettings from './settings';
+import Loader from './loader';
+import Settings from './settings';
 
-export default owner => (<main class={style.main}>
-    {getSettings(owner)}
+export default ({ owner }) => (<main className={style.main}>
+    <Settings owner={owner} />
     {owner.tabs.nodes.nav}
     {owner.tabs.nodes.sandbox}
-    {getLoader(owner)}
-</main>)
+    <Loader owner={owner} />
+</main>);

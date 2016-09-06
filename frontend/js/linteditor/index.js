@@ -1,15 +1,13 @@
-import Matreshka from 'matreshka';
-import makeElement from 'makeelement';
+import MatreshkaObject from 'matreshka/object';
+import trigger from 'matreshka/trigger';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import jsonlint from 'exports?jsonlint!jsonlint/web/jsonlint';
 import byteSize from 'byte-size';
 import { isUri } from 'valid-url';
-import styles from './style.css';
-import getExtras from './components/extras';
+import Extras from './components/extras';
 import './codemirror-init';
 
-const { html, className } = Matreshka.binders;
-
-export default class LintEditor extends Matreshka.Object {
+export default class LintEditor extends MatreshkaObject {
     constructor({
         codeMirror,
         owner,
@@ -23,8 +21,7 @@ export default class LintEditor extends Matreshka.Object {
             validated: false
         })
         .bindNode({
-            sandbox: this.codeMirror.display.wrapper,
-            extras: getExtras(this)
+            sandbox: this.codeMirror.display.wrapper
         })
         .bindNode('code', ':sandbox', {
             on(callback) {
@@ -38,33 +35,43 @@ export default class LintEditor extends Matreshka.Object {
             }
         })
         .bindNode('errorLine', ':sandbox', {
-            setValue(value, bindingOptions) {
-                const { CodeMirror: codeMirror } = this;
-                const { previousErrorLine } = codeMirror;
-                if(value !== null) {
-                    codeMirror.addLineClass(value, 'background', 'lint-line-error');
-                    codeMirror.previousErrorLine = value;
-                } else if(typeof previousErrorLine === 'number') {
-                    codeMirror.removeLineClass(previousErrorLine, 'background', 'lint-line-error');
+            setValue(value) {
+                const { CodeMirror: codeMirrorInstance } = this;
+                const { previousErrorLine } = codeMirrorInstance;
+
+                if (value !== null) {
+                    codeMirrorInstance.addLineClass(value, 'background', 'lint-line-error');
+                    codeMirrorInstance.previousErrorLine = value;
+                } else if (typeof previousErrorLine === 'number') {
+                    codeMirrorInstance.removeLineClass(
+                        previousErrorLine, 'background', 'lint-line-error'
+                    );
                 }
             }
         })
-        .appendNode('extras', ':sandbox')
-        .linkProps('size', 'code', code => {
+
+        .calc('size', 'code', code => {
             const bytes = new Blob([code], {
                 type: 'text/javascript'
             }).size;
-
-            return bytes ? byteSize(bytes, {
+            const { value, unit } = byteSize(bytes, {
                 units: 'iec'
-            }) : '';
+            });
+
+            return bytes ? value + unit : '';
         })
-        .linkProps('code', [owner, ownerCodeProperty])
+        .calc('code', {
+            object: owner,
+            key: ownerCodeProperty
+        })
         .events();
 
-        owner.linkProps(ownerCodeProperty, [this, 'code']);
+        owner.calc(ownerCodeProperty, {
+            object: this,
+            key: 'code'
+        });
 
-
+        this.nodes.sandbox.appendChild(<Extras owner={this} />);
     }
 
     onClearButtonClick() {
@@ -72,7 +79,7 @@ export default class LintEditor extends Matreshka.Object {
     }
 
     onLintButtonClick() {
-        if(isUri(this.code.trim())) {
+        if (isUri(this.code.trim())) {
             this.lintRemoteResource();
         } else {
             this.lint();
@@ -81,13 +88,15 @@ export default class LintEditor extends Matreshka.Object {
 
     events() {
         return this
-            .on('change:code', () => {
-                this.errorLine = null;
-                this.errorText = '';
-                this.validated = false;
+            .on('change:code', evt => {
+                if (!evt || !evt.fromReformat) {
+                    this.errorLine = null;
+                    this.errorText = '';
+                    this.validated = false;
+                }
             })
             .on('lint', () => {
-                Matreshka.trigger(LintEditor, 'lint', this);
+                trigger(LintEditor, 'lint', this);
             });
     }
 
@@ -139,7 +148,7 @@ export default class LintEditor extends Matreshka.Object {
             } else {
                 this.errorText = resp.error;
             }
-        } catch(e) {
+        } catch (e) {
             this.errorText = e;
         }
     }
