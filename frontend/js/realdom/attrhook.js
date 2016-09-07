@@ -1,4 +1,4 @@
-import { bindNode } from 'matreshka';
+import bindNode from 'matreshka/bindnode';
 
 export default {
     className: (element, value) => {

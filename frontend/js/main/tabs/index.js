@@ -10,7 +10,7 @@ export default class Tabs extends MatreshkaObject {
         super({
             simple: { title: 'Simple' },
             batch: { title: 'Batch' },
-            diff: { title: 'Merge' }
+            diff: { title: 'Diff' }
         })
         .instantiate({
             simple: SimpleTab,
