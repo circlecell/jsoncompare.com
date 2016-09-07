@@ -4,7 +4,7 @@ import Sandbox from './components/sandbox';
 import LintEditor from '../../../../../linteditor';
 
 export default class BatchItem extends MatreshkaObject {
-    renderer = Sandbox;
+    renderer = self => <Sandbox owner={self} />;
     constructor(data, parent) {
         super()
         .set(data)

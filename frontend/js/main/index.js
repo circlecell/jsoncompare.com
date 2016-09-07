@@ -55,6 +55,8 @@ export default class Main extends Matreshka {
 
         if (this.id) {
             this.restore(this.id);
+        } else {
+            this.loading = false;
         }
 
         Matreshka.on(LintEditor, {

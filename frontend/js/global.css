@@ -9,7 +9,15 @@
         box-sizing: border-box;
     }
 
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
     body {
+        display: flex;
+        flex-direction: column;
         font-size: 14px;
         line-height: 1.6;
         font-weight: 400;
@@ -17,17 +25,30 @@
         color: var(--main-text-color);
     }
 
+    header {
+        padding: 1rem;
 
-    html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
 
-    main {
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
+        .logo {
+            float: left;
+
+
+            h1, h2 {
+                font-weight: normal;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+        }
+
+        .ad {
+            float: right;
+        }
     }
 
     .button,
