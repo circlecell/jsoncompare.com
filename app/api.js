@@ -24,7 +24,7 @@ router.post('/save', ({ jsonBody, rawBody }, res) => {
     } else {
         const key = md5(rawBody);
         const params = {
-            Bucket: 'jsonlintcom',
+            Bucket: 'jsonlintcome',
             Key: `${key}.json`,
             Body: rawBody,
             ContentType: 'application/json'
@@ -47,7 +47,10 @@ router.post('/proxy', (req, res) => {
     const url = String(req.jsonBody.url).trim();
 
     if (isUri(url)) {
-        request(url, (error, response, body) => {
+        request({
+            timeout: 5000,
+            url
+        }, (error, response, body) => {
             if (error) {
                 res.status(400).json({ error: `Error ${error.code || 'unknown'}` });
             } else if (response.statusCode === 200) {

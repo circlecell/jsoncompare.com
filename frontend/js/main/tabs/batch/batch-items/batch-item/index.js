@@ -15,7 +15,7 @@ export default class BatchItem extends MatreshkaObject {
         .on('afterrender', this.onAfterRender);
     }
 
-    onAfterRender() {console.log('bobobo')
+    onAfterRender() {
         this.editor = new LintEditor({
             codeMirror: new CodeMirror(this.nodes.sandbox),
             owner: this,

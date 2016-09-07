@@ -80,3 +80,25 @@
     opacity: 0.5;
   }
 }
+
+.error {
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    top: 45%;
+    z-index: 4;
+    width: 60%;
+    left: 20%;
+    opacity: 0;
+    -webkit-transition: opacity .5s ease-out;
+    transition: opacity .5s ease-out;
+    background: #FBE3E4;
+    color: #D12F19;
+    border: 1px solid #FBC2C4;
+    padding: 0.8em;
+
+    &:not(:empty) {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}

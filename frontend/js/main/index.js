@@ -96,6 +96,14 @@ export default class Main extends Matreshka {
         this.save();
     }
 
+    error(errorText) {
+        clearTimeout(this.errorTimeout);
+        this.errorText = errorText;
+        this.errorTimeout = setTimeout(() => {
+            this.errorText = '';
+        }, 5000);
+    }
+
     async save() {
         const body = this.toJSONString();
         let foundId;
@@ -115,19 +123,26 @@ export default class Main extends Matreshka {
 
             this.saved = true;
         } else {
-            const resp = await (
-                await fetch('/api/save', {
-                    method: 'post',
-                    body
-                })
-            ).json();
+            try {
+                const { error, key } = await (
+                    await fetch('/api/save', {
+                        method: 'post',
+                        body
+                    })
+                ).json();
 
-            if (!resp.error) {
-                this.set('id', resp.key, {
-                    fromSave: true
-                });
-                this.memo[resp.key] = body;
-                this.saved = true;
+                if (error) {
+                    this.error(error);
+                } else {
+                    this.set('id', key, {
+                        fromSave: true
+                    });
+
+                    this.memo[key] = body;
+                    this.saved = true;
+                }
+            } catch(error) {
+                this.error(error);
             }
         }
 
