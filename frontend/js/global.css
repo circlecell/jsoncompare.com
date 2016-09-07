@@ -53,7 +53,7 @@
       cursor: pointer;
       box-sizing: border-box;
 
-      &.disabled {
+      &:disabled {
           opacity: .5;
           pointer-events: none;
       }
@@ -94,6 +94,6 @@
       border-color: #1EAEDB; }
 
 
-      
+
 
 }

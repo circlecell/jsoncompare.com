@@ -1,4 +1,4 @@
-import className from 'matreshka/binders/classname';
+import prop from 'matreshka/binders/prop';
 import style from '../style.css';
 
 export default ({ owner }) => (<div className={style.settings}>
@@ -15,7 +15,7 @@ export default ({ owner }) => (<div className={style.settings}>
         data-saved-text="Saved"
         bind={{
             owner,
-            saved: className('disabled')
+            saved: prop('disabled')
         }}
     />
 </div>);
