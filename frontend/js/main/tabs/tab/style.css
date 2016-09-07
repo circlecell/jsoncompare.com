@@ -45,3 +45,70 @@
 .activeNavItem {
     border-bottom: 1px solid #fff;
 }
+
+.help {
+  cursor: help;
+  position: relative;
+
+  .helpIcon {
+      &::after {
+          content: '(?)';
+          font-weight: bold;
+          display: inline-block;
+          margin-left: 0.5rem;
+          font-size: 0.8rem;
+          color: #bbb;
+      }
+  }
+
+  .tooltip {
+      line-height: 1.5rem;
+      text-align: center;
+      width: 180px;
+      left: -75px;
+    background: #1496bb;
+    bottom: 100%;
+    color: #fff;
+    display: block;
+
+    margin-bottom: 15px;
+    opacity: 0;
+    padding: 0.5rem;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(10px);
+    transition: all .25s ease-out 0.5s;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  }
+
+  /* This bridges the gap so you can mouse into the tooltip without it disappearing */
+  .tooltip:before {
+    bottom: -20px;
+    content: " ";
+    display: block;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  /* CSS Triangles - see Trevor's post */
+  .tooltip:after {
+    border-left: solid transparent 10px;
+    border-right: solid transparent 10px;
+    border-top: solid #1496bb 10px;
+    bottom: -10px;
+    content: " ";
+    height: 0;
+    left: 50%;
+    margin-left: -13px;
+    position: absolute;
+    width: 0;
+  }
+
+  &:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0px);
+  }
+}

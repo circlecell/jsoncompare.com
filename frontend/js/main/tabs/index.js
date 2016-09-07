@@ -8,9 +8,18 @@ import Nav from './components/nav';
 export default class Tabs extends MatreshkaObject {
     constructor() {
         super({
-            simple: { title: 'Simple' },
-            batch: { title: 'Batch' },
-            diff: { title: 'Diff' }
+            simple: {
+                title: 'Simple',
+                description: 'Simple JSON validation'
+            },
+            batch: {
+                title: 'Batch',
+                description: 'Validate few JSON objects per once'
+            },
+            diff: {
+                title: 'Diff',
+                description: 'Compare and merge two JSON objects'
+            }
         })
         .instantiate({
             simple: SimpleTab,
