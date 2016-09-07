@@ -12,7 +12,7 @@ export default ({ owner }) => (
     >
         {owner.title}
         <span className={style.help}>
-            <span className={style.helpIcon}></span>
+            <span className={style.helpIcon} />
             <span className={style.tooltip}>
                 {owner.description}
             </span>

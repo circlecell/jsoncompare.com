@@ -1,5 +1,5 @@
-import style from '../style.css';
 import text from 'matreshka/binders/text';
+import style from '../style.css';
 
 export default ({ owner }) => (<div
     className={style.error}
@@ -7,4 +7,4 @@ export default ({ owner }) => (<div
         owner,
         errorText: text()
     }}
-/>)
+/>);

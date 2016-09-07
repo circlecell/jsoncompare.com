@@ -31,9 +31,7 @@ export default class BatchTab extends Tab {
             });
     }
 
-    initialize() {
-        //this.items.rerender();
-    }
+    initialize() {}
 
     onAddButtonClick() {
         this.items.add({});
@@ -50,7 +48,7 @@ export default class BatchTab extends Tab {
             dontRender: true
         });
 
-        if(this.isActive) {
+        if (this.isActive) {
             this.items.rerender();
         }
 

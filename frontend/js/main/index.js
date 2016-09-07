@@ -82,7 +82,7 @@ export default class Main extends Matreshka {
             lintRemoteEnd: () => {
                 this.loading = false;
             }
-        })
+        });
 
         window.onbeforeunload = this.beforeUnload.bind(this);
     }
@@ -143,7 +143,7 @@ export default class Main extends Matreshka {
                     this.memo[key] = body;
                     this.saved = true;
                 }
-            } catch(error) {
+            } catch (error) {
                 this.error(error);
             }
         }
