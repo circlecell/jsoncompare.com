@@ -7,8 +7,7 @@
 .tabNav {
     list-style: none;
     border-bottom: 1px solid #bbb;
-    padding: 0 5px;
+    padding: 0 1rem;
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
 }

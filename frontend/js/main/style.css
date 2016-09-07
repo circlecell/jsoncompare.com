@@ -7,8 +7,7 @@
 
 .settings {
     position: absolute;
-    right: 5px;
-    top: 20px;
+    right: 1rem;
 
     select {
         /* TODO COMPOSE BUTTON */
