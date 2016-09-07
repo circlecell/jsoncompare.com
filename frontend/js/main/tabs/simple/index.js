@@ -27,11 +27,11 @@ export default class SimpleTab extends Tab {
     }
 
     toJSON() {
-        return encodeURIComponent(this.value);
+        return btoa(this.value);
     }
 
     fromJSON(value) {
-        this.value = decodeURIComponent(value);
+        this.value = atob(value);
         return this;
     }
 }

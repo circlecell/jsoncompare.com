@@ -48,14 +48,14 @@ export default class DiffTab extends Tab {
 
     toJSON() {
         return {
-            left: encodeURIComponent(this.leftValue),
-            right: encodeURIComponent(this.rightValue)
+            left: btoa(this.leftValue),
+            right: btoa(this.rightValue)
         };
     }
 
     fromJSON(value) {
-        this.leftValue = decodeURIComponent(value.left);
-        this.rightValue = decodeURIComponent(value.right);
+        this.leftValue = atob(value.left);
+        this.rightValue = atob(value.right);
         return this;
     }
 }
