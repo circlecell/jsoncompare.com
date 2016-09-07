@@ -14,6 +14,7 @@ export default class BatchTab extends Tab {
             .bindSandbox(<Sandbox owner={this} />)
             .on({
                 tabfocus: () => {
+                    this.items.rerender();
                     // this.editor.focus();
                 },
                 'change:files': () => {
@@ -31,7 +32,7 @@ export default class BatchTab extends Tab {
     }
 
     initialize() {
-        this.items.rerender();
+        //this.items.rerender();
     }
 
     onAddButtonClick() {
@@ -45,7 +46,13 @@ export default class BatchTab extends Tab {
     fromJSON(value) {
         this.items.recreate(value.map(item => ({
             value: atob(item)
-        })));
+        })), {
+            dontRender: true
+        });
+
+        if(this.isActive) {
+            this.items.rerender();
+        }
 
         return this;
     }
