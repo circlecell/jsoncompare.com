@@ -134,6 +134,8 @@ export default class LintEditor extends MatreshkaObject {
     async lintRemoteResource() {
         const url = this.code.trim();
 
+        trigger(LintEditor, 'lintRemoteStart', this);
+
         try {
             const resp = await (
                 await fetch('/api/proxy', {
@@ -151,5 +153,7 @@ export default class LintEditor extends MatreshkaObject {
         } catch (e) {
             this.errorText = e;
         }
+
+        trigger(LintEditor, 'lintRemoteEnd', this);
     }
 }

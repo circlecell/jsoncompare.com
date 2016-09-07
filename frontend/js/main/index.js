@@ -16,7 +16,7 @@ export default class Main extends Matreshka {
                 mode: this.mode || 'simple',
                 defaultView: this.toJSONString(),
                 saved: true,
-                loading: false
+                loading: true
             })
             .bindSandbox(<Sandbox owner={this} />)
             .bindNode('win', window)
@@ -57,22 +57,30 @@ export default class Main extends Matreshka {
             this.restore(this.id);
         }
 
-        Matreshka.on(LintEditor, 'lint', instance => {
-            const { reformat } = this;
-            let { code } = instance;
+        Matreshka.on(LintEditor, {
+            lint: instance => {
+                const { reformat } = this;
+                let { code } = instance;
 
-            if (reformat === 'minify') {
-                code = minify(code);
-            } else if (reformat === 'beautify') {
-                code = beautify.js_beautify(code, {
-                    indent_with_tabs: true
+                if (reformat === 'minify') {
+                    code = minify(code);
+                } else if (reformat === 'beautify') {
+                    code = beautify.js_beautify(code, {
+                        indent_with_tabs: true
+                    });
+                }
+
+                instance.set({ code }, {
+                    fromReformat: true
                 });
+            },
+            lintRemoteStart: () => {
+                this.loading = true;
+            },
+            lintRemoteEnd: () => {
+                this.loading = false;
             }
-
-            instance.set({ code }, {
-                fromReformat: true
-            });
-        });
+        })
 
         window.onbeforeunload = this.beforeUnload.bind(this);
     }
@@ -91,6 +99,8 @@ export default class Main extends Matreshka {
     async save() {
         const body = this.toJSONString();
         let foundId;
+
+        this.loading = true;
 
         for (const [memoId, memoBody] of Object.entries(this.memo)) {
             if (memoBody === body) {
@@ -120,9 +130,13 @@ export default class Main extends Matreshka {
                 this.saved = true;
             }
         }
+
+        this.loading = false;
     }
 
     async restore(id) {
+        this.loading = true;
+
         if (this.memo[id]) {
             this.fromJSONString(this.memo[id]);
         } else {
@@ -133,6 +147,8 @@ export default class Main extends Matreshka {
             this.memo[id] = resp;
             this.fromJSONString(resp);
         }
+
+        this.loading = false;
     }
 
     toJSONString() {
