@@ -1,7 +1,7 @@
-import bodyParser from 'body-parser';
-import path from 'path';
-import express from 'express';
-import api from './api';
+const bodyParser = require('body-parser');
+const path = require('path');
+const express = require('express');
+const api = require('./api');
 
 const app = express();
 const { PORT, NODE_ENV, API_ONLY } = process.env;
@@ -18,7 +18,7 @@ app.set('port', PORT);
 
 if (NODE_ENV === 'development') {
     // eslint-disable-next-line global-require
-    const config = require('../webpack/webpack.config.babel');
+    const config = require('../webpack/webpack.config');
     // eslint-disable-next-line global-require
     const webpackDevMiddleware = require('webpack-dev-middleware');
     // eslint-disable-next-line global-require

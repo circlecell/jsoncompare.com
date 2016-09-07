@@ -11,4 +11,4 @@ if (NODE_ENV === 'development') {
     entry.app.unshift('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000');
 }
 
-export default entry;
+module.exports = entry;

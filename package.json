@@ -9,7 +9,7 @@
     "start": "npm run serve-prod",
     "serve-prod": "pm2 startOrRestart ecosystem.json --env production --watch",
     "develop": "opn http://localhost:5001; PORT=5001 NODE_ENV=development nodemon index.js --ignore 'frontend/*' --ignore 'public/*' --ignore 'node_modules/*'",
-    "bundle": "npm run clean; NODE_ENV=production webpack --config ./webpack/webpack.config.babel.js",
+    "bundle": "npm run clean; NODE_ENV=production webpack --config ./webpack/webpack.config.js",
     "check-updates": "ncu; ncu --packageFile ./frontend/package.json",
     "upgrade": "ncu -a; npm install; ncu --packageFile ./frontend/package.json -a; cd ./frontend; npm install",
     "npm-frontend": "cd frontend; npm",

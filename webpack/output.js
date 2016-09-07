@@ -1,4 +1,4 @@
-import path from 'path';
+const path = require('path');
 
 const { NODE_ENV } = process.env;
 const root = path.resolve(__dirname, '..');
@@ -27,4 +27,4 @@ if (NODE_ENV === 'development') {
     });
 }
 
-export default output;
+module.exports = output;

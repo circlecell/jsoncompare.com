@@ -1,8 +1,8 @@
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import SplitByPathPlugin from 'webpack-split-by-path';
-import path from 'path';
+const webpack  = require('webpack');
+const ExtractTextPlugin  = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin  = require('html-webpack-plugin');
+const SplitByPathPlugin  = require('webpack-split-by-path');
+const path  = require('path');
 
 const { NODE_ENV } = process.env;
 
@@ -49,4 +49,4 @@ if (NODE_ENV === 'development') {
     );
 }
 
-export default plugins;
+module.exports = plugins;

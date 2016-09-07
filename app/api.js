@@ -1,11 +1,11 @@
-import { Router } from 'express';
-import { Validator } from 'jsonschema';
-import AWS from 'aws-sdk';
-import md5 from 'md5';
-import request from 'request';
-import { isUri } from 'valid-url';
-import path from 'path';
-import AppState from './app-state-schema';
+const { Router } = require('express');
+const { Validator } = require('jsonschema');
+const AWS = require('aws-sdk');
+const md5 = require('md5');
+const request = require('request');
+const { isUri } = require('valid-url');
+const path = require('path');
+const AppState = require('./app-state-schema');
 
 AWS.config.loadFromPath(
     path.resolve(__dirname, '../../jsonlint_aws_credentials.json')
@@ -62,4 +62,4 @@ router.post('/proxy', (req, res) => {
 });
 
 
-export default router;
+module.exports = router;
