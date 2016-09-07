@@ -2,7 +2,28 @@
 Source code for http://jsonlint.com
 
 ## API
-``POST /api/save`` - saves current application state. A body should be JSON with 3 keys:
-- ``simple`` [string] - contains base64-encoded value of Simple tab
-- ``batch`` [array of strings] - contains an array of base64-encoded values for Batch tab
-- ``diff`` [object] - contains data for Merge tab with keys "left" (base64-encoded value of left side editor) and "right" (base64-encoded value of right side editor).
+``POST https://jsonlint.com/api/save`` - saves current application state on S3.
+A body should include 3 keys:
+- ``simple`` *string* - base64-encoded value of Simple tab
+- ``batch`` *string[]* - an array of base64-encoded values for Batch tab
+- ``diff`` *object* - data for Merge tab with keys "left" (base64-encoded value of left side editor) and "right" (base64-encoded value of right side editor).
+
+Response JSON includes ``key`` - a name of newly created file on S3 (MD5 hash of the body) or ``error`` if there is an error.
+
+Example:
+```js
+>>>
+{
+	"simple": "eyJhIjogMX0=",
+	"batch": ["eyJiIjogMn0=", "eyJjIjogM30=", "eyJkIjogNH0="],
+	"diff": {
+		"left": "eyJlIjogNX0=",
+		"right": "eyJmIjogNn0="
+	}
+}
+<<<
+{ "key":"aac35abfc8e25a4914cf90da13aa29e9" }
+```
+
+
+``GET https://jsonlintcom.s3.amazonaws.com/{key}.json`` - gets an application state by given key.

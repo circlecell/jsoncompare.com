@@ -24,7 +24,7 @@ router.post('/save', ({ jsonBody, rawBody }, res) => {
     } else {
         const key = md5(rawBody);
         const params = {
-            Bucket: 'jsonlintcome',
+            Bucket: 'jsonlintcom',
             Key: `${key}.json`,
             Body: rawBody,
             ContentType: 'application/json'
@@ -37,7 +37,7 @@ router.post('/save', ({ jsonBody, rawBody }, res) => {
                     error: `${code}: ${message}`
                 });
             } else {
-                res.status(200).json({ key, error: null });
+                res.status(200).json({ key });
             }
         });
     }
