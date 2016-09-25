@@ -1,7 +1,7 @@
 import MatreshkaObject from 'matreshka/object';
 import trigger from 'matreshka/trigger';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import jsonlint from 'exports?jsonlint!jsonlint/web/jsonlint';
+import jsonlint from 'jsonlint-mod';
 import byteSize from 'byte-size';
 import { isUri } from 'valid-url';
 import Extras from './components/extras';
@@ -108,26 +108,19 @@ export default class LintEditor extends MatreshkaObject {
         const { code } = this;
 
         try {
-            JSON.parse(code);
+            jsonlint.parse(code);
             this.validated = true;
             this.errorText = '';
             this.trigger('lint');
-        } catch (_e) {
-            try {
-                jsonlint.parse(code);
-                this.validated = true;
-                this.errorText = '';
-                this.trigger('lint');
-            } catch (e) {
-                // retrieve line number from error
-                const lineMatches = e.message.match(/line ([0-9]*)/);
-                if (lineMatches && lineMatches.length > 1) {
-                    this.errorLine = +lineMatches[1] - 1;
-                }
-
-                this.validated = false;
-                this.errorText = e.message;
+        } catch (e) {
+            // retrieve line number from error string
+            const lineMatches = e.message.match(/line ([0-9]*)/);
+            if (lineMatches && lineMatches.length > 1) {
+                this.errorLine = +lineMatches[1] - 1;
             }
+
+            this.validated = false;
+            this.errorText = e.message;
         }
     }
 
