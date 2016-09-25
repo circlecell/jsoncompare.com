@@ -1,5 +1,5 @@
 {
-  "name": "jsonlint-pro",
+  "name": "jsonlint-next",
   "version": "0.0.0",
   "description": "Jsonlint website",
   "main": "app.js",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/circlecell/jsonlint.git"
+    "url": "git+https://github.com/circlecell/jsonlint-next.git"
   },
   "keywords": [
     "jsonlint"
@@ -28,9 +28,9 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/circlecell/jsonlint/issues"
+    "url": "https://github.com/circlecell/jsonlint-next/issues"
   },
-  "homepage": "https://github.com/circlecell/jsonlint#readme",
+  "homepage": "https://github.com/circlecell/jsonlint-next#readme",
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
