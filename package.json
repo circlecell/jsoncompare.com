@@ -14,7 +14,7 @@
     "upgrade": "ncu -a; npm install; ncu --packageFile ./frontend/package.json -a; cd ./frontend; npm install",
     "npm-frontend": "cd frontend; npm",
     "lint": "eslint . --ext .js --cache --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'",
-    "stylelint": "stylelint frontend/pcss/style.pcss",
+    "stylelint": "stylelint frontend/**/*.css",
     "clean": "rimraf public",
     "deploy": "pm2 deploy ecosystem.json production"
   },
