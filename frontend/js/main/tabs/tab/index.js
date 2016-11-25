@@ -6,7 +6,7 @@ export default class Tab extends MatreshkaObject {
         super(data)
             .set({ parent, name })
             .bindNode('navItem', <NavItem owner={this} />)
-            .onDebounce('change:isActive', evt => {
+            .onDebounce('change:isActive', (evt) => {
                 if (evt.value) {
                     if (!this.initialized) {
                         this.initialize();

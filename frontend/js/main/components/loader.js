@@ -9,6 +9,6 @@ export default ({ owner }) => (<div
     }}
 >
     <span className={style.loaderBracketLeft}>{'{'}</span>
-    "loading": true
+    &quot;loading&quot;: true
     <span className={style.loaderBracketRight}>{'}'}</span>
 </div>);

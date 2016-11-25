@@ -51,7 +51,7 @@ app.use(bodyParser.urlencoded({
 app.use((req, res, next) => {
     let rawBody = '';
 
-    req.on('data', chunk => {
+    req.on('data', (chunk) => {
         rawBody += chunk;
     });
 

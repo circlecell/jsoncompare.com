@@ -21,7 +21,7 @@ export default class Main extends Matreshka {
             .bindSandbox(<Sandbox owner={this} />)
             .bindNode('win', window)
             .on({
-                'tabs@change:activeTab': evt => {
+                'tabs@change:activeTab': (evt) => {
                     this.mode = evt.value.name;
                 },
                 'change:id': ({ fromSave }) => {
@@ -29,7 +29,7 @@ export default class Main extends Matreshka {
                         this.restore(this.id);
                     }
                 },
-                'keydown::win': evt => {
+                'keydown::win': (evt) => {
                     const S_KEY_CODE = 83;
                     const { domEvent: { ctrlKey, keyCode } } = evt;
                     if (keyCode === S_KEY_CODE && ctrlKey) {
@@ -60,7 +60,7 @@ export default class Main extends Matreshka {
         }
 
         Matreshka.on(LintEditor, {
-            lint: instance => {
+            lint: (instance) => {
                 const { reformat } = this;
                 let { code } = instance;
 

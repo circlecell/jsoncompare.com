@@ -50,7 +50,7 @@ export default class LintEditor extends MatreshkaObject {
             }
         })
 
-        .calc('size', 'code', code => {
+        .calc('size', 'code', (code) => {
             const bytes = new Blob([code], {
                 type: 'text/javascript'
             }).size;
@@ -88,7 +88,7 @@ export default class LintEditor extends MatreshkaObject {
 
     events() {
         return this
-            .on('change:code', evt => {
+            .on('change:code', (evt) => {
                 if (!evt || !evt.fromReformat) {
                     this.errorLine = null;
                     this.errorText = '';

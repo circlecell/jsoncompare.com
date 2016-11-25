@@ -29,7 +29,7 @@ export default class Tabs extends MatreshkaObject {
         .bindSandbox(<Sandbox owner={this} />)
         .bindNode('nav', <Nav owner={this} />)
         .on({
-            '*@change:isActive': evt => {
+            '*@change:isActive': (evt) => {
                 if (evt.value) {
                     for (const tab of this) {
                         tab.isActive = tab === evt.self;
