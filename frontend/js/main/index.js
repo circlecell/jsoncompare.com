@@ -1,15 +1,16 @@
 import Matreshka from 'matreshka/matreshka';
+import { dataset } from 'matreshka/binders';
 import initRouter from 'matreshka-router';
 import beautify from 'js-beautify/js/lib/beautify';
 import minify from 'jsonminify';
+import LintEditor from '../linteditor';
 import Sandbox from './components/sandbox';
 import Tabs from './tabs';
-import LintEditor from '../linteditor';
+
 
 export default class Main extends Matreshka {
     constructor() {
-        super();
-        initRouter(this, 'mode/id')
+        initRouter(super(), 'mode/id')
             .instantiate('tabs', Tabs)
             .set({
                 memo: {},
@@ -20,6 +21,7 @@ export default class Main extends Matreshka {
             })
             .bindSandbox(<Sandbox owner={this} />)
             .bindNode('win', window)
+            .bindNode('mode', 'body', dataset('mode'))
             .on({
                 'tabs@change:activeTab': (evt) => {
                     this.mode = evt.value.name;
@@ -51,7 +53,7 @@ export default class Main extends Matreshka {
                 }
             }, 500);
 
-        document.body.appendChild(this.nodes.sandbox);
+        document.querySelector('main').appendChild(this.nodes.sandbox);
 
         if (this.id) {
             this.restore(this.id);

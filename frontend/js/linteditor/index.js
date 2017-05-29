@@ -5,7 +5,6 @@ import jsonlint from 'jsonlint-mod';
 import byteSize from 'byte-size';
 import { isUri } from 'valid-url';
 import Extras from './components/extras';
-import './codemirror-init';
 
 export default class LintEditor extends MatreshkaObject {
     constructor({

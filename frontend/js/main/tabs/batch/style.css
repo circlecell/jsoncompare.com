@@ -1,9 +1,12 @@
 @import '../tab/style.css';
 
 .batchContent {
+    overflow: auto;
+    min-height: 357px;
+    background: #fff;
     :global {
         .CodeMirror {
-            height: 400px!important;
+            height: 357px!important;
             position: static;
         }
     }

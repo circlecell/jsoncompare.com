@@ -12,6 +12,9 @@
             border-top: none;
             width: 100%;
             position: absolute;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
         }
 
         .CodeMirror-merge, .CodeMirror-merge-pane {

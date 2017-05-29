@@ -5,14 +5,15 @@ import style from '../style.css';
 export default ({ owner }) => (<div>
     <span
         className={style.lintButton}
-        title="Lint"
         onClick={() => owner.onLintButtonClick()}
         bind={{
             owner,
             validated: className(style.lintButtonSuccess)
         }}
-    />
-    <span className={style.clearButton} title="Clear" onClick={() => owner.onClearButtonClick()} />
+    >Lint</span>
+    <span className={style.clearButton} onClick={() => owner.onClearButtonClick()}>
+        Clear
+    </span>
     <span
         className={style.sizeBlock}
         title="Size"

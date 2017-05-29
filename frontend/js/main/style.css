@@ -1,26 +1,33 @@
-.main {
+.app {
     display: flex;
     flex: 1;
     flex-direction: column;
     position: relative;
+    min-height: 400px;
+
+
+    /*position: fixed;
+    height: calc(100% - 45px);
+    width: 100%;
+    top: 45px;
+    left: 0;*/
 }
 
 .settings {
     position: absolute;
-    right: 1rem;
+    right: 0;
 
     select {
-        /* TODO COMPOSE BUTTON */
         height: 38px;
-        background: white;
-        border: 1px solid #bbb;
-        border-radius: 4px;
-        margin-right: 1rem;
-        color: #555;
-        text-transform: uppercase;
+        border: 1px solid #e1e1e1;
+        border-radius: 2px;
         font-size: 11px;
-        font-weight: 600;
         padding: 0 10px;
+        font-size: inherit;
+        font-family: inherit;
+        color: inherit;
+        height: 34px;
+        margin-right: 5px;
 
         option {
             font-weight: normal;
@@ -28,13 +35,14 @@
         }
 
         &:focus {
-            border-color: #888;
+            border-color: #d0d0d0;
             outline: none;
         }
     }
 }
 
 .saveButton {
+
     &::before {
         content: attr(data-save-text);
     }
@@ -52,32 +60,27 @@
     text-align: center;
     pointer-events: none;
     z-index: 10;
-  color: #aaa;
-
-  font-family: Consolas, Menlo, Monaco, monospace;
-  font-weight: bold;
-  font-size: 2rem;
-
-  opacity: 0.8;
-
+    color: #aaa;
+    font-family: Consolas, Menlo, Monaco, monospace;
+    font-weight: bold;
+    font-size: 2rem;
+    opacity: 0.8;
 }
 
 .loaderBracketLeft, .loaderBracketRight {
-  display: inline-block;
-  animation: pulse 0.4s alternate infinite ease-in-out;
-
-
+    display: inline-block;
+    animation: pulse 0.4s alternate infinite ease-in-out;
 }
 
 .loaderBracketRight {
-   animation-delay: 0.4s;
+    animation-delay: 0.4s;
 }
 
 @keyframes pulse {
-  to {
-    transform: scale(1.5);
-    opacity: 0.5;
-  }
+    to {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
 }
 
 .error {
@@ -89,7 +92,6 @@
     width: 60%;
     left: 20%;
     opacity: 0;
-    -webkit-transition: opacity .5s ease-out;
     transition: opacity .5s ease-out;
     background: #FBE3E4;
     color: #D12F19;

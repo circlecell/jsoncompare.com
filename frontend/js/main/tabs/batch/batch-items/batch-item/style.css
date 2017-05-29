@@ -1,6 +1,10 @@
 .batchItem {
     position: relative;
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #e1e1e1;
+
+    &:last-child {
+        border-bottom: none;
+    }
 }
 
 .deleteButton {
@@ -11,7 +15,5 @@
 
     &::before {
         content: '✕';
-        font-size: 2rem;
-        line-height: 40px;
     }
 }

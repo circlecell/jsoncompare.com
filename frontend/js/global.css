@@ -4,117 +4,320 @@
 
 :global {
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+        box-sizing: border-box
     }
 
-    html, body {
-        height: 100%;
+    *,
+    body,
+    html {
         margin: 0;
-        padding: 0;
+        padding: 0
+    }
+
+    body,
+    html {
+        height: 100%
     }
 
     body {
+        font-size: 13px;
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background: #fafbfc;
+        color: #333;
+        line-height: 26px;
+        margin: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
+    }
+
+    h2 {
+        font-size: 20px;
+        border-top: 1px solid #eee;
+        text-align: center;
+        margin: 40px 0 0;
+        line-height: 35px;
+        padding-top: 40px;
+    }
+
+    p {
         font-size: 14px;
-        line-height: 1.6;
-        font-weight: 400;
-        font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        color: var(--main-text-color);
+        line-height: 24px;
+        margin-bottom: 10px;
+    }
+
+    p.heading {
+        font-size: 15px;
+        font-weight: 700;
+        padding-bottom: 0;
+        margin: 20px 0 5px;
+    }
+
+    .info ul,
+    .info ol {
+        margin: 5px 0 5px 10px;
+    }
+
+    .info li {
+        margin: 0 0 0 15px;
+        padding: 0;
+        font-size: 14px;
+    }
+
+    .toggle, [id^="drop"] {
+        display: none;
     }
 
     header {
-        padding: 1rem;
-        margin-bottom: 0.5rem;
+        width: 100%;
+        background-color: #fff;
+        z-index: 1;
+        border-bottom: 1px solid #f0f0f0;
+    }
 
-        .logo {
-            float: left;
+    nav {
+        margin: 0 auto 0;
+        padding: 0 15px;
+        color: #353535;
+        font-size: 13px;
+        max-width: 1250px;
+    }
 
+    .dev-tools-logo {
+        width: 30px;
+        text-align: right;
+        line-height: 10px;
+        height: 30px;
+        padding: 7px 2px 0px 3px;
+        float: left;
+        border-radius: 2px;
+        margin: 4px 0 0;
+        font-weight: 700;
+        font-size: 9px;
+        letter-spacing: 0.2px;
+        color: #fff;
+        background: #3498DB;
+    }
 
-            h1, h2 {
-                font-weight: normal;
-            }
+    .plus {
+        font-size: 12px
+    }
 
-            h1 {
-                font-size: 2rem;
-            }
+    .logo {
+        display: block;
+        padding: 6px 15px 0;
+        float: left;
+    }
 
-            h2 {
-                font-size: 1rem;
-            }
-        }
+    .logo h1 {
+        font-size: 13px;
+        font-weight: 700;
+        float: left;
+        margin: 0;
+    }
 
-        .ad {
-            float: right;
+    .sub-title,
+    tagline-title {
+        font-weight: 400
+    }
+
+    nav:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    nav ul {
+        float: right;
+        margin: 0;
+        list-style: none;
+        position: relative;
+        padding: 0;
+        z-index: 101;
+    }
+
+    nav ul li {
+        margin: 0;
+        display: inline-block;
+        background-color: #fafafa;
+        padding: 7px 0;
+        border-left: 1px solid #f0f0f0;
+        border-right: 1px solid #f0f0f0;
+    }
+
+    nav a {
+        display: block;
+        padding: 0 15px;
+        color: #333;
+        text-decoration: none;
+    }
+
+    nav ul li ul li:hover {
+        background: #f4f4f4;
+    }
+
+    nav ul ul {
+        display: none;
+        position: absolute;
+        top: 40px;
+        right: 0;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    nav ul li:hover>ul {
+        display: inherit;
+    }
+
+    nav ul ul li {
+        width: 240px;
+        float: none;
+        display: list-item;
+        position: relative;
+        border-bottom: 1px solid #f0f0f0;
+        padding: 7px 0;
+        line-height: 20px;
+    }
+
+    nav ul ul li.jscompress {
+        border-left: 5px solid #F8DC3C;
+    }
+
+    nav ul ul li.json {
+        border-left: 5px solid #1E8BC3;
+    }
+
+    nav ul ul li.compare {
+        border-left: 5px solid #446CB3;
+    }
+
+    nav ul ul li.dns {
+        border-left: 5px solid #26A65B;
+    }
+
+    nav ul ul li.keygen {
+        border-left: 5px solid #EB9532;
+    }
+
+    nav ul ul ul li {
+        position: relative;
+        top: -60px;
+        left: 300px;
+    }
+
+    .tagline-title {
+        font-size: 11px
+    }
+
+    li>a:only-child:after {
+        content: '';
+    }
+
+    .three-lines {
+        position: relative;
+        display: inline-block;
+        width: 0.8em;
+        height: 0.8em;
+        margin: 7px 10px 0 0;
+        border-top: 0.1em solid #333;
+        border-bottom: 0.1em solid #333;
+    }
+
+    .three-lines:before {
+        content: "";
+        position: absolute;
+        top: 0.3em;
+        left: 0;
+        width: 100%;
+        border-top: 0.1em solid #333;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .container {
+        display: block;
+        margin: 0 auto;
+        max-width: 1250px;
+        padding: 0 15px;
+        text-align: left;
+    }
+
+    .ad.top img,
+    .ad.bottom img {
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .ad {
+        display: block;
+        text-align: center;
+    }
+
+    .ad.top {
+        margin: 40px 0;
+        padding: 0 0 30px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .ad.bottom {
+        margin: 30px 0;
+        border-top: 1px solid #eee;
+        padding: 40px 0 0;
+    }
+
+    .info {
+        border-top: 1px solid #eee;
+        padding: 10px 0 0;
+    }
+
+    footer {
+        text-align: center;
+        max-width: 1250px;
+        padding: 15px;
+        margin: 0 auto 0;
+        border-top: 1px solid #eee;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    main {
+        display: block;
+        width: 100%;
+        padding: 1.5em 0;
+    }
+
+    button {
+        background: white;
+        border: 1px solid #e1e1e1;
+        height: 34px;
+        padding: 0 30px;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        border-radius: 2px;
+        border: 1px solid #e1e1e1;
+        cursor: pointer;
+        box-sizing: border-box;
+        margin: 0;
+        font-family: 'Open Sans';
+        color: #333;
+        margin: 0 0 0 5px;
+        vertical-align: top;
+        font-size: 13px;
+
+        &:disabled {
+            color: #999;
+            cursor: not-allowed;
         }
     }
 
-    .button,
-    button,
-    input[type="submit"],
-    input[type="reset"],
-    input[type="button"] {
-      display: inline-block;
-      height: 38px;
-      padding: 0 30px;
-      color: #555;
-      text-align: center;
-      font-size: 11px;
-      font-weight: 600;
-      line-height: 38px;
-      letter-spacing: .1rem;
-      text-transform: uppercase;
-      text-decoration: none;
-      white-space: nowrap;
-      background-color: transparent;
-      border-radius: 4px;
-      border: 1px solid #bbb;
-      cursor: pointer;
-      box-sizing: border-box;
-
-      &:disabled {
-          opacity: .5;
-          pointer-events: none;
-      }
+    .CodeMirror {
+        color: #333;
     }
-    .button:hover,
-    button:hover,
-    input[type="submit"]:hover,
-    input[type="reset"]:hover,
-    input[type="button"]:hover,
-    .button:focus,
-    button:focus,
-    input[type="submit"]:focus,
-    input[type="reset"]:focus,
-    input[type="button"]:focus {
-      color: #333;
-      border-color: #888;
-      outline: 0; }
-    .button.button-primary,
-    button.button-primary,
-    input[type="submit"].button-primary,
-    input[type="reset"].button-primary,
-    input[type="button"].button-primary {
-      color: #FFF;
-      background-color: #33C3F0;
-      border-color: #33C3F0; }
-    .button.button-primary:hover,
-    button.button-primary:hover,
-    input[type="submit"].button-primary:hover,
-    input[type="reset"].button-primary:hover,
-    input[type="button"].button-primary:hover,
-    .button.button-primary:focus,
-    button.button-primary:focus,
-    input[type="submit"].button-primary:focus,
-    input[type="reset"].button-primary:focus,
-    input[type="button"].button-primary:focus {
-      color: #FFF;
-      background-color: #1EAEDB;
-      border-color: #1EAEDB; }
-
-
-
-
 }
