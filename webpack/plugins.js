@@ -10,7 +10,8 @@ const plugins = [
     new webpack.ProvidePlugin({
         RealDOM: path.join(__dirname, '../frontend/js/realdom')
     }),
-    new ExtractTextPlugin('css/style.css', {
+    new ExtractTextPlugin({
+        filename: 'css/style.css',
         allChunks: true
     }),
     new HtmlWebpackPlugin({
@@ -44,7 +45,7 @@ if (NODE_ENV === 'production') {
 
 if (NODE_ENV === 'development') {
     plugins.push(
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin()
     );
 }

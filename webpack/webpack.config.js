@@ -3,7 +3,7 @@ const path = require('path');
 const entry = require('./entry');
 const output = require('./output');
 const plugins = require('./plugins');
-const postcss = require('./postcss');
+
 
 const { NODE_ENV } = process.env;
 const root = path.resolve(__dirname, '..');
@@ -12,31 +12,37 @@ if (!NODE_ENV) {
     throw Error('NODE_ENV is not set');
 }
 
-const cssConfig = JSON.stringify({
-    modules: true,
-    importLoaders: 1,
-    localIdentName: '[local]___[hash:base64:5]'
-});
-
 module.exports = {
     entry,
     plugins,
-    postcss,
     output,
     devtool: 'module-source-map',
     context: `${root}/frontend`,
     module: {
-        loaders: [{
+        rules: [{
             test: /.js?$/,
-            loaders: ['babel'],
+            use: ['babel-loader'],
             exclude: /node_modules/
         }, {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract('style', 'css!postcss'),
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: ['css-loader', 'postcss-loader']
+            }),
             include: /node_modules/
         }, {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract('style', `css?${cssConfig}!postcss`),
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
+                use: [{
+                    loader: 'css-loader',
+                    options: {
+                        modules: true,
+                        importLoaders: 1,
+                        localIdentName: '[local]___[hash:base64:5]'
+                    }
+                }, 'postcss-loader']
+            }),
             exclude: /node_modules/
         }]
     }
