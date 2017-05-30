@@ -41,7 +41,7 @@
     width: 380px;
     left: calc(50% - 190px);
     bottom: 50%;
-    position: fixed;
+    position: absolute;
     z-index: 4;
 
     h3 {
@@ -53,6 +53,7 @@
     .batchButtons {
         left: 20px;
         bottom: 40px;
+        position: fixed;
 
         h3 {
             opacity: 0;

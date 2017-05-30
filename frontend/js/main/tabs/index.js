@@ -14,7 +14,7 @@ export default class Tabs extends MatreshkaObject {
             },
             batch: {
                 title: 'Batch',
-                description: 'Validate few JSON objects per once'
+                description: 'Validate multiple JSON objects at once'
             },
             diff: {
                 title: 'Diff',
