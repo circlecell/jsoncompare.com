@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const { NODE_ENV } = process.env;
@@ -24,6 +25,7 @@ const plugins = [
             return order.indexOf(nameA) - order.indexOf(nameB);
         }
     }),
+    new CopyWebpackPlugin([{ from: 'icons', to: 'icons' }]),
     new SplitByPathPlugin([{
         name: 'vendor',
         path: path.join(__dirname, '..', 'frontend/node_modules/')
