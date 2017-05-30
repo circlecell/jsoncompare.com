@@ -39,12 +39,12 @@
     pointer-events: none;
     text-align: center;
     width: 380px;
-    left: calc(50% - 190px);
-    bottom: 50%;
-    position: absolute;
     z-index: 4;
+    padding-top: 75px;
+    margin: 0 auto 0;
 
     h3 {
+        padding-bottom: 15px;
         transition: opacity  0.5s ease-out 0s;
     }
 }

@@ -16,6 +16,7 @@
 .settings {
     position: absolute;
     right: 0;
+    margin-right: 4px;
 
     select {
         height: 38px;

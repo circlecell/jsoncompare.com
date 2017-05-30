@@ -64,24 +64,28 @@
     }
 
     .tooltip {
-        line-height: 1.5rem;
+        line-height: 20px;
         text-align: center;
-        width: 180px;
+        width: 170px;
         left: -75px;
-        background: #1496bb;
+        background: #3498DB;
         bottom: 100%;
         color: #fff;
         display: block;
-
         margin-bottom: 15px;
         opacity: 0;
-        padding: 0.5rem;
+        padding: 8px;
+        padding: .5rem;
         pointer-events: none;
         position: absolute;
+        -webkit-transform: translateY(10px);
         transform: translateY(10px);
-        transition: all .25s ease-out 0.5s;
-        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+        -webkit-transition: all .05s ease-out .05s;
+        transition: all .05s ease-out .05s;
+        border-radius: 2px;
+        font-size: 12px;
     }
+
 
   /* This bridges the gap so you can mouse into the tooltip without it disappearing */
   .tooltip:before {
@@ -98,7 +102,7 @@
   .tooltip:after {
     border-left: solid transparent 10px;
     border-right: solid transparent 10px;
-    border-top: solid #1496bb 10px;
+    border-top: solid #3498db 10px;
     bottom: -10px;
     content: " ";
     height: 0;
