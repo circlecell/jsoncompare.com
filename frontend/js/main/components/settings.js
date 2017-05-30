@@ -17,5 +17,19 @@ export default ({ owner }) => (<div className={style.settings}>
             owner,
             saved: prop('disabled')
         }}
-    />
+    ></button>
+
+    <button
+        onClick={() => owner.onClickFullscreen()}
+        className={style.fullscreenButton}
+        bind={{
+            owner,
+            fullscreen: {
+                getValue: null,
+                setValue(value, { node }) {
+                    this.textContent = value ? 'Exit Fullscreen' : 'Fullscreen Editor';
+                }
+            }
+        }}
+    ></button>
 </div>);

@@ -1,3 +1,4 @@
+import className from 'matreshka/binders/classname';
 import style from '../style.css';
 import Error from './error';
 import Loader from './loader';

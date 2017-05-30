@@ -2,7 +2,13 @@
 
 .batchContent {
     overflow: auto;
+
     min-height: 357px;
+
+    body[data-fullscreen="on"] & {
+        min-height: 100%;
+    }
+
     background: #fff;
     :global {
         .CodeMirror {
@@ -42,10 +48,16 @@
     z-index: 4;
     padding-top: 75px;
     margin: 0 auto 0;
+    left: calc(50% - 190px);
+    bottom: 50%;
+
+    body[data-fullscreen="on"] & {
+        position: fixed;
+    }
 
     h3 {
         padding-bottom: 15px;
-        transition: opacity  0.5s ease-out 0s;
+        transition: opacity 0.5s ease-out 0s;
     }
 }
 
@@ -54,6 +66,11 @@
         left: 20px;
         bottom: 40px;
         position: fixed;
+
+        body[data-fullscreen="on"] & {
+            left: 20px;
+            bottom: 40px;
+        }
 
         h3 {
             opacity: 0;

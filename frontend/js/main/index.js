@@ -17,11 +17,17 @@ export default class Main extends Matreshka {
                 mode: this.mode || 'simple',
                 defaultView: this.toJSONString(),
                 saved: true,
-                loading: true
+                loading: true,
+                fullscreen: false
             })
             .bindSandbox(<Sandbox owner={this} />)
             .bindNode('win', window)
             .bindNode('mode', 'body', dataset('mode'))
+            .bindNode('fullscreen', 'body', {
+                setValue(value, { node }) {
+                    node.dataset.fullscreen = value ? 'on' : 'off';
+                }
+            })
             .on({
                 'tabs@change:activeTab': (evt) => {
                     this.mode = evt.value.name;
@@ -96,8 +102,13 @@ export default class Main extends Matreshka {
 
         return undefined;
     }
+
     onClickSave() {
         this.save();
+    }
+
+    onClickFullscreen() {
+        this.fullscreen = !this.fullscreen;
     }
 
     error(errorText) {

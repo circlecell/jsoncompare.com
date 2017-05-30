@@ -4,19 +4,21 @@
     flex-direction: column;
     position: relative;
     min-height: 400px;
-
-
-    /*position: fixed;
-    height: calc(100% - 45px);
-    width: 100%;
-    top: 45px;
-    left: 0;*/
+    background: #fafbfc;
+    body[data-fullscreen="on"] & {
+        position: fixed;
+        height: calc(100% - 60px);
+        width: 100%;
+        top: 60px;
+        left: 0;
+        z-index: 1;
+    }
 }
+
 
 .settings {
     position: absolute;
     right: 0;
-    margin-right: 4px;
 
     select {
         height: 38px;
@@ -28,7 +30,6 @@
         font-family: inherit;
         color: inherit;
         height: 34px;
-        margin-right: 5px;
 
         option {
             font-weight: normal;
@@ -43,6 +44,7 @@
 }
 
 .saveButton {
+    margin-left: 10px;
 
     &::before {
         content: attr(data-save-text);
@@ -53,6 +55,18 @@
     }
 }
 
+.fullscreenButton {
+    margin-left: 10px;
+    background: #3498DB;
+    color: #fff;
+    border: 1px solid #3498DB;
+    font-weight: 700;
+
+    &:hover {
+        background: #555;
+        color: #fff
+    }
+}
 
 .loader {
     position: fixed;
