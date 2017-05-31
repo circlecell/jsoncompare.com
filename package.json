@@ -15,7 +15,7 @@
     "lint": "eslint . --ext .js --cache --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'",
     "stylelint": "stylelint frontend/**/*.css",
     "clean": "rimraf public",
-    "deploy": "pm2 deploy ecosystem.json production",
+    "deploy": "pm2 deploy ecosystem.json production --force",
     "travis-deploy": "if-env TRAVIS_BRANCH=master TRAVIS_PULL_REQUEST=false && npm run semantic-release || echo 'Deploy is not run'",
     "semantic-release": "semantic-release pre && ssh-keyscan 192.241.157.86 >> ~/.ssh/known_hosts && npm run deploy && semantic-release post"
   },
