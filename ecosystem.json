@@ -2,7 +2,7 @@
 
   "apps" : [
     {
-      "name"      : "jsonlint",
+      "name"      : "jsoncompare.com",
       "script"    : "index.js",
       "env": {},
       "env_production" : {
@@ -18,8 +18,8 @@
       "user" : "deployer",
       "host" : "192.241.157.86",
       "ref"  : "origin/master",
-      "repo" : "git@github.com:circlecell/jsonlint-next.git",
-      "path" : "/var/web/beta.jsonlint.com",
+      "repo" : "git@github.com:circlecell/jsoncompare.com.git",
+      "path" : "/var/web/jsoncompare.com",
       "ssh_options": ["StrictHostKeyChecking=no", "PasswordAuthentication=no"],
       "post-deploy" : "rm -rf node_modules; rm -rf frontend/node_modules; npm install && npm run npm-frontend -- install && npm run bundle && npm run serve-prod"
     },

@@ -1,12 +1,12 @@
-# jsonlint
-Source code for http://test.jsonlint.com
+# jsoncompare.com
+Source code for http://jsoncompare.com
 
 ## API
-``POST https://jsonlint.com/api/save`` - saves current application state on S3.
+``POST https://jsoncompare.com/api/save`` - saves current application state on S3.
 A body should include 3 keys:
-- ``simple`` *string* - base64-encoded value of Simple tab
-- ``batch`` *string[]* - an array of base64-encoded values for Batch tab
-- ``diff`` *object* - data for Diff tab with keys "left" (base64-encoded value of left side editor) and "right" (base64-encoded value of right side editor).
+- ``simple`` *string* - base64-encoded value of the Simple tab
+- ``batch`` *string[]* - an array of base64-encoded values for the Batch tab
+- ``diff`` *object* - data forthe  Diff tab with keys "left" (base64-encoded value of the left side editor) and "right" (base64-encoded value of the right side editor).
 
 Response JSON includes ``key`` - a name of newly created file on S3 (MD5 hash of the body) or ``error`` if there is an error.
 
