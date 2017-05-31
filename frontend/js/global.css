@@ -324,6 +324,58 @@
         background: #f1f1f1;
     }
 
+    .bsa-cpc-inline #_default_ {
+      padding: .4em 1em .6em;
+      background-color: hsla(0, 0%, 20%, .97);
+      z-index: 10;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      line-height: 1.5;
+    }
+
+    .bsa-cpc-inline .default-ad {
+      display: none;
+    }
+
+    .bsa-cpc-inline ._default_ {
+      display: inline;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+
+    .bsa-cpc-inline ._default_ > * {
+      vertical-align: middle;
+    }
+
+    .bsa-cpc-inline a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .bsa-cpc-inline a:hover {
+      color: #ddd;
+    }
+
+    .bsa-cpc-inline .default-image {
+      display: none;
+    }
+
+    .bsa-cpc-inline .default-title:after {
+      content: " — ";
+    }
+
+    .bsa-cpc-inline .default-title,
+    .bsa-cpc-inline .default-description {
+      display: inline;
+    }
+
+    .bsa-cpc-inline .default-title {
+      position: relative;
+      margin-left: 8px;
+    }
+
 
     .CodeMirror {
         color: #333;
