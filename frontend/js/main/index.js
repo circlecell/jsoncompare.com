@@ -74,9 +74,17 @@ export default class Main extends Matreshka {
 
                 if (reformat === 'minify') {
                     code = minify(code);
-                } else if (reformat === 'beautify') {
+                } else if (reformat === 'beautify_tabs') {
                     code = beautify.js_beautify(code, {
                         indent_with_tabs: true
+                    });
+                } else if (reformat === 'beautify_2') {
+                    code = beautify.js_beautify(code, {
+                        indent_size: 2
+                    });
+                } else if (reformat === 'beautify_4') {
+                    code = beautify.js_beautify(code, {
+                        indent_size: 4
                     });
                 }
 

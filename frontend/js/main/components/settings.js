@@ -4,7 +4,9 @@ import style from '../style.css';
 export default ({ owner }) => (<div className={style.settings}>
     <select bind={{ owner, reformat: {} }}>
         <option value="">Keep JSON as is</option>
-        <option value="beautify">Beautify on validate</option>
+        <option value="beautify_tabs">Beautify (tabs)</option>
+        <option value="beautify_2">Beautify (2 spaces)</option>
+        <option value="beautify_4">Beautify (4 spaces)</option>
         <option value="minify">Minify on validate</option>
     </select>
 
