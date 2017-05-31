@@ -14,6 +14,6 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: npm run deploy && pm2 kill
+  script: npm run travis-deploy && pm2 kill
   on:
     branch: master

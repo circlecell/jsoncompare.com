@@ -16,7 +16,28 @@
     "lint": "eslint . --ext .js --cache --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'",
     "stylelint": "stylelint frontend/**/*.css",
     "clean": "rimraf public",
-    "deploy": "pm2 deploy ecosystem.json production"
+    "deploy": "pm2 deploy ecosystem.json production",
+    "travis-deploy": "if-env TRAVIS_BRANCH=master TRAVIS_PULL_REQUEST=false && npm run semantic-release || echo 'Deploy is not run'",
+    "semantic-release": "semantic-release pre && ssh-keyscan 192.241.157.86 >> ~/.ssh/known_hosts && npm run deploy && semantic-release post"
+  },
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert"
+      ]
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "release": {
+    "getLastRelease": "last-release-git"
   },
   "repository": {
     "type": "git",
@@ -50,7 +71,10 @@
     "eslint-plugin-react": "^7.0.1",
     "exports-loader": "^0.6.4",
     "extract-text-webpack-plugin": "^2.1.0",
+    "ghooks": "^2.0.0",
     "html-webpack-plugin": "^2.28.0",
+    "if-env": "^1.0.0",
+    "last-release-git": "0.0.3",
     "nodemon": "^1.11.0",
     "npm-check-updates": "^2.11.2",
     "object.assign": "^4.0.4",
@@ -63,9 +87,11 @@
     "postcss-nested": "^2.0.2",
     "postcss-url": "^6.1.0",
     "script-loader": "^0.7.0",
+    "semantic-release": "^6.3.6",
     "style-loader": "^0.18.1",
     "stylelint": "^7.10.1",
     "stylelint-config-standard": "^16.0.0",
+    "validate-commit-msg": "^2.12.1",
     "webpack": "^2.6.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-hot-middleware": "^2.18.0",
