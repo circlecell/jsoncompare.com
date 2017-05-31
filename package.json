@@ -1,7 +1,7 @@
 {
   "name": "jsonlint-next",
   "version": "0.0.0",
-  "description": "Jsonlint website",
+  "description": "JSONCompare website",
   "main": "app.js",
   "private": true,
   "scripts": {
