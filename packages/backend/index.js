@@ -18,7 +18,7 @@ app.set('port', PORT);
 
 if (NODE_ENV === 'development') {
     // eslint-disable-next-line global-require
-    const config = require('../webpack/webpack.config');
+    const config = require('../../webpack/webpack.config');
     // eslint-disable-next-line global-require
     const webpackDevMiddleware = require('webpack-dev-middleware');
     // eslint-disable-next-line global-require
@@ -39,7 +39,7 @@ if (NODE_ENV === 'development') {
 } else if (!API_ONLY) {
     app.use(
         express.static(
-            path.resolve(__dirname, '..', 'public')
+            path.resolve(__dirname, 'public')
         )
     );
 }

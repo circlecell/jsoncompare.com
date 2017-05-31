@@ -9,7 +9,7 @@ const { NODE_ENV } = process.env;
 
 const plugins = [
     new webpack.ProvidePlugin({
-        RealDOM: path.join(__dirname, '../frontend/js/realdom')
+        RealDOM: path.join(__dirname, '../packages/frontend/js/realdom')
     }),
     new ExtractTextPlugin({
         filename: 'css/style.css',
@@ -28,7 +28,7 @@ const plugins = [
     new CopyWebpackPlugin([{ from: 'icons', to: 'icons' }]),
     new SplitByPathPlugin([{
         name: 'vendor',
-        path: path.join(__dirname, '..', 'frontend/node_modules/')
+        path: path.join(__dirname, '..', 'packages/frontend/node_modules/')
     }], {
         // fix https://github.com/webpack/extract-text-webpack-plugin/issues/92
         ignore: [/\.css/]

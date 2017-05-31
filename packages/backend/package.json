@@ -1,0 +1,21 @@
+{
+  "name": "jscompress-backend",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.58.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jsonschema": "^1.1.1",
+    "makeelement": "0.0.1",
+    "md5": "^2.2.1",
+    "request": "^2.81.0",
+    "valid-url": "^1.0.9"
+  },
+  "author": "",
+  "license": "MIT"
+}

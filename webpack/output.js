@@ -1,7 +1,7 @@
 const path = require('path');
 
 const { NODE_ENV } = process.env;
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../packages');
 let filename;
 let chunkFilename;
 
@@ -16,7 +16,7 @@ if (NODE_ENV === 'development') {
 const output = {
     filename,
     chunkFilename,
-    path: `${root}/public`,
+    path: `${root}/packages/backend/public`,
     publicPath: '/'
 };
 

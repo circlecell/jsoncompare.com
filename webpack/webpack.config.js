@@ -17,7 +17,7 @@ module.exports = {
     plugins,
     output,
     devtool: 'module-source-map',
-    context: `${root}/frontend`,
+    context: `${root}/packages/frontend`,
     module: {
         rules: [{
             test: /.js?$/,
