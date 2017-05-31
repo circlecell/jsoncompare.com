@@ -17,3 +17,6 @@ deploy:
   script: npm run travis-deploy && pm2 kill
   on:
     branch: master
+branches:
+  except:
+  - "/^v\\d+\\.\\d+\\.\\d+$/"
