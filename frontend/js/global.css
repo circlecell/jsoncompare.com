@@ -278,7 +278,7 @@
     footer {
         text-align: center;
         max-width: 1250px;
-        padding: 15px;
+        padding: 15px 0 45px;
         margin: 0 auto 0;
         border-top: 1px solid #eee;
         font-size: 12px;
@@ -374,6 +374,19 @@
     .bsa-cpc-inline .default-title {
       position: relative;
       margin-left: 8px;
+    }
+
+    .bsa-cpc-inline .default-title:before {
+        position: relative;
+        top: -1px;
+        left: -8px;
+        padding: 2px 5px 3px;
+        background-color: #1e8bc3;
+        color: #3498DB;
+        content: "Sponsor";
+        text-transform: uppercase;
+        font-size: 11px;
+        font-family: Verdana, sans-serif;
     }
 
 
