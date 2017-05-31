@@ -15,7 +15,7 @@ if (NODE_ENV === 'development') {
 const output = {
     filename,
     chunkFilename,
-    path: `${__dirname}/packages/backend/public`,
+    path: path.resolve(__dirname, '../packages/backend/public'),
     publicPath: '/'
 };
 
