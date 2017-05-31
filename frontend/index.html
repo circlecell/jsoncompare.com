@@ -23,6 +23,7 @@
     <link href="icons/apple-touch-icon-128x128.png" rel="icon" sizes="128x128" />
 </head>
 <body>
+    <div class="bsa-cpc-inline"></div>
     <header>
        <nav>
            <div class="dev-tools-logo"><span class="plus">+</span><br>JSON</div>
@@ -57,21 +58,36 @@
             </script>
         </div>
         <main></main>
+        <!-- bsa-cpc -->
+        <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+
+        <script>
+          (function(){
+            if(typeof _bsa !== 'undefined' && _bsa) {
+            _bsa.init('default', 'CVADT27Y', 'placement:jsonlintcom', {
+              target: '.bsa-cpc-inline',
+              align: 'horizontal',
+              disable_css: 'true'
+            });
+              }
+          })();
+        </script>
+        <!-- /bsa-cpc -->
         <div class="info">
             <p class="heading">About JSONCompare</p>
 
-<p>JSONCompare, the advanced version of the legendary <a href="https://jsonlint.com/" target="_blank">JSONLint</a> validator, is a fully featured JSON tool that allows you to directly input and validate JSON code, upload and validate multiple (batch) JSON files simultaneously, and also compare (diff) and merge two JSON objects.</p>
+            <p>JSONCompare, the advanced version of the legendary <a href="https://jsonlint.com/" target="_blank">JSONLint</a> validator, is a fully featured JSON tool that allows you to directly input and validate JSON code, upload and validate multiple (batch) JSON files simultaneously, and also compare (diff) and merge two JSON objects.</p>
 
-<p>And if you're looking for distraction-free mode, simply click the '<strong>Fullscreen Editor</strong>.'</p>
+            <p>And if you're looking for distraction-free mode, simply click the '<strong>Fullscreen Editor</strong>.'</p>
 
-<p class="heading">JSONCompare Modes</p>
-<p>
+            <p class="heading">JSONCompare Modes</p>
+            <p>
 
-<ul>
-<li><strong>Simple</strong>: Directly input or copy & paste and click 'Lint' to validate.</li>
-<li><strong>Batch</strong>: Upload multiple JSON objects at once and click 'Lint' to validate.</li>
-<li><strong>Diff</strong>: Directly input or copy & paste code to compare, merge and validate two seperate JSON objects.</li>
-</ul>
+            <ul>
+            <li><strong>Simple</strong>: Directly input or copy &amp; paste and click 'Lint' to validate.</li>
+            <li><strong>Batch</strong>: Upload multiple JSON objects at once and click 'Lint' to validate.</li>
+            <li><strong>Diff</strong>: Directly input or copy &amp; paste code to compare, merge and validate two seperate JSON objects.</li>
+            </ul>
             <p class="heading">Credits &amp; Source</p>
             <p>Built and maintained by <a target="_blank" href="https://github.com/finom/">Andrey Gubanov</a>. You can grab the JSONCompare.com source code from GitHub <a target="_blank" href="">here</a>.</p>
         </div>
