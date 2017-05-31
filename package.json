@@ -41,7 +41,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/circlecell/jsonlint-next.git"
+    "url": "git+https://github.com/circlecell/jsoncompare.com.git"
   },
   "keywords": [
     "jsonlint"
@@ -51,7 +51,7 @@
   "bugs": {
     "url": "https://github.com/circlecell/jsonlint-next/issues"
   },
-  "homepage": "https://github.com/circlecell/jsonlint-next#readme",
+  "homepage": "https://github.com/circlecell/jsoncompare.com#readme",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
