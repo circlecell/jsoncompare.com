@@ -3,7 +3,7 @@
   "apps" : [
     {
       "name"      : "jsoncompare.com",
-      "script"    : "index.js",
+      "script"    : "packages/backend/index.js",
       "env": {},
       "env_production" : {
         "NODE_ENV": "production",
@@ -21,7 +21,7 @@
       "repo" : "git@github.com:circlecell/jsoncompare.com.git",
       "path" : "/var/web/jsoncompare.com",
       "ssh_options": ["StrictHostKeyChecking=no", "PasswordAuthentication=no"],
-      "post-deploy" : "rm -rf node_modules; rm -rf frontend/node_modules; npm install && npm run npm-frontend -- install && npm run bundle && npm run serve-prod"
+      "post-deploy" : "install-all && npm run bundle && npm run serve-prod"
     },
   }
 }
