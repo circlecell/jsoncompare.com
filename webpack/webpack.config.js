@@ -18,5 +18,5 @@ module.exports = {
     module: moduleConf,
     entry,
     plugins,
-    output,
+    output
 };

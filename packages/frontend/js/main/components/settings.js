@@ -19,7 +19,7 @@ export default ({ owner }) => (<div className={style.settings}>
             owner,
             saved: prop('disabled')
         }}
-    ></button>
+    />
 
     <button
         onClick={() => owner.onClickFullscreen()}
@@ -29,9 +29,10 @@ export default ({ owner }) => (<div className={style.settings}>
             fullscreen: {
                 getValue: null,
                 setValue(value, { node }) {
-                    this.textContent = value ? 'Exit Fullscreen' : 'Fullscreen Editor';
+                    // eslint-disable-next-line no-param-reassign
+                    node.textContent = value ? 'Exit Fullscreen' : 'Fullscreen Editor';
                 }
             }
         }}
-    ></button>
+    />
 </div>);

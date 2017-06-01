@@ -19,9 +19,9 @@ app.set('port', PORT);
 if (NODE_ENV === 'development') {
     // eslint-disable-next-line global-require
     const config = require('../../webpack/webpack.config');
-    // eslint-disable-next-line global-require
+    // eslint-disable-next-line global-require, import/no-extraneous-dependencies
     const webpackDevMiddleware = require('webpack-dev-middleware');
-    // eslint-disable-next-line global-require
+    // eslint-disable-next-line global-require, import/no-extraneous-dependencies
     const webpack = require('webpack');
 
     const compiler = webpack(config);

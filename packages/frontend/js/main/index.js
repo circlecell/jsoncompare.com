@@ -25,6 +25,7 @@ export default class Main extends Matreshka {
             .bindNode('mode', 'body', dataset('mode'))
             .bindNode('fullscreen', 'body', {
                 setValue(value, { node }) {
+                    // eslint-disable-next-line no-param-reassign
                     node.dataset.fullscreen = value ? 'on' : 'off';
                 }
             })
