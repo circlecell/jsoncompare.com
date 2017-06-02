@@ -4,6 +4,8 @@
     {
       "name"      : "jsoncompare.com",
       "script"    : "packages/backend/index.js",
+      "error_file": "/var/web/jsoncompare.com/err.log",
+      "out_file": "/var/web/jsoncompare.com/out.log",
       "env": {},
       "env_production" : {
         "NODE_ENV": "production",
