@@ -5,7 +5,7 @@
   "main": "app.js",
   "private": true,
   "scripts": {
-    "test": "npm run lint || echo 'Ignoring errors for now'",
+    "test": "npm run lint",
     "start": "npm run serve-prod",
     "serve-prod": "pm2 startOrRestart ecosystem.json --env production --watch",
     "develop": "opn http://localhost:5001; PORT=5001 NODE_ENV=development nodemon packages/backend --ignore 'frontend/*' --ignore 'public/*' --ignore 'node_modules/*'",
@@ -13,7 +13,7 @@
     "check-updates": "ncu; ncu --packageFile ./frontend/package.json",
     "upgrade": "ncu -a && npm install && lerna exec --concurrency 1 -- ncu -a && lerna exec --concurrency 1 -- npm install",
     "install-all": "npm install && lerna exec --concurrency 1 -- npm install",
-    "lint": "eslint . --ext .js --cache --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'",
+    "lint": "eslint . --ext .js --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'",
     "stylelint": "stylelint frontend/**/*.css",
     "clean": "rimraf packages/backend/public",
     "deploy": "pm2 deploy ecosystem.json production --force",
