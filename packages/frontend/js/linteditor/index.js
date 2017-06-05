@@ -70,6 +70,10 @@ export default class LintEditor extends MatreshkaObject {
             key: 'code'
         });
 
+        codeMirror.addKeyMap({
+            'Ctrl-Enter': () => this.lint()
+        });
+
         this.nodes.sandbox.appendChild(<Extras owner={this} />);
     }
 
