@@ -20,7 +20,7 @@ Object.assign(CodeMirror.defaults, {
     viewportMargin: Infinity,
     lineNumbers: true,
     foldGutter: true,
-    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
 });
 
 export default CodeMirror;
