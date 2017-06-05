@@ -32,7 +32,6 @@ Object.assign(CodeMirror.defaults, {
     lineNumbers: true,
     foldGutter: true,
     gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-
 });
 
 export default CodeMirror;
