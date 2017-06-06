@@ -1,5 +1,4 @@
-# jsoncompare.com [![Build Status](https://travis-ci.org/circlecell/jsoncompare.com.svg?branch=master)](https://travis-ci.org/circlecell/jsoncompare.com) [![devDependency Status](https://img.shields.io/david/dev/circlecell/jsoncompare.com.svg)](https://david-dm.org/circlecell/jsoncompare.com#info=devDependencies)
-[![Dependency Status](https://img.shields.io/david/circlecell/jsoncompare.com.svg)](https://david-dm.org/circlecell/jsoncompare.com)
+# jsoncompare.com [![Build Status](https://travis-ci.org/circlecell/jsoncompare.com.svg?branch=master)](https://travis-ci.org/circlecell/jsoncompare.com)
 
 Source code for http://jsoncompare.com
 
