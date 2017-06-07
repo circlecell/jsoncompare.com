@@ -11,6 +11,18 @@ module.exports = function createElement(givenElement, attributes, ...children) {
         element = givenElement;
     }
 
+    for (let i = 0; i < children.length; i++) {
+        let child = children[i];
+
+        if (typeof child === 'string') {
+            child = document.createTextNode(child);
+        }
+
+        if (child instanceof Node) {
+            element.appendChild(child);
+        }
+    }
+
     if (attributes) {
         for (let i = 0, keys = Object.keys(attributes); i < keys.length; i++) {
             const name = keys[i];
@@ -25,24 +37,10 @@ module.exports = function createElement(givenElement, attributes, ...children) {
                 && lowerCasedName in element
             ) {
                 element[lowerCasedName] = value;
-            } else {
+            } else if (name !== 'owner') {
                 element.setAttribute(name, value);
             }
         }
-    }
-
-    for (let i = 0; i < children.length; i++) {
-        let child = children[i];
-
-        if (typeof child === 'string') {
-            child = document.createTextNode(child);
-        }
-
-        if (!(child instanceof Node)) {
-            throw Error(`RealDOM JSX can not contain ${typeof child}`);
-        }
-
-        element.appendChild(child);
     }
 
     return element;

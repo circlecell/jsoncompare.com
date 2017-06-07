@@ -1,6 +1,6 @@
 # jsoncompare.com [![Build Status](https://travis-ci.org/circlecell/jsoncompare.com.svg?branch=master)](https://travis-ci.org/circlecell/jsoncompare.com)
 
-Source code for http://jsoncompare.com
+Source code for [jsoncompare.com](jsoncompare.com).
 
 ## API
 ``POST https://jsoncompare.com/api/save`` - saves current application state on S3.

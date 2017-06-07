@@ -3,22 +3,55 @@ import { dataset } from 'matreshka/binders';
 import initRouter from 'matreshka-router';
 import beautify from 'js-beautify/js/lib/beautify';
 import minify from 'jsonminify';
+import qs from 'qs';
 import LintEditor from '../linteditor';
 import Sandbox from './components/sandbox';
 import Tabs from './tabs';
 
-
 export default class Main extends Matreshka {
     constructor() {
-        initRouter(super(), 'mode/id')
+        initRouter(super(), 'mode/params')
             .instantiate('tabs', Tabs)
             .set({
                 memo: {},
                 mode: this.mode || 'simple',
                 defaultView: this.toJSONString(),
                 saved: true,
-                loading: true,
-                fullscreen: false
+                loading: true
+            })
+            .calc({
+                id: {
+                    source: 'params',
+                    handler: params => (qs.parse(params).id || null)
+                },
+                fullscreen: {
+                    source: 'params',
+                    handler: params => 'fullscreen' in qs.parse(params)
+                },
+                reformat: {
+                    source: 'params',
+                    handler: params => (qs.parse(params).reformat || null)
+                },
+                params: {
+                    source: ['id', 'fullscreen', 'reformat'],
+                    handler(id, fullscreen, reformat) {
+                        const params = [];
+
+                        if (id) {
+                            params.push(`id=${id}`);
+                        }
+
+                        if (fullscreen) {
+                            params.push('fullscreen');
+                        }
+
+                        if (reformat) {
+                            params.push(`reformat=${reformat}`);
+                        }
+
+                        return params.join('&');
+                    }
+                }
             })
             .bindSandbox(<Sandbox owner={this} />)
             .bindNode('win', window)

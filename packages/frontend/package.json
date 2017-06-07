@@ -28,6 +28,7 @@
     "matreshka-binders-file": "0.0.2",
     "matreshka-router": "1.0.30",
     "object.assign": "^4.0.4",
+    "qs": "^6.4.0",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
