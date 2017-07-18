@@ -30,7 +30,7 @@ export default class Main extends Matreshka {
                 },
                 reformat: {
                     source: 'params',
-                    handler: params => (qs.parse(params).reformat || null)
+                    handler: params => (qs.parse(params).reformat || 'beautify_tabs')
                 },
                 params: {
                     source: ['id', 'fullscreen', 'reformat'],
@@ -45,7 +45,7 @@ export default class Main extends Matreshka {
                             params.push('fullscreen');
                         }
 
-                        if (reformat) {
+                        if (reformat !== 'beautify_tabs') {
                             params.push(`reformat=${reformat}`);
                         }
 
