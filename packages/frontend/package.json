@@ -20,15 +20,15 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "balajs": "^1.0.6",
-    "byte-size": "^3.0.0",
-    "codemirror": "^5.26.0",
+    "byte-size": "^4.0.2",
+    "codemirror": "^5.27.4",
     "diff-match-patch": "^1.0.0",
     "jsonlint-mod": "^1.7.2",
     "matreshka": "^2.4.0",
     "matreshka-binders-file": "0.0.2",
     "matreshka-router": "1.0.30",
     "object.assign": "^4.0.4",
-    "qs": "^6.4.0",
+    "qs": "^6.5.0",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
