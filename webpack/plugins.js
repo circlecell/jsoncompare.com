@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path');
 
 const { NODE_ENV } = process.env;
@@ -37,7 +38,7 @@ const plugins = [
 
 if (NODE_ENV === 'production') {
     plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
+        new UglifyJsPlugin({
             compress: {
                 warnings: false
             }
