@@ -7,12 +7,12 @@ export default class BatchItem extends MatreshkaObject {
     renderer = self => <Sandbox owner={self} />;
     constructor(data, parent) {
         super()
-        .set(data)
-        .setData({
-            value: this.value || ''
-        })
-        .set({ parent })
-        .on('afterrender', this.onAfterRender);
+            .set(data)
+            .setData({
+                value: this.value || ''
+            })
+            .set({ parent })
+            .on('afterrender', this.onAfterRender);
     }
 
     onAfterRender() {

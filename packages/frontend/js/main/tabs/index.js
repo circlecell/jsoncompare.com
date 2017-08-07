@@ -21,24 +21,24 @@ export default class Tabs extends MatreshkaObject {
                 description: 'Compare and merge two JSON objects'
             }
         })
-        .instantiate({
-            simple: SimpleTab,
-            batch: BatchTab,
-            diff: DiffTab
-        })
-        .bindSandbox(<Sandbox owner={this} />)
-        .bindNode('nav', <Nav owner={this} />)
-        .on({
-            '*@change:isActive': (evt) => {
-                if (evt.value) {
-                    for (const tab of this) {
-                        tab.isActive = tab === evt.self;
-                    }
+            .instantiate({
+                simple: SimpleTab,
+                batch: BatchTab,
+                diff: DiffTab
+            })
+            .bindSandbox(<Sandbox owner={this} />)
+            .bindNode('nav', <Nav owner={this} />)
+            .on({
+                '*@change:isActive': (evt) => {
+                    if (evt.value) {
+                        for (const tab of this) {
+                            tab.isActive = tab === evt.self;
+                        }
 
-                    this.activeTab = evt.self;
+                        this.activeTab = evt.self;
+                    }
                 }
-            }
-        });
+            });
 
         this.simple.isActive = true;
     }

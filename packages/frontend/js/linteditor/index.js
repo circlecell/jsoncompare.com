@@ -13,57 +13,57 @@ export default class LintEditor extends MatreshkaObject {
         ownerCodeProperty
     }) {
         super()
-        .set({
-            codeMirror,
-            errorLine: null,
-            errorText: '',
-            validated: false
-        })
-        .bindNode({
-            sandbox: this.codeMirror.display.wrapper
-        })
-        .bindNode('code', ':sandbox', {
-            on(callback) {
-                this.CodeMirror.on('change', callback);
-            },
-            getValue() {
-                return this.CodeMirror.getValue();
-            },
-            setValue(value) {
-                this.CodeMirror.setValue(`${value}`);
-            }
-        })
-        .bindNode('errorLine', ':sandbox', {
-            setValue(value) {
-                const { CodeMirror: codeMirrorInstance } = this;
-                const { previousErrorLine } = codeMirrorInstance;
-
-                if (value !== null) {
-                    codeMirrorInstance.addLineClass(value, 'background', 'lint-line-error');
-                    codeMirrorInstance.previousErrorLine = value;
-                } else if (typeof previousErrorLine === 'number') {
-                    codeMirrorInstance.removeLineClass(
-                        previousErrorLine, 'background', 'lint-line-error'
-                    );
+            .set({
+                codeMirror,
+                errorLine: null,
+                errorText: '',
+                validated: false
+            })
+            .bindNode({
+                sandbox: this.codeMirror.display.wrapper
+            })
+            .bindNode('code', ':sandbox', {
+                on(callback) {
+                    this.CodeMirror.on('change', callback);
+                },
+                getValue() {
+                    return this.CodeMirror.getValue();
+                },
+                setValue(value) {
+                    this.CodeMirror.setValue(`${value}`);
                 }
-            }
-        })
+            })
+            .bindNode('errorLine', ':sandbox', {
+                setValue(value) {
+                    const { CodeMirror: codeMirrorInstance } = this;
+                    const { previousErrorLine } = codeMirrorInstance;
 
-        .calc('size', 'code', (code) => {
-            const bytes = new Blob([code], {
-                type: 'text/javascript'
-            }).size;
-            const { value, unit } = byteSize(bytes, {
-                units: 'iec'
-            });
+                    if (value !== null) {
+                        codeMirrorInstance.addLineClass(value, 'background', 'lint-line-error');
+                        codeMirrorInstance.previousErrorLine = value;
+                    } else if (typeof previousErrorLine === 'number') {
+                        codeMirrorInstance.removeLineClass(
+                            previousErrorLine, 'background', 'lint-line-error'
+                        );
+                    }
+                }
+            })
 
-            return bytes ? value + unit : '';
-        })
-        .calc('code', {
-            object: owner,
-            key: ownerCodeProperty
-        })
-        .events();
+            .calc('size', 'code', (code) => {
+                const bytes = new Blob([code], {
+                    type: 'text/javascript'
+                }).size;
+                const { value, unit } = byteSize(bytes, {
+                    units: 'iec'
+                });
+
+                return bytes ? value + unit : '';
+            })
+            .calc('code', {
+                object: owner,
+                key: ownerCodeProperty
+            })
+            .events();
 
         owner.calc(ownerCodeProperty, {
             object: this,

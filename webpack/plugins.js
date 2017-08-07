@@ -3,7 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const BabiliPlugin = require("babili-webpack-plugin");
+const BabiliPlugin = require('babili-webpack-plugin');
 const path = require('path');
 
 const { NODE_ENV } = process.env;
