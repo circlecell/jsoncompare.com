@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "aws-sdk": "^2.86.0",
+    "aws-sdk": "^2.94.0",
     "body-parser": "^1.17.2",
-    "express": "^4.15.3",
+    "express": "^4.15.4",
     "jsonschema": "^1.1.1",
     "makeelement": "0.0.1",
     "md5": "^2.2.1",

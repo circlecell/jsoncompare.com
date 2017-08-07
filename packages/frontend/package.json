@@ -21,7 +21,7 @@
     "babel-polyfill": "^6.23.0",
     "balajs": "^1.0.6",
     "byte-size": "^4.0.2",
-    "codemirror": "^5.27.4",
+    "codemirror": "^5.28.0",
     "diff-match-patch": "^1.0.0",
     "jsonlint-mod": "^1.7.2",
     "matreshka": "^2.4.0",
