@@ -23,7 +23,7 @@ Example:
 	}
 }
 <<<
-{ "key":"aac35abfc8e25a4914cf90da13aa29e9" }
+{ "key":"aac35abfc8e25a4914cf90da13aa29e9" } 
 ```
 
 
