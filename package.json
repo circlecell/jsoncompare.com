@@ -17,7 +17,7 @@
     "stylelint": "stylelint frontend/**/*.css",
     "clean": "rimraf packages/backend/public",
     "deploy": "pm2 deploy ecosystem.json production --force",
-    "travis-deploy": "if-env TRAVIS_BRANCH=master TRAVIS_PULL_REQUEST=false && npm run semantic-release || echo 'Deploy is not run'",
+    "travis-deploy": "if-env TRAVIS_BRANCH=master TRAVIS_PULL_REQUEST=false && npm run semantic-release || echo \"Deploy is not run: TRAVIS_BRANCH=$TRAVIS_BRANCH TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST\"",
     "semantic-release": "semantic-release pre && ssh-keyscan 192.241.157.86 >> ~/.ssh/known_hosts && npm run deploy && semantic-release post"
   },
   "config": {
