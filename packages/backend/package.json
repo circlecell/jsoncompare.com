@@ -7,13 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "aws-sdk": "^2.94.0",
-    "body-parser": "^1.17.2",
-    "express": "^4.15.4",
-    "jsonschema": "^1.1.1",
-    "makeelement": "0.0.1",
+    "aws-sdk": "^2.189.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jsonschema": "^1.2.2",
+    "makeelement": "0.0.3",
     "md5": "^2.2.1",
-    "request": "^2.81.0",
+    "request": "^2.83.0",
     "valid-url": "^1.0.9"
   },
   "author": "",
