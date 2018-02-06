@@ -335,6 +335,7 @@
       text-align: center;
       position: fixed;
       bottom: 0;
+      left: 0;
       width: 100%;
       line-height: 1.5;
     }
@@ -395,7 +396,7 @@
 
     /* fix for https://github.com/circlecell/jsoncompare.com/issues/9 */
     body[data-fullscreen="on"] .bsa-cpc-inline:not(:empty) + main > div {
-      height: calc(100% - 82px);
+      height: calc(100% - 92px);
     }
 
 
