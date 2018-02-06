@@ -29,7 +29,8 @@
         "perf",
         "test",
         "chore",
-        "revert"
+        "revert",
+        "ci"
       ]
     },
     "ghooks": {
