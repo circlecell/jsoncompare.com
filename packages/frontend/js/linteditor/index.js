@@ -42,9 +42,7 @@ export default class LintEditor extends MatreshkaObject {
                         codeMirrorInstance.addLineClass(value, 'background', 'lint-line-error');
                         codeMirrorInstance.previousErrorLine = value;
                     } else if (typeof previousErrorLine === 'number') {
-                        codeMirrorInstance.removeLineClass(
-                            previousErrorLine, 'background', 'lint-line-error'
-                        );
+                        codeMirrorInstance.removeLineClass(previousErrorLine, 'background', 'lint-line-error');
                     }
                 }
             })

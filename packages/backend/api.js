@@ -7,9 +7,7 @@ const { isUri } = require('valid-url');
 const path = require('path');
 const AppState = require('./app-state-schema');
 
-AWS.config.loadFromPath(
-    path.resolve(__dirname, '../../../jsonlint_aws_credentials.json')
-);
+AWS.config.loadFromPath(path.resolve(__dirname, '../../../jsonlint_aws_credentials.json'));
 
 const validator = new Validator();
 const s3 = new AWS.S3();

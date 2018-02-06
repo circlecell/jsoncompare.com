@@ -37,9 +37,7 @@ const plugins = [
 ];
 
 if (NODE_ENV === 'production') {
-    plugins.push(
-        new BabiliPlugin()
-    );
+    plugins.push(new BabiliPlugin());
 }
 
 if (NODE_ENV === 'development') {

@@ -37,11 +37,7 @@ if (NODE_ENV === 'development') {
         historyApiFallback: true
     }));
 } else if (!API_ONLY) {
-    app.use(
-        express.static(
-            path.resolve(__dirname, 'public')
-        )
-    );
+    app.use(express.static(path.resolve(__dirname, 'public')));
 }
 
 app.use(bodyParser.urlencoded({

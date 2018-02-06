@@ -6,7 +6,7 @@ export default {
     },
 
     bind: (element, value) => {
-        const owner = value.owner;
+        const { owner } = value;
 
         if (!owner) {
             throw Error('binding owner is missing');
