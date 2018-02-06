@@ -54,6 +54,7 @@
   },
   "homepage": "https://github.com/circlecell/jsoncompare.com#readme",
   "devDependencies": {
+    "@semantic-release/github": "^4.0.2",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
