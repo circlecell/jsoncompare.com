@@ -38,7 +38,7 @@
     }
   },
   "release": {
-    "getLastRelease": "last-release-git"
+    "publish": []
   },
   "repository": {
     "type": "git",
