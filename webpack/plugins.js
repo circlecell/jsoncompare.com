@@ -26,7 +26,10 @@ const plugins = [
             return order.indexOf(nameA) - order.indexOf(nameB);
         }
     }),
-    new CopyWebpackPlugin([{ from: 'icons', to: 'icons' }]),
+    new CopyWebpackPlugin([
+        { from: 'icons', to: 'icons' },
+        { from: 'privacy-policy.html' }
+    ]),
     new SplitByPathPlugin([{
         name: 'vendor',
         path: path.join(__dirname, '..', 'packages/frontend/node_modules/')
