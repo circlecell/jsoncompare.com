@@ -4,6 +4,8 @@ node_js:
 before_install:
 - openssl aes-256-cbc -K $encrypted_81d4cb85ffe2_key -iv $encrypted_81d4cb85ffe2_iv
   -in deploy_rsa.enc -out deploy_rsa -d
+install:
+  - echo 'Skip install'
 addons:
   ssh_known_hosts: 192.241.157.86
 before_deploy:
