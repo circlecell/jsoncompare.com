@@ -7,7 +7,6 @@ before_install:
 addons:
   ssh_known_hosts: 192.241.157.86
 before_deploy:
-- npm install -g pm2
 - eval "$(ssh-agent -s)"
 - chmod 600 $TRAVIS_BUILD_DIR/deploy_rsa
 - ssh-add $TRAVIS_BUILD_DIR/deploy_rsa
