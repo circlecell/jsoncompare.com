@@ -1,9 +1,7 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const SplitByPathPlugin = require('webpack-split-by-path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const BabiliPlugin = require('babili-webpack-plugin');
 const path = require('path');
 
 const { NODE_ENV } = process.env;
@@ -29,19 +27,8 @@ const plugins = [
     new CopyWebpackPlugin([
         { from: 'icons', to: 'icons' },
         { from: 'privacy-policy.html' }
-    ]),
-    new SplitByPathPlugin([{
-        name: 'vendor',
-        path: path.join(__dirname, '..', 'packages/frontend/node_modules/')
-    }], {
-        // fix https://github.com/webpack/extract-text-webpack-plugin/issues/92
-        ignore: [/\.css/]
-    })
+    ])
 ];
-
-if (NODE_ENV === 'production') {
-    plugins.push(new BabiliPlugin());
-}
 
 if (NODE_ENV === 'development') {
     plugins.push(

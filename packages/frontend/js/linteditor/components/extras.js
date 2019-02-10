@@ -11,7 +11,8 @@ export default ({ owner }) => (
                 owner,
                 validated: className(style.lintButtonSuccess)
             }}
-        >Lint
+        >
+Lint
         </span>
         <span className={style.clearButton} onClick={() => owner.onClearButtonClick()}>
         Clear

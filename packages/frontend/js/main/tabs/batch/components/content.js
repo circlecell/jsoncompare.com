@@ -17,14 +17,16 @@ export default ({ owner }) => (
         <div className={style.batchButtons}>
             <h3>Drop files here or add fields manually</h3>
 
-            <button className={style.addFiles}>
+            <button type="button" className={style.addFiles}>
                 <input type="file" multiple bind={{ owner, files: file('text') }} />
             Open files
             </button>
             <button
+                type="button"
                 className={style.addField}
                 onClick={evt => owner.onAddButtonClick(evt)}
-            >Add field
+            >
+Add field
             </button>
         </div>
     </div>

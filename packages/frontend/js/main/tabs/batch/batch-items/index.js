@@ -4,6 +4,7 @@ import Sandbox from './components/sandbox';
 
 export default class BatchItems extends MatreshkaArray {
     Model = BatchItem;
+
     constructor(data) {
         super(...data)
             .bindSandbox(<Sandbox owner={this} />)

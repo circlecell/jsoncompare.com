@@ -2,7 +2,7 @@ const { NODE_ENV } = process.env;
 
 const entry = {
     app: [
-        'babel-polyfill',
+        '@babel/polyfill',
         './js/index'
     ]
 };

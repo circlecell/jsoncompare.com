@@ -12,6 +12,7 @@ export default ({ owner }) => (
         </select>
 
         <button
+            type="button"
             onClick={() => owner.onClickSave()}
             className={style.saveButton}
             data-save-text="Save"
@@ -23,6 +24,7 @@ export default ({ owner }) => (
         />
 
         <button
+            type="button"
             onClick={() => owner.onClickFullscreen()}
             className={style.fullscreenButton}
             bind={{

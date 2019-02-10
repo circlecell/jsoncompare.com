@@ -18,21 +18,21 @@
   },
   "homepage": "https://github.com/circlecell/jsonlint#readme",
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
+    "@babel/polyfill": "^7.2.5",
     "balajs": "^1.0.7",
-    "byte-size": "^4.0.2",
-    "codemirror": "^5.34.0",
-    "diff-match-patch": "^1.0.0",
-    "jsonlint-mod": "^1.7.2",
+    "byte-size": "^5.0.1",
+    "codemirror": "^5.43.0",
+    "diff-match-patch": "^1.0.4",
+    "jsonlint-mod": "^1.7.4",
     "matreshka": "^2.4.0",
     "matreshka-binders-file": "0.0.2",
     "matreshka-router": "1.0.30",
     "object.assign": "^4.1.0",
-    "qs": "^6.5.1",
+    "qs": "^6.6.0",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
-    "js-beautify": "^1.7.5",
+    "js-beautify": "^1.8.9",
     "jsonminify": "^0.4.1"
   }
 }

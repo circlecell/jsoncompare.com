@@ -1,6 +1,6 @@
 import attrHook from './attrhook';
 
-module.exports = function createElement(givenElement, attributes, ...children) {
+export default function createElement(givenElement, attributes, ...children) {
     let element;
 
     if (typeof givenElement === 'string') {
@@ -44,4 +44,4 @@ module.exports = function createElement(givenElement, attributes, ...children) {
     }
 
     return element;
-};
+}
