@@ -21,9 +21,9 @@
     "@babel/polyfill": "^7.4.4",
     "balajs": "^1.0.7",
     "byte-size": "^5.0.1",
-    "codemirror": "^5.47.0",
+    "codemirror": "^5.48.2",
     "diff-match-patch": "^1.0.4",
-    "jsonlint-mod": "^1.7.4",
+    "jsonlint-mod": "^1.7.5",
     "matreshka": "^2.4.0",
     "matreshka-binders-file": "0.0.2",
     "matreshka-router": "1.0.30",
@@ -32,7 +32,7 @@
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
-    "js-beautify": "^1.10.0",
+    "js-beautify": "^1.10.1",
     "jsonminify": "^0.4.1"
   }
 }
