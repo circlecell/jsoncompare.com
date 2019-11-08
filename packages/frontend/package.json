@@ -18,17 +18,17 @@
   },
   "homepage": "https://github.com/circlecell/jsonlint#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.6.0",
+    "@babel/polyfill": "^7.7.0",
     "balajs": "^1.0.7",
-    "byte-size": "^6.0.0",
-    "codemirror": "^5.49.0",
+    "byte-size": "^6.2.0",
+    "codemirror": "^5.49.2",
     "diff-match-patch": "^1.0.4",
     "jsonlint-mod": "^1.7.5",
     "matreshka": "^2.4.0",
     "matreshka-binders-file": "0.0.2",
     "matreshka-router": "1.0.30",
     "object.assign": "^4.1.0",
-    "qs": "^6.9.0",
+    "qs": "^6.9.1",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
