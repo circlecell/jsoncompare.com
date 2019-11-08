@@ -24,10 +24,7 @@ const plugins = [
             return order.indexOf(nameA) - order.indexOf(nameB);
         }
     }),
-    new CopyWebpackPlugin([
-        { from: 'icons', to: 'icons' },
-        { from: 'privacy-policy.html' }
-    ])
+    new CopyWebpackPlugin([{ from: 'static' }])
 ];
 
 if (NODE_ENV === 'development') {
