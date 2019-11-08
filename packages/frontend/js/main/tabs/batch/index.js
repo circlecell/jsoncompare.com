@@ -38,11 +38,11 @@ export default class BatchTab extends Tab {
     }
 
     toJSON() {
-        return this.items.map(item => btoa(item.value));
+        return this.items.map((item) => btoa(item.value));
     }
 
     fromJSON(value) {
-        this.items.recreate(value.map(item => ({
+        this.items.recreate(value.map((item) => ({
             value: atob(item)
         })), {
             dontRender: true

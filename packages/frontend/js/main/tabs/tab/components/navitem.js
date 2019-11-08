@@ -4,7 +4,7 @@ import style from '../style.css';
 export default ({ owner }) => (
     <li
         className={style.navItem}
-        onClick={evt => owner.onNavClick(evt)}
+        onClick={(evt) => owner.onNavClick(evt)}
         bind={{
             owner,
             isActive: className(style.activeNavItem)

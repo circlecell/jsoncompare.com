@@ -15,7 +15,7 @@ export default class BatchItems extends MatreshkaArray {
 
     add() {
         this.push({});
-        this[this.length - 1].once('initialize', item => item.editor.focus());
+        this[this.length - 1].once('initialize', (item) => item.editor.focus());
     }
 
     onItemClickDelete(item) {

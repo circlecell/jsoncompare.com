@@ -24,7 +24,7 @@ export default ({ owner }) => (
             <button
                 type="button"
                 className={style.addField}
-                onClick={evt => owner.onAddButtonClick(evt)}
+                onClick={(evt) => owner.onAddButtonClick(evt)}
             >
 Add field
             </button>

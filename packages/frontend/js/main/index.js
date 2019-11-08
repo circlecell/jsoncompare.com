@@ -22,15 +22,15 @@ export default class Main extends Matreshka {
             .calc({
                 id: {
                     source: 'params',
-                    handler: params => (qs.parse(params).id || null)
+                    handler: (params) => (qs.parse(params).id || null)
                 },
                 fullscreen: {
                     source: 'params',
-                    handler: params => 'fullscreen' in qs.parse(params)
+                    handler: (params) => 'fullscreen' in qs.parse(params)
                 },
                 reformat: {
                     source: 'params',
-                    handler: params => (qs.parse(params).reformat || 'beautify_tabs')
+                    handler: (params) => (qs.parse(params).reformat || 'beautify_tabs')
                 },
                 params: {
                     source: ['id', 'fullscreen', 'reformat'],
