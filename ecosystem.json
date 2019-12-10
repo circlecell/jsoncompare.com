@@ -22,7 +22,7 @@
       "repo" : "git@github.com:circlecell/jsoncompare.com.git",
       "path" : "/var/web/jsoncompare.com",
       "ssh_options": ["StrictHostKeyChecking=no", "PasswordAuthentication=no"],
-      "post-deploy" : "npm run install-all && npm run build && npm run serve-prod"
+      "post-deploy" : "npm run ci-all && npm run build && npm run serve-prod"
     },
   }
 }

@@ -13,6 +13,7 @@
     "check-updates": "ncu; ncu --packageFile ./frontend/package.json",
     "upgrade": "ncu -u && npm install && lerna exec --concurrency 1 -- ncu -u && lerna exec --concurrency 1 -- npm install",
     "install-all": "npm install && lerna exec --concurrency 1 -- npm install",
+    "ci-all": "npm ci && lerna exec --concurrency 1 -- npm ci",
     "reinstall": "rm -rf node_modules package-lock.json && rm -rf packages/*/node_modules packages/*/package-lock.json && npm run install-all",
     "lint": "eslint . --ext .js --ignore-pattern '**/node_modules/**' --ignore-pattern '**/public/**'",
     "stylelint": "stylelint frontend/**/*.css",
