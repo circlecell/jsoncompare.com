@@ -1,4 +1,4 @@
-import prop from 'matreshka/binders/prop';
+import { prop } from 'seemple/binders';
 import style from '../style.css';
 
 export default ({ owner }) => (

@@ -1,5 +1,5 @@
-import { dropFiles, file, dragOver } from 'matreshka-binders-file';
-import className from 'matreshka/binders/classname';
+import { dropFiles, file, dragOver } from 'file-binders';
+import { className } from 'seemple/binders';
 import style from '../style.css';
 
 export default ({ owner }) => (

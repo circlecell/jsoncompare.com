@@ -1,11 +1,11 @@
-import MatreshkaObject from 'matreshka/object';
+import SeempleObject from 'seemple/object';
 import SimpleTab from './simple';
 import BatchTab from './batch';
 import DiffTab from './diff';
 import Sandbox from './components/sandbox';
 import Nav from './components/nav';
 
-export default class Tabs extends MatreshkaObject {
+export default class Tabs extends SeempleObject {
     constructor() {
         super({
             simple: {

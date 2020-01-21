@@ -1,9 +1,9 @@
-import MatreshkaArray from 'matreshka/array';
+import SeempleArray from 'seemple/array';
 import BatchItem from './batch-item';
 import Sandbox from './components/sandbox';
 
-export default class BatchItems extends MatreshkaArray {
-    Model = BatchItem;
+export default class BatchItems extends SeempleArray {
+    get Model() { return BatchItem; }
 
     constructor(data) {
         super(...data)

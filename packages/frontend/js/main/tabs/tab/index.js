@@ -1,7 +1,7 @@
-import MatreshkaObject from 'matreshka/object';
+import SeempleObject from 'seemple/object';
 import NavItem from './components/navitem';
 
-export default class Tab extends MatreshkaObject {
+export default class Tab extends SeempleObject {
     constructor(data, parent, name) {
         super(data)
             .set({ parent, name })

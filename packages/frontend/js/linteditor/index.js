@@ -1,12 +1,12 @@
-import MatreshkaObject from 'matreshka/object';
-import trigger from 'matreshka/trigger';
+import SeempleObject from 'seemple/object';
+import trigger from 'seemple/trigger';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import jsonlint from 'jsonlint-mod';
 import byteSize from 'byte-size';
 import { isUri } from 'valid-url';
 import Extras from './components/extras';
 
-export default class LintEditor extends MatreshkaObject {
+export default class LintEditor extends SeempleObject {
     constructor({
         codeMirror,
         owner,

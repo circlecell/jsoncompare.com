@@ -1,6 +1,6 @@
-import Matreshka from 'matreshka/matreshka';
-import { dataset } from 'matreshka/binders';
-import initRouter from 'matreshka-router';
+import Seemple from 'seemple/seemple';
+import { dataset } from 'seemple/binders';
+import initRouter from 'seemple-router';
 import beautify from 'js-beautify/js/lib/beautify';
 import minify from 'jsonminify';
 import qs from 'qs';
@@ -8,7 +8,7 @@ import LintEditor from '../linteditor';
 import Sandbox from './components/sandbox';
 import Tabs from './tabs';
 
-export default class Main extends Matreshka {
+export default class Main extends Seemple {
     constructor() {
         initRouter(super(), 'mode/params')
             .instantiate('tabs', Tabs)
@@ -101,7 +101,7 @@ export default class Main extends Matreshka {
             this.loading = false;
         }
 
-        Matreshka.on(LintEditor, {
+        Seemple.on(LintEditor, {
             lint: (instance) => {
                 const { reformat } = this;
                 let { code } = instance;

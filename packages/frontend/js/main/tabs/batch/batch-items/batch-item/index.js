@@ -1,9 +1,9 @@
-import MatreshkaObject from 'matreshka/object';
+import SeempleObject from 'seemple/object';
 import CodeMirror from 'codemirror';
 import Sandbox from './components/sandbox';
 import LintEditor from '../../../../../linteditor';
 
-export default class BatchItem extends MatreshkaObject {
+export default class BatchItem extends SeempleObject {
     renderer = (self) => <Sandbox owner={self} />;
 
     constructor(data, parent) {

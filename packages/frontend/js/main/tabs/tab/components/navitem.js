@@ -1,4 +1,4 @@
-import className from 'matreshka/binders/classname';
+import { className } from 'seemple/binders';
 import style from '../style.css';
 
 export default ({ owner }) => (

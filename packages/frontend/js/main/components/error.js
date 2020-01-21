@@ -1,4 +1,4 @@
-import text from 'matreshka/binders/text';
+import { text } from 'seemple/binders';
 import style from '../style.css';
 
 export default ({ owner }) => (
