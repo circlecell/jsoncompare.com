@@ -11,10 +11,10 @@ export default ({ owner }) => (
                 validated: className(style.lintButtonSuccess)
             }}
         >
-Lint
+            Lint
         </span>
         <span className={style.clearButton} onClick={() => owner.onClearButtonClick()}>
-        Clear
+            Clear
         </span>
         <span
             className={style.sizeBlock}

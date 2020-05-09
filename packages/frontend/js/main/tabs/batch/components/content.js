@@ -19,14 +19,14 @@ export default ({ owner }) => (
 
             <button type="button" className={style.addFiles}>
                 <input type="file" multiple bind={{ owner, files: file('text') }} />
-            Open files
+                Open files
             </button>
             <button
                 type="button"
                 className={style.addField}
                 onClick={(evt) => owner.onAddButtonClick(evt)}
             >
-Add field
+                Add field
             </button>
         </div>
     </div>
