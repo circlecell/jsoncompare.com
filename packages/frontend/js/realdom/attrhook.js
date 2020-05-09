@@ -5,6 +5,10 @@ export default {
         element.className = value; // eslint-disable-line no-param-reassign
     },
 
+    htmlFor: (element, value) => {
+        element.htmlFor = value; // eslint-disable-line no-param-reassign
+    },
+
     bind: (element, value) => {
         const { owner } = value;
 

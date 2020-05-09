@@ -4,6 +4,7 @@ import initRouter from 'seemple-router';
 import beautify from 'js-beautify/js/lib/beautify';
 import minify from 'jsonminify';
 import qs from 'qs';
+import jsonabc from 'jsonabc';
 import LintEditor from '../linteditor';
 import Sandbox from './components/sandbox';
 import Tabs from './tabs';
@@ -32,9 +33,13 @@ export default class Main extends Seemple {
                     source: 'params',
                     handler: (params) => (qs.parse(params).reformat || 'beautify_tabs')
                 },
+                sortAlphabetically: {
+                    source: 'params',
+                    handler: (params) => 'sortAlphabetically' in qs.parse(params)
+                },
                 params: {
-                    source: ['id', 'fullscreen', 'reformat'],
-                    handler(id, fullscreen, reformat) {
+                    source: ['id', 'fullscreen', 'reformat', 'sortAlphabetically'],
+                    handler(id, fullscreen, reformat, sortAlphabetically) {
                         const params = [];
 
                         if (id) {
@@ -47,6 +52,10 @@ export default class Main extends Seemple {
 
                         if (reformat !== 'beautify_tabs') {
                             params.push(`reformat=${reformat}`);
+                        }
+
+                        if (sortAlphabetically) {
+                            params.push('sortAlphabetically');
                         }
 
                         return params.join('&');
@@ -103,8 +112,12 @@ export default class Main extends Seemple {
 
         Seemple.on(LintEditor, {
             lint: (instance) => {
-                const { reformat } = this;
+                const { reformat, sortAlphabetically } = this;
                 let { code } = instance;
+
+                if (sortAlphabetically) {
+                    code = JSON.stringify(jsonabc.sortObj(JSON.parse(code)));
+                }
 
                 if (reformat === 'minify') {
                     code = minify(code);
