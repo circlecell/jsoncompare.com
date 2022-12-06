@@ -28,7 +28,7 @@
     "file-binders": "0.3.13",
     "seemple-router": "2.4.17",
     "object.assign": "^4.1.0",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "valid-url": "^1.0.9",
     "jsonabc": "^2.3.1"
   },
