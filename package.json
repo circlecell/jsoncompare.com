@@ -78,7 +78,7 @@
     "html-webpack-plugin": "^4.3.0",
     "if-env": "^1.0.4",
     "last-release-git": "0.0.3",
-    "lerna": "^3.20.2",
+    "lerna": "^6.4.1",
     "nodemon": "^2.0.3",
     "npm-check-updates": "^5.0.0",
     "object.assign": "^4.1.0",
